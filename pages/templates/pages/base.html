@@ -1,0 +1,129 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    
+    <title>{% block title %}Progressus project{% endblock %}</title>
+
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;" class="bi">
+        <symbol id="github" viewBox="0 0 16 16">
+            <title>GitHub</title>
+            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+        </symbol>
+        <symbol id="house" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+            <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+        </symbol>
+        <symbol id="telefone" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
+            <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+        </symbol>
+        <symbol id="email" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+            <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
+        </symbol>
+      </svg>
+    
+    {% block menu %}
+        <!-- Responsive navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+          <div class="container">
+              <a class="navbar-brand" href="{% url 'pages:home' %}"><em>PROGRESSUS</em></a>
+            </div>
+          </nav>
+  {% endblock %}
+
+    {% block header %}
+      <div class="container">
+      </div>
+    {% endblock %}
+
+    {% block content %}
+      <div class="container" style="font-size: 11pt;">
+          Em construção...
+      </div>
+    {% endblock %}
+
+    {% block extra %}
+    {% endblock %}
+
+    {% block footnote %}
+      <footer class="d-flex align-items-center py-1 my-0 mt-auto fs-6 bg-dark text-muted">
+        <div class="container-fluid" style="font-size: small;">
+          <div class="row align-items-start">
+            <div class="col-xl-3 mx-left mt-1">
+              <h6 class="text-uppercase text-center">
+                Sobre
+              </h6>
+              <p>
+                Plataforma Progressus é um sistema on-line para submissão, acompanhamento e divulgação de projetos de iniciação científica.
+              </p>
+            </div>
+            <div class="col-xl-3 mx-left mt-1">
+              <h6 class="text-uppercase text-center">
+                Links importantes
+              </h6>
+              <ul class="list-unstyled">
+                <li><a class="link-secondary" style="text-decoration: none;" href="https://irati.ifpr.edu.br/">Site institucional do IFPR - campus Irati</a></li>
+                <li><a class="link-secondary" style="text-decoration: none;" href="https://www.even3.com.br/sipex2021irati/">SIPEX VII</a></li>
+                <li><a class="link-secondary" style="text-decoration: none;" href="https://irati.ifpr.edu.br/eventos/eventos-2021/iftech-2021/">IX IFTECH</a></li>
+              </ul>
+            </div>
+            <div class="col-xl-3 mx-left mt-1">
+              <h6 class="text-uppercase text-center">
+                Patrocinadores
+              </h6>
+              Desde já agradecemos por sua doação. Logo os administradores do evento irão divulgar a lista de patrocinadores.
+            </div>
+            <div class="col-xl-3 mx-left mt-1">
+              <h6 class="text-uppercase text-center">
+                Contato
+              </h6>
+              <ul class="list-unstyled">
+                <li"><svg width="16" height="16"><use xlink:href="#house"/>
+                </svg><span class="ms-2">Rua Pedro Koppe, 100, Vila Matilde, Irati-Pr</span></li>
+                <li><svg width="16" height="16"><use xlink:href="#telefone"/>
+                </svg><span class="ms-2">42 2104-0200</span></li>
+                <li><svg width="16" height="16"><use xlink:href="#email"/>
+                </svg><span class="ms-2">flavianowilliams@gmail.com</span></li>
+              </ul>
+            </div>
+          </div>
+          <div class="border-top d-flex bd-highlight mb-0 py-2">
+            <span class="bd-highlight">
+              © 2022, MIT license. Developed by Flaviano Williams Fernandes
+            </span>
+            <span class="ms-auto bd-highlight">
+              <a href="https://github.com/flavianowilliams/progressus">
+                <svg width="24" height="24"><use xlink:href="#github"/>
+                </svg>
+              </a>
+            </span>
+          </div>
+        </div>
+      </footer>
+    {% endblock %}
+
+    <!-- Bootstrap core JS-->
+    <!--<script src="{% static 'js/bootstrap.min.js' %}"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <!-- Core theme JS-->
+    <!--<script src="js/scripts.js"></script>-->
+    <!-- extras -->
+    <!--<script src="{% static 'js/popper.min.js' %}"></script>-->
+    <!--<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>-->
+
+</body>
+</html>

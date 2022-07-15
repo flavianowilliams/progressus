@@ -1,7 +1,5 @@
-#import environ
+import os
 
 from progressus.settings.settings import *
 
-#env = environ.Env()
-
-#DEBUG = env.bool("DEBUG", True)
+os.environ['DEBUG'] = 'True'

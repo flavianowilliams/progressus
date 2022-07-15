@@ -40,3 +40,7 @@ Thumbs.db
 # Tokens             #
 ######################
 *.token
+
+# Environment variables #
+#########################
+.env

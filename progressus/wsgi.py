@@ -12,6 +12,6 @@ import os
 from django.core.wsgi import get_wsgi_application
 
 #os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'progressus.settings.settings')
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'progressus.settings.deploy')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'progressus.settings')
 
 application = get_wsgi_application()

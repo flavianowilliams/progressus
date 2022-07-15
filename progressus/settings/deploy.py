@@ -1,7 +1,7 @@
 import os
 import environ
 
-from progressus.settings.settings import *
+from progressus.settings import *
 
 # Take environment variables from .env file
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

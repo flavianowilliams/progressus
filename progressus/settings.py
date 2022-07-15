@@ -22,15 +22,18 @@ env = environ.Env(
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Set the project base directory
+BASE_ENV = os.path.dirname((os.path.abspath(__file__)))
+
 # Take environment variables from .env file
-env.read_env(os.path.join(BASE_DIR, '.env'))
+env.read_env(os.path.join(BASE_ENV, '.env'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = env('SECRET_KEY')
-SECRET_KEY = 'django-insecure-ks!h)da-oe1wb^#f_@_e3n^!6z2$!r@3l#qn7arlmt&c4_hh+e'
+#SECRET_KEY = 'django-insecure-ks!h)da-oe1wb^#f_@_e3n^!6z2$!r@3l#qn7arlmt&c4_hh+e'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')

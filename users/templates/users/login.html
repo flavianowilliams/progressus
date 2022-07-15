@@ -21,6 +21,8 @@
                     {{ form|crispy }}
                     <button type="submit" class="btn btn-primary mt-3">Entrar</button>
                 </form>
+                <br>
+                <a href="{% url 'users:register' %}">Cadastre-se</a>
             </div>
         {% endif %}
     </div>

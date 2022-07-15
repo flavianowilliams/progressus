@@ -1,11 +1,12 @@
-from tokenize import group
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.core.exceptions import ValidationError
+from users.models import Profile
 
 class UserCreation(UserCreationForm):
-    email = forms.EmailField(max_length=50)
+
+    email = forms.EmailField(max_length=50)  
 
     class Meta:
         model = User
@@ -22,3 +23,10 @@ class UserCreation(UserCreationForm):
         if User.objects.filter(username=data).exists():
             raise ValidationError(" O nome de usuário {} já está em uso.".format(data))
         return data
+
+class ProfileCreation(forms.ModelForm):
+
+    class Meta:
+        model = Profile
+
+        fields = ['nome_completo', 'turma']

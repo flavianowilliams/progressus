@@ -41,9 +41,27 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4 mx-1">
           <div class="container-fluid">
               <a class="navbar-brand" href="{% url 'pages:home' %}"><em>PROGRESSUS</em></a>
-              <div class="collapse navbar-collapse">
+              <div class="collapse navbar-collapse" id="collapsenavbar">
                 <div class="navbar-nav ms-auto">
-                  <a class="nav-item nav-link active" href="#">Login</a>
+                  {% if request.user.is_authenticated %}
+                    <div class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" id="dropdownlogin" role="button" href="#" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
+                        {{ request.user }}
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownlogin">
+                        {% if request.user.is_superuser %}
+                          <a class="dropdown-item" href="#">Avaliações</a>
+                        {% else %}
+                          <a class="dropdown-item" href="{% url 'users:profile' %}">Meus dados</a>
+                          <a class="dropdown-item" href="#">Minhas inscrições</a>
+                        {% endif %}
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'users:logout' %}">Sair</a>
+                      </div>
+                    </div>
+                  {% else %}
+                    <a class="nav-item nav-link active" href="{% url 'users:login' %}">Login</a>
+                  {% endif %}
                 </div>
               </div>
             </div>
@@ -66,7 +84,7 @@
     {% endblock %}
 
     {% block footnote %}
-      <footer class="d-flex align-items-center py-1 my-0 mt-auto fs-6 bg-dark text-muted">
+      <footer class="d-flex align-items-center py-1 mt-2 mb-0 bg-light text-muted" style="position: relative;">
         <div class="container-fluid" style="font-size: small;">
           <div class="row align-items-start">
             <div class="col-xl-3 mx-left mt-1">
@@ -113,7 +131,7 @@
             </span>
             <span class="ms-auto bd-highlight">
               <a href="https://github.com/flavianowilliams/progressus">
-                <svg width="24" height="24"><use xlink:href="#github"/>
+                <svg width="20" height="20"><use xlink:href="#github"/>
                 </svg>
               </a>
             </span>

@@ -1,34 +1,18 @@
-from django.shortcuts import get_object_or_404
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
-from users.forms import UserCreation
+from users.forms import ProfileCreation, UserCreation
 from django.contrib.auth.models import Group
 from django.views.generic.edit import CreateView
+from users.models import Profile
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
-#def user_create_view(request):
-#    template_name = "users/forms.html"
-#    form_class = UserCreation
-#    form = form_class
-#
-#    grupo = Group.objects.get(name='users')
-#
-#    if request.method == 'POST':
-#        form = form_class(request.POST)
-#        if form.is_valid():
-#            usuario = form.Meta.model.username
-#            usuario.groups.add(grupo)
-#            form.save()
-#            return HttpResponseRedirect(reverse_lazy('pages:home'))
-#
-#    context = {'titulo': 'Registro de novo usuário', 'botao': 'Cadastrar', 'form': form}
-#
-#    return render(request, template_name, context)
-#
 class UserCreateView(CreateView):
     template_name = "users/forms.html"
     form_class = UserCreation
-    success_url = reverse_lazy("pages:home")
+    success_url = reverse_lazy("users:login")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -43,5 +27,39 @@ class UserCreateView(CreateView):
         url = super().form_valid(form)
         self.object.groups.add(grupo)
         self.object.save()
-#        Profile.objects.create(usuario=self.object)
+        Profile.objects.create(usuario=self.object)
         return url
+
+#def user_create_view(request):
+#    template_name = "users/forms.html"
+#    form_class = UserCreation
+#    form = form_class
+#
+#    if request.method == 'POST':
+#        form = form_class(request.POST)
+#        if form.is_valid():
+#            form.save()
+#            return HttpResponseRedirect(reverse_lazy('pages:home'))
+#
+#    context = {'titulo': 'Registro de cadastro de usuário', 'botao': 'Cadastrar', 'form': form}
+#
+#    return render(request, template_name, context)
+
+@login_required
+def profile_update_view(request):
+    template_name = "users/forms.html"
+    form_class = ProfileCreation
+#
+    object = get_object_or_404(Profile, usuario = request.user)
+#
+    if request.method == 'POST':
+        form = form_class(request.POST, instance = object)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse_lazy('pages:home'))
+    else:
+        form = form_class(instance = object)
+#
+    context = {'titulo': 'Registro de cadastro de usuário', 'botao': 'Cadastrar', 'form': form}
+#
+    return render(request, template_name, context)

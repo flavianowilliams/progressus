@@ -1,7 +1,12 @@
-from os import environ
+import os
 import environ
 
 from progressus.settings.settings import *
+
+# Take environment variables from .env file
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+
 
 env = environ.Env()
 
@@ -9,4 +14,4 @@ DEBUG = env.bool("DEBUG", True)
 
 #environ['DEBUG'] = 'False'
 
-#os.environ['ALLOWED_HOSTS'] = ['200.17.101.198', '127.0.0.1', '10.10.0.30']
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")

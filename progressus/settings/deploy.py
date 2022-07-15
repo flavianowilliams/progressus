@@ -1,4 +1,4 @@
-from . import environ
+import environ
 
 from progressus.settings.settings import *
 

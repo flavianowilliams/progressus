@@ -1,0 +1,46 @@
+{% extends 'pages/base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <div class="container-fluid">
+        <h3 style="text-align: center;">Lista de perfis</h3>
+        <div class="table-responsive">
+            <table class="table table-striped" style="text-align: center;">
+                <colgroup>
+                    <col style="width: 25vw;">
+                    <col style="width: 20vw;">
+                    <col style="width: 20vw;">
+                    <col style="width: 20vw;">
+                    <col style="width: 5vw;">
+                    <col style="width: 10vw;">
+                </colgroup>
+                <tr>
+                    <th>Nome completo</th>
+                    <th>Data</th>
+                    <th>Username</th>
+                    <th>email</th>
+                    <th>turma</th>
+                    <th>Opções</th>
+                </tr>
+                {% for object in object_list %}
+                <tr>
+                    <td>{{ object.profile.nome_completo|default:'-' }}</td>
+                    <td>{{ object.created }}</td>
+                    <td>{{ object.profile.usuario }}</td>
+                    <td>{{ object.profile.usuario.email }}</td>
+                    <td>{{ object.profile.turma|default:'-' }}</td>
+                    <td><a class="btn btn-danger btn-sm" href="{% url 'cadastros:profile_delete' object.profile.usuario.pk %}">Excluir</a></td>
+                </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="6">Nenhum perfil registrado.</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footnote %}
+{% endblock %}

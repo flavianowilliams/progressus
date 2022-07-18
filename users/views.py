@@ -1,6 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
+from cadastros.models import CadastroProfile
 from users.forms import ProfileCreation, UserCreation
 from django.contrib.auth.models import Group
 from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetCompleteView, PasswordResetConfirmView
@@ -28,7 +29,8 @@ class UserCreateView(CreateView):
         url = super().form_valid(form)
         self.object.groups.add(grupo)
         self.object.save()
-        Profile.objects.create(usuario=self.object)
+        profile = Profile.objects.create(usuario=self.object)
+        CadastroProfile.objects.create(profile = profile)
         return url
 
 #def user_create_view(request):

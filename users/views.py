@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
 from users.forms import ProfileCreation, UserCreation
 from django.contrib.auth.models import Group
+from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetCompleteView, PasswordResetConfirmView
 from django.views.generic.edit import CreateView
 from users.models import Profile
 from django.contrib.auth.decorators import login_required
@@ -63,3 +64,20 @@ def profile_update_view(request):
     context = {'titulo': 'Registro de cadastro de usuário', 'botao': 'Cadastrar', 'form': form}
 #
     return render(request, template_name, context)
+
+# reset de senha
+
+class PasswordReset(PasswordResetView):
+    template_name='users/password_reset.html'
+    email_template_name='users/password_reset_email.html'
+    success_url=reverse_lazy('users:password_reset_done')
+
+class PasswordResetDone(PasswordResetDoneView):
+    template_name='users/password_reset_done.html'
+
+class PasswordResetConfirm(PasswordResetConfirmView):
+    template_name='users/password_reset_confirm.html'
+    success_url=reverse_lazy('users:password_reset_complete')
+
+class PasswordResetComplete(PasswordResetCompleteView):
+    template_name='users/password_reset_complete.html'

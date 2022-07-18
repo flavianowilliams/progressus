@@ -5,12 +5,14 @@ package users{
         username: varchar(50)
         email: varchar(50)
     }
-    entity Profile{
+    entity CadastroProfile{
         id: integer
         nome_completo: varchar(50)
         turma: varchar(4)
         usuario: varchar(50)
         fk_id_usuario: integer
+        created: Date
+        updated: Date
     }
     Profile "(1,1)" -- "(1,1)" User
 }

@@ -52,6 +52,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'pages.apps.PagesConfig',
     'users.apps.UsersConfig',
+    'cadastros.apps.CadastrosConfig',
+    'chamadas.apps.ChamadasConfig',
 ]
 
 MIDDLEWARE = [

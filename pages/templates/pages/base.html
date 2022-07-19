@@ -58,7 +58,7 @@
                       </a>
                       <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownlogin">
                         {% if request.user.is_superuser %}
-                          <a class="dropdown-item" href="#">Avaliações</a>
+                          <a class="dropdown-item" href="#">Chamadas</a>
                         {% else %}
                           <a class="dropdown-item" href="{% url 'users:profile' %}">Meus dados</a>
                           <a class="dropdown-item" href="#">Minhas inscrições</a>

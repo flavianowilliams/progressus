@@ -44,7 +44,15 @@
               <div class="collapse navbar-collapse" id="collapsenavbar">
                 <div class="navbar-nav ms-auto">
                   {% if request.user.is_authenticated %}
-                    <div class="nav-item dropdown">
+                    {% if request.user.is_superuser %}
+                      <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="dropdowncadastro" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" href="#">Cadastro</a>
+                          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdowncadastro">
+                            <a class="dropdown-item" href="{% url 'cadastros:profiles_list' %}">Perfis</a>
+                        </div>
+                      </div>
+                    {% endif %}
+                  <div class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" id="dropdownlogin" role="button" href="#" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
                         {{ request.user }}
                       </a>

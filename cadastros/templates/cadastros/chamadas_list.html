@@ -19,6 +19,7 @@
                     <th>Nome</th>
                     <th>Data</th>
                     <th>Atualização</th>
+                    <th>Edital</th>
                     <th>Opções</th>
                 </tr>
                 {% for object in object_list %}
@@ -26,6 +27,7 @@
                         <td>{{ object }}</td>
                         <td>{{ object.created }}</td>
                         <td>{{ object.updated }}</td>
+                        <td><a class="btn btn-warning btn-sm" href="{{ object.chamada.edital.url }}">Ver</a></td>
                         <td><a class="btn btn-danger btn-sm" href="{% url 'cadastros:chamada_delete' object.pk %}">Excluir</a></td>
                     </tr>
                 {% empty %}

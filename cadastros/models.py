@@ -9,7 +9,13 @@ class CadastroProfile(models.Model):
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
 
+    def __str__(self):
+        return self.profile
+
 class CadastroChamada(models.Model):
     chamada = models.OneToOneField(Chamada, on_delete=models.CASCADE)
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
+
+    def __str__(self):
+        return self.chamada.nome

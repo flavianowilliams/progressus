@@ -1,0 +1,42 @@
+{% extends 'pages/base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <div class="container-fluid">
+        <h3 style="text-align: left;">
+            Lista de chamadas
+            <a class="btn btn-primary btn-sm float-end" href="{% url 'cadastros:chamada_create' %}">Adicionar</a>
+        </h3>
+        <div class="table-responsive">
+            <table class="table table-striped" style="text-align: center;">
+                <colgroup>
+                    <col style="width: 10vw;">
+                    <col style="width: 20vw;">
+                    <col style="width: 20vw;">
+                </colgroup>
+                <tr>
+                    <th>Nome</th>
+                    <th>Data</th>
+                    <th>Atualização</th>
+                    <th>Opções</th>
+                </tr>
+                {% for object in object_list %}
+                    <tr>
+                        <td>{{ object }}</td>
+                        <td>{{ object.created }}</td>
+                        <td>{{ object.updated }}</td>
+                        <td><a class="btn btn-danger btn-sm" href="{% url 'cadastros:chamada_delete' object.pk %}">Excluir</a></td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="6">Nenhuma chamada registrada.</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footnote %}
+{% endblock %}

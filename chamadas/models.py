@@ -11,8 +11,8 @@ class Chamada(models.Model):
     deadline_projeto = models.DateField(verbose_name='Data limite do projeto', null=True)
     deadline_chamada = models.DateField(verbose_name='Data limite da chamada', null=True)
     resumo = models.TextField()
-    edital = models.FileField()
-    aviso = models.TextField(null=True, blank=True)
+    edital = models.FileField(upload_to='pdf/%Y/%m/%d/')
+    aviso = models.TextField(null=True, blank=True) 
 
     def get_status(self):
         if date.today() > self.deadline_inscricao:
@@ -23,9 +23,6 @@ class Chamada(models.Model):
         else:
             data = "Aberto"
         return data
-
-    def __str__(self):
-        return self.nome
 
     def get_bibliografia(self):
         if date.today() > self.deadline_bibliografia:
@@ -44,3 +41,6 @@ class Chamada(models.Model):
             return False
         else:
             return True
+
+    def __str__(self):
+        return self.nome

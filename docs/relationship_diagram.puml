@@ -14,14 +14,32 @@ package users{
     }
     Profile "(1,1)" -- "(1,1)" User
 }
+package chamadas{
+    entity Chamada{
+        id: integer
+        nome = varchar(7)
+        deadline_inscricao: date
+        deadline_bibliografia: date
+        deadline_proposta: date
+        deadline_projeto: date
+        deadline_chamada: date
+        resumo: varchar()
+        edital: file
+        aviso = varchar()
+    }
+}
 package cadastros{
     entity CadastroProfile{
-        id: integer
         created: date
         updated: date
-        profile: varchar(50)
         fk_id_profile: integer
     }
     CadastroProfile "(1,1)" -- "(1,1)" Profile
+    entity CadastroChamada{
+        created: date
+        updated: date
+        fk_id_chamada: integer
+    }
+    CadastroChamada "(1,1)" -- "(1,1)" Chamada
 }
 @enduml

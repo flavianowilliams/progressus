@@ -10,5 +10,6 @@ urlpatterns = [
     # chamadas
     path('chamadas_list/',views.chamadas_list_view, name='chamadas_list'),
     path('chamada_create/', views.chamadas_create_view, name='chamada_create'),
-    path('chamada_delete/<int:pk>', views.chamada_delete_view, name='chamada_delete'),
+    path('chamada_delete/<int:pk>/', views.chamada_delete_view, name='chamada_delete'),
+    path('chamada_update/<int:pk>/', views.chamada_update_view, name='chamada_update'),
 ]

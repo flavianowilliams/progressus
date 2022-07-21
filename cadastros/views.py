@@ -2,7 +2,7 @@ from venv import create
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
-from chamadas.forms import ChamadaForm
+from chamadas.forms import ChamadaFormCreate, ChamadaFormUpdate
 from chamadas.models import Chamada
 from .models import CadastroChamada, CadastroProfile
 from django.contrib.auth.models import User
@@ -49,13 +49,13 @@ def chamadas_create_view(request):
     template_name = 'cadastros/forms_upload.html'
 
     if request.method == 'POST':
-        form = ChamadaForm(request.POST, request.FILES)
+        form = ChamadaFormCreate(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             CadastroChamada.objects.create(chamada = form.instance)
             return HttpResponseRedirect(reverse_lazy('cadastros:chamadas_list'))
     else:
-        form = ChamadaForm
+        form = ChamadaFormCreate
 
     context = {'titulo': 'Novo cadastro de chamada', 'botao': 'Inscrever' ,'form': form}
 
@@ -70,6 +70,26 @@ def chamadas_list_view(request):
     object_list = CadastroChamada.objects.all()
 
     context = {'object_list': object_list}
+
+    return render(request, template_name, context)
+
+@login_required
+@user_passes_test(lambda u:u.is_superuser, login_url='users:login')
+def chamada_update_view(request, pk):
+
+    template_name = 'cadastros/forms_upload.html'
+
+    object = get_object_or_404(CadastroChamada, pk = pk)
+
+    if request.method == 'POST':
+        form = ChamadaFormUpdate(request.POST, request.FILES, instance=object.chamada)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse_lazy('cadastros:chamadas_list'))
+    else:
+        form = ChamadaFormUpdate(instance=object.chamada)
+
+    context = {'titulo': 'Edição de cadastro de chamada', 'botao': 'Salvar', 'form': form}
 
     return render(request, template_name, context)
 

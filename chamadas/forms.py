@@ -1,7 +1,7 @@
 from django import forms
 from .models import Chamada
 
-class ChamadaForm(forms.ModelForm):
+class ChamadaFormCreate(forms.ModelForm):
     class Meta:
         model = Chamada
         fields = [
@@ -21,3 +21,18 @@ class ChamadaForm(forms.ModelForm):
         if Chamada.objects.filter(nome = data).exists():
             raise forms.ValidationError('O nome {} já está em uso.'.format(data))
         return data
+
+class ChamadaFormUpdate(forms.ModelForm):
+    class Meta:
+        model = Chamada
+        fields = [
+            'nome',
+             'resumo',
+              'aviso',
+               'deadline_inscricao',
+                'deadline_bibliografia',
+                'deadline_proposta',
+                'deadline_projeto',
+                'deadline_chamada',
+                'edital',
+                ]

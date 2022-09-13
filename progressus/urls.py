@@ -23,6 +23,7 @@ urlpatterns = [
     path('', include('pages.urls', namespace='pages')),
     path('users/', include('users.urls', namespace='users')),
     path('cadastros/', include('cadastros.urls', namespace='cadastros')),
+    path('chamadas/',include('chamadas.urls', namespace='chamadas')),
 ]
 
 if settings.DEBUG:

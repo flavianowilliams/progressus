@@ -1,0 +1,22 @@
+{% extends 'pages/base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <h3>Chamadas encerradas</h3>
+        {% for object in object_list %}
+            <h4>{{ object.nome }}</h4>
+            <p><em>Encerrada em {{ object.deadline_chamada }}</em></p>
+            <p>
+                Objetivos:
+                <br>
+                <em>{{ object.resumo }}</em>
+            </p>
+            <br>
+            <a class="btn btn-primary btn-sm" href="#">Projetos em destaque</a>
+        {% empty %}
+            <p>Nenhuma chamada encerrada até o momento...</p>
+        {% endfor %}
+    </div>
+{% endblock %}

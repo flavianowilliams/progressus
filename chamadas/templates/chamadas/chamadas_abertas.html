@@ -1,0 +1,23 @@
+{% extends 'pages/base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <h3>Chamadas abertas</h3>
+        {% for object in object_list %}
+            <h4>{{ object.nome }}</h4>
+            <p><em>Atualizado em {{ object.cadastrochamada.updated }}</em></p>
+            <p>
+                Objetivos:
+                <br>
+                <em>{{ object.resumo }}</em>
+            </p>
+            <p><strong>Data limite para inscrição: {{ object.deadline_inscricao }}</strong></p>
+            <br>
+            <a class="btn btn-primary btn-sm" href="{{ object.edital.url }}">Edital</a>
+        {% empty %}
+            <p>Nenhuma chamada em aberto até o momento...</p>
+        {% endfor %}
+    </div>
+{% endblock %}

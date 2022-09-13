@@ -53,7 +53,7 @@
                         </div>
                       </div>
                     {% endif %}
-                  <div class="nav-item dropdown">
+                    <div class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" id="dropdownlogin" role="button" href="#" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
                         {{ request.user }}
                       </a>
@@ -69,6 +69,14 @@
                       </div>
                     </div>
                   {% else %}
+                    <div class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle active" id="dropdownchamada" role="button" href="#" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Chamadas</a>
+                      <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownchamada">
+                        <a class="dropdown-item" href="{% url 'chamadas:chamadas_abertas' %}">Abertas</a>
+                        <a class="dropdown-item" href="{% url 'chamadas:chamadas_andamento' %}">Em andamento</a>
+                        <a class="dropdown-item" href="{% url 'chamadas:chamadas_encerradas' %}">Encerradas</a>
+                      </div>
+                    </div>
                     <a class="nav-item nav-link active" href="{% url 'users:login' %}">Login</a>
                   {% endif %}
                 </div>

@@ -50,10 +50,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_forms',
-    'pages.apps.PagesConfig',
-    'users.apps.UsersConfig',
-    'cadastros.apps.CadastrosConfig',
-    'chamadas.apps.ChamadasConfig',
+#    'pages.apps.PagesConfig',
+#    'users.apps.UsersConfig',
+#    'cadastros.apps.CadastrosConfig',
+#    'chamadas.apps.ChamadasConfig',
     'django_cleanup.apps.CleanupConfig',
 ]
 

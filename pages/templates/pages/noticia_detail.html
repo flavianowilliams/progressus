@@ -12,8 +12,12 @@
             <p><em>Atualizado em {{ object.updated }}.</em></p>
             <p>{{ object.noticia.texto }}</p>
             {% if object.noticia.link %}
-                <p>Para maiores informações acesse o <a href="{{ object.noticia.link }}">site</a>.</p>
+                <p>Para maiores informações acesse o <a href="{{ object.noticia.link }}">site</a> do evento.</p>
             {% endif %}
         </div>
+    </div>
+    <br>
+    <div class="container mx-4">
+        <a href="{% url 'pages:noticias_list' %}">Ver todas as notícias.</a>
     </div>
 {% endblock %}

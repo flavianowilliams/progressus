@@ -25,3 +25,13 @@ def noticia_detail_view(request, pk):
     context = {'object': object}
 
     return render(request, template_name, context)
+
+def noticias_list_view(request):
+
+    template_name = 'pages/noticias_list.html'
+
+    object_list = CadastroNoticia.objects.all()
+
+    context = {'object_list': object_list}
+
+    return render(request, template_name, context)

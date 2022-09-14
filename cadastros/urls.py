@@ -15,4 +15,5 @@ urlpatterns = [
     # noticias
     path('noticias_list/', views.noticia_list_view, name='noticias_list'),
     path('noticias_create/', views.noticia_create_view, name='noticias_create'),
+    path('noticias_update/<int:pk>/', views.noticia_update_view, name='noticias_update'),
 ]

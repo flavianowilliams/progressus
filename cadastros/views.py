@@ -2,7 +2,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
 from chamadas.forms import ChamadaFormCreate, ChamadaFormUpdate
-from pages.forms import NoticiaFormCreate
+from pages.forms import NoticiaFormCreate, NoticiaFormUpdate
 from .models import CadastroChamada, CadastroProfile, CadastroNoticia
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -138,5 +138,23 @@ def noticia_list_view(request):
     object_list = CadastroNoticia.objects.all()
 
     context = {'object_list': object_list}
+
+    return render(request, template_name, context)
+
+def noticia_update_view(request, pk):
+
+    template_name = 'cadastros/forms_upload.html'
+
+    object = get_object_or_404(CadastroNoticia, pk = pk)
+
+    if request.method == 'POST':
+        form = NoticiaFormUpdate(request.POST, request.FILES, instance=object.noticia)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse_lazy('cadastros:noticias_list'))
+    else:
+        form = NoticiaFormUpdate(instance=object.noticia)
+
+    context = {'titulo': 'Edição de cadastro de chamada', 'botao': 'Salvar', 'form': form}
 
     return render(request, template_name, context)

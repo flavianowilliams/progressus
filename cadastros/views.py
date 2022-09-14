@@ -1,10 +1,9 @@
-from venv import create
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
 from chamadas.forms import ChamadaFormCreate, ChamadaFormUpdate
-from chamadas.models import Chamada
-from .models import CadastroChamada, CadastroProfile
+from pages.forms import NoticiaFormCreate
+from .models import CadastroChamada, CadastroProfile, CadastroNoticia
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, user_passes_test
 
@@ -106,5 +105,38 @@ def chamada_delete_view(request, pk):
         return HttpResponseRedirect(reverse_lazy('cadastros:chamadas_list'))
 
     context = {'object': object}
+
+    return render(request, template_name, context)
+
+# Notícias
+
+@login_required
+@user_passes_test(lambda u:u.is_superuser, login_url='users:login')
+def noticia_create_view(request):
+
+    template_name = 'cadastros/forms_upload.html'
+
+    if request.method == 'POST':
+        form = NoticiaFormCreate(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            CadastroNoticia.objects.create(noticia = form.instance)
+            return HttpResponseRedirect(reverse_lazy('cadastros:noticias_list'))
+    else:
+        form = NoticiaFormCreate
+
+    context = {'titulo': 'Novo cadastro de chamada', 'botao': 'Inscrever' ,'form': form}
+
+    return render(request, template_name, context)
+
+@login_required
+@user_passes_test(lambda u:u.is_superuser, login_url='users:login')
+def noticia_list_view(request):
+
+    template_name = 'cadastros/noticias_list.html'
+
+    object_list = CadastroNoticia.objects.all()
+
+    context = {'object_list': object_list}
 
     return render(request, template_name, context)

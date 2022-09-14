@@ -12,4 +12,7 @@ urlpatterns = [
     path('chamada_create/', views.chamadas_create_view, name='chamada_create'),
     path('chamada_delete/<int:pk>/', views.chamada_delete_view, name='chamada_delete'),
     path('chamada_update/<int:pk>/', views.chamada_update_view, name='chamada_update'),
+    # noticias
+    path('noticias_list/', views.noticia_list_view, name='noticias_list'),
+    path('noticias_create/', views.noticia_create_view, name='noticias_create'),
 ]

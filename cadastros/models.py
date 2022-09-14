@@ -1,5 +1,6 @@
 from chamadas.models import Chamada
 from users.models import Profile
+from pages.models import Noticia
 from django.db import models
 
 # Create your models here.
@@ -19,3 +20,11 @@ class CadastroChamada(models.Model):
 
     def __str__(self):
         return self.chamada.nome
+
+class CadastroNoticia(models.Model):
+    noticia = models.OneToOneField(Noticia, on_delete=models.CASCADE)
+    created = models.DateField(auto_now_add=True)
+    updated = models.DateField(auto_now=True)
+
+    def __str__(self):
+        return self.noticia.titulo

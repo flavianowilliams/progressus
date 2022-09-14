@@ -7,7 +7,7 @@
         <h3>Notícias</h3>
         <hr>
         {% for object in object_list %}
-            <h4><strong>{{ object.titulo }}</strong></h4>
+            <h4><strong>{{ object.noticia.titulo }}</strong></h4>
             <p><em>Atualizado em {{ object.updated }}.</em></p>
             <p>{{ object.noticia.texto }}</p>
             <a href="{% url 'pages:noticia_detail' object.pk %}">Ver notícia</a>

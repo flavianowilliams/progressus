@@ -29,7 +29,7 @@ def encerradas_list_view(request):
 
     template_name = 'chamadas/chamadas_encerradas.html'
 
-    object_list = [object for object in Chamada.objects.all() if object.get_status() == 'Aberto']
+    object_list = [object for object in Chamada.objects.all() if object.get_status() == 'Encerrado']
 
     context = {'object_list': object_list}
 

@@ -5,4 +5,36 @@
 {% block title %}Progressus{% endblock %}
 
 {% block content %}
+    <div class="container-fluid">
+        {% for object in chamada %}
+            {% now "d-m-Y" as today %}
+            {% if today == object.deadline_inscricao|date:"d-m-Y" %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Atenção! Encerra hoje o prazo para a inscricao na chamada {{ object }}.</strong>
+                    <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% elif today == object.deadline_bibliografia|date:"d-m-Y" %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Atenção! Encerra hoje o prazo para o envio da revisão bibliográfica.</strong>
+                    <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% elif today == object.deadline_proposta|date:"d-m-Y" %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Atenção! Encerra hoje o prazo para o envio da proposta de trabalho.</strong>
+                    <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% elif today == object.deadline_projeto|date:"d-m-Y" %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Atenção! Encerra hoje o prazo para o envio do projeto de pesquisa.</strong>
+                    <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endif %}
+            {% if object.aviso %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Chamada {{ object }}: Atenção! {{ object.aviso }}</strong>
+                    <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
 {% endblock %}

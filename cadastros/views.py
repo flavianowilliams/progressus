@@ -1,3 +1,4 @@
+from multiprocessing import context
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
@@ -156,5 +157,19 @@ def noticia_update_view(request, pk):
         form = NoticiaFormUpdate(instance=object.noticia)
 
     context = {'titulo': 'Edição de cadastro de chamada', 'botao': 'Salvar', 'form': form}
+
+    return render(request, template_name, context)
+
+def noticia_delete_view(request, pk):
+
+    template_name = 'cadastros/forms_delete.html'
+
+    object = get_object_or_404(CadastroNoticia, pk = pk)
+
+    if request.method == 'POST':
+        object.noticia.delete()
+        return HttpResponseRedirect(reverse_lazy('cadastros:noticias_list'))
+
+    context = {'object': object}
 
     return render(request, template_name, context)

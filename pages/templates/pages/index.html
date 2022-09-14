@@ -37,5 +37,10 @@
             {% endif %}
         {% endfor %}
         <h4>Notícias</h4>
+        {% for object in noticia %}
+            <div class="border-top p-3" style="text-align: center;">
+                <a href="{% url 'pages:noticia_detail' object.pk %}"><img src="{{ object.noticia.imagem.url }}" alt="imagem de noticia" style="height: 50vh;"></a>
+            </div>
+        {% endfor %}
     </div>
 {% endblock %}

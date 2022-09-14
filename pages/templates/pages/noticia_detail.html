@@ -1,0 +1,19 @@
+{% extends 'pages/base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <div class="container-fluid" style="display: flex;">
+        <div class="mx-2">
+            <img src="{{ object.noticia.imagem.url }}" alt="imagem de noticia" style="height: 50vh;">
+        </div>
+        <div class="mx-2">
+            <p><strong>{{ object.noticia.titulo }}</strong></p>
+            <p><em>Atualizado em {{ object.updated }}</em></p>
+            <p>{{ object.noticia.texto }}</p>
+            {% if object.noticia.link %}
+                <p>Para maiores informações acesse o <a href="{{ object.noticia.link }}">site</a> do evento.</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

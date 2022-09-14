@@ -1,6 +1,6 @@
-from django.shortcuts import render
-
+from django.shortcuts import render, get_object_or_404
 from chamadas.models import Chamada
+from cadastros.models import CadastroNoticia
 
 # Create your views here.
 
@@ -10,6 +10,18 @@ def HomePageDetail(request):
 
     chamada = [object for object in Chamada.objects.all() if object.get_status() != 'Encerrado']
 
-    context = {'chamada': chamada}
+    noticia = CadastroNoticia.objects.all()
+
+    context = {'chamada': chamada, 'noticia': noticia}
+
+    return render(request, template_name, context)
+
+def noticia_detail_view(request, pk):
+
+    template_name = 'pages/noticia_detail.html'
+
+    object = get_object_or_404(CadastroNoticia, pk = pk)
+
+    context = {'object': object}
 
     return render(request, template_name, context)

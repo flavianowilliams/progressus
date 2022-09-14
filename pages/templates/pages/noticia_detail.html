@@ -9,10 +9,10 @@
         </div>
         <div class="mx-2">
             <p><strong>{{ object.noticia.titulo }}</strong></p>
-            <p><em>Atualizado em {{ object.updated }}</em></p>
+            <p><em>Atualizado em {{ object.updated }}.</em></p>
             <p>{{ object.noticia.texto }}</p>
             {% if object.noticia.link %}
-                <p>Para maiores informações acesse o <a href="{{ object.noticia.link }}">site</a> do evento.</p>
+                <p>Para maiores informações acesse o <a href="{{ object.noticia.link }}">site</a>.</p>
             {% endif %}
         </div>
     </div>

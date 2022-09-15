@@ -27,19 +27,48 @@ package chamadas{
         edital: file
         aviso = varchar()
     }
+    entity Tema{
+        id: integer
+        titulo: varchar(255)
+        descricao: varchar
+        requisitos: varchar
+    }
+    entity Inscricao{
+        id: integer
+        fk_id_chamada: integer
+        fk_id_tema: integer
+        fk_id_profile: integer
+        lider: varchar
+        membro_1: varchar
+        membro_2: varchar
+        membro_3: varchar
+        bibliografia: float
+        introducao: float
+    }
+    Tema "(1,N)" -- "(1,1)" Inscricao
+    Chamada "(1,1)" -- "(1,N)" Inscricao
 }
 package cadastros{
     entity CadastroProfile{
+        id: integer
         created: date
         updated: date
         fk_id_profile: integer
     }
     CadastroProfile "(1,1)" -- "(1,1)" Profile
     entity CadastroChamada{
+        id: integer
         created: date
         updated: date
         fk_id_chamada: integer
     }
     CadastroChamada "(1,1)" -- "(1,1)" Chamada
+    entity CadastroTema{
+        id: integer
+        created: date
+        updated: date
+        fk_id_tema: integer
+    }
+    CadastroTema "(1,1)" -- "(1,1)" Tema
 }
 @enduml

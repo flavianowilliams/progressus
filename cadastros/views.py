@@ -2,9 +2,9 @@ from multiprocessing import context
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
-from chamadas.forms import ChamadaFormCreate, ChamadaFormUpdate
+from chamadas.forms import ChamadaFormCreate, ChamadaFormUpdate, TemaFormCreate, TemaFormUpdate
 from pages.forms import NoticiaFormCreate, NoticiaFormUpdate
-from .models import CadastroChamada, CadastroProfile, CadastroNoticia
+from .models import CadastroChamada, CadastroProfile, CadastroNoticia, CadastroTema
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, user_passes_test
 
@@ -142,6 +142,8 @@ def noticia_list_view(request):
 
     return render(request, template_name, context)
 
+@login_required
+@user_passes_test(lambda u:u.is_superuser, login_url='users:login')
 def noticia_update_view(request, pk):
 
     template_name = 'cadastros/forms_upload.html'
@@ -160,6 +162,8 @@ def noticia_update_view(request, pk):
 
     return render(request, template_name, context)
 
+@login_required
+@user_passes_test(lambda u:u.is_superuser, login_url='users:login')
 def noticia_delete_view(request, pk):
 
     template_name = 'cadastros/forms_delete.html'
@@ -169,6 +173,73 @@ def noticia_delete_view(request, pk):
     if request.method == 'POST':
         object.noticia.delete()
         return HttpResponseRedirect(reverse_lazy('cadastros:noticias_list'))
+
+    context = {'object': object}
+
+    return render(request, template_name, context)
+
+# Temas
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser, login_url='users:login')
+def tema_create_view(request):
+
+    template_name = 'cadastros/forms.html'
+
+    if request.method == 'POST':
+        form = TemaFormCreate(request.POST)
+        if form.is_valid():
+            form.save()
+            CadastroTema.objects.create(tema = form.instance)
+            return HttpResponseRedirect(reverse_lazy('cadastros:temas_list'))
+    else:
+        form = TemaFormCreate
+
+    context = {'titulo': 'Edição de cadastro de tema', 'botao': 'Salvar', 'form': form}
+
+    return render(request, template_name, context)
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser, login_url='users:login')
+def tema_list_view(request):
+
+    template_name = 'cadastros/temas_list.html'
+
+    object_list = CadastroTema.objects.all()
+
+    context = {'object_list': object_list}
+
+    return render(request, template_name, context)
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser, login_url='users:login')
+def tema_update_view(request, pk):
+
+    template_name = 'cadastros/forms.html'
+
+    object = get_object_or_404(CadastroTema, pk = pk)
+
+    if request.method == 'POST':
+        form = TemaFormUpdate(request.POST, instance = object.tema)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse_lazy('cadastros:temas_list'))
+    else:
+        form = TemaFormUpdate(instance=object.tema)
+
+    context = {'titulo': 'Edição de cadastro de tema', 'botao': 'Salvar', 'form': form}
+
+    return render(request, template_name, context)
+
+def tema_delete_view(request, pk):
+
+    template_name = 'cadastros/forms_delete.html'
+
+    object = get_object_or_404(CadastroTema, pk = pk)
+
+    if request.method == 'POST':
+        object.tema.delete()
+        return HttpResponseRedirect(reverse_lazy('cadastros:temas_list'))
 
     context = {'object': object}
 

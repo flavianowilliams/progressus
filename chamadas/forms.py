@@ -1,7 +1,8 @@
 from django import forms
-from .models import Chamada
+from .models import Chamada, Tema
 
 class ChamadaFormCreate(forms.ModelForm):
+
     class Meta:
         model = Chamada
         fields = [
@@ -23,6 +24,7 @@ class ChamadaFormCreate(forms.ModelForm):
         return data
 
 class ChamadaFormUpdate(forms.ModelForm):
+    
     class Meta:
         model = Chamada
         fields = [
@@ -35,4 +37,30 @@ class ChamadaFormUpdate(forms.ModelForm):
                 'deadline_projeto',
                 'deadline_chamada',
                 'edital',
+                ]
+
+class TemaFormCreate(forms.ModelForm):
+
+    class Meta:
+        model = Tema
+        fields = [
+            'titulo',
+             'requisitos',
+              'descricao',
+                ]
+
+    def clean_titulo(self):
+        data = self.cleaned_data['titulo']
+        if Tema.objects.filter(titulo = data).exists():
+            raise forms.ValidationError('O título {} já está em uso.'.format(data))
+        return data
+
+class TemaFormUpdate(forms.ModelForm):
+
+    class Meta:
+        model = Tema
+        fields = [
+            'titulo',
+             'requisitos',
+              'descricao',
                 ]

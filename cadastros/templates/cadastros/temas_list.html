@@ -1,0 +1,46 @@
+{% extends 'pages/base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <div class="container-fluid">
+        <h3 style="text-align: left;">
+            Lista de Temas
+            <a class="btn btn-sm btn-primary float-end" href="{% url 'cadastros:tema_create' %}">Adicionar</a>
+        </h3>
+        <div class="table-responsive">
+            <table class="table table-striped" style="text-align: center;">
+                <colgroup>
+                    <col style="width: 30vw;">
+                    <col style="width: 25vw;">
+                    <col style="width: 25vw;">
+                    <col style="width: 20vw;">
+                </colgroup>
+                <tr>
+                    <th>Título</th>
+                    <th>Data</th>
+                    <th>Atualizado</th>
+                    <th>Opções</th>
+                </tr>
+                {% for object in object_list %}
+                    <tr>
+                        <td>{{ object }}</td>
+                        <td>{{ object.created }}</td>
+                        <td>{{ object.updated }}</td>
+                        <td>
+                            <a class="btn btn-sm btn-warning" href="{% url 'cadastros:tema_update' object.pk %}">Editar</a>
+                            <a class="btn btn-sm btn-danger" href="{% url 'cadastros:tema_delete' object.pk %}">Excluir</a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="1">Nenhum tema registrado.</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footnote %}
+{% endblock %}

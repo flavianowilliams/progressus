@@ -2,12 +2,14 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
 from cadastros.models import CadastroProfile
+from progressus.settings import EMAIL_HOST_USER
 from users.forms import ProfileCreation, UserCreation
 from django.contrib.auth.models import Group
 from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetCompleteView, PasswordResetConfirmView
 from django.views.generic.edit import CreateView
 from users.models import Profile
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
 
 # Create your views here.
 
@@ -83,3 +85,28 @@ class PasswordResetConfirm(PasswordResetConfirmView):
 
 class PasswordResetComplete(PasswordResetCompleteView):
     template_name='users/password_reset_complete.html'
+
+# email
+
+def enviar_email(request, pk):
+
+    template_name = 'users/email.html'
+
+    usuario = get_object_or_404(Profile, pk = pk)
+
+    sender = EMAIL_HOST_USER
+    receiver = usuario.usuario.email
+    subject = 'Plaforma progressus - Aviso!'
+
+    if request.method == 'POST':
+        message = request.POST.get('message')
+        send_mail(subject, message, sender, [receiver], fail_silently=False)
+        return HttpResponseRedirect(reverse_lazy('pages:home'))
+    else:
+        message = ''
+
+    form = {'from': sender, 'to': receiver, 'message': message, 'subject': subject}
+
+    context = {'nome': usuario.nome_completo, 'botao': 'Enviar', 'form': form}
+
+    return render(request, template_name, context)

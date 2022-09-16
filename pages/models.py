@@ -8,3 +8,4 @@ class Noticia(models.Model):
     texto = models.TextField(null=True, blank=True)
     link = models.URLField(max_length=200, null=True, blank=True)
     imagem = models.ImageField(upload_to='img/', max_length=100)
+

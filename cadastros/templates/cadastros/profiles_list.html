@@ -28,7 +28,7 @@
                     <td>{{ object.profile.nome_completo|default:'-' }}</td>
                     <td>{{ object.created }}</td>
                     <td>{{ object.profile.usuario }}</td>
-                    <td>{{ object.profile.usuario.email }}</td>
+                    <td><a href="{% url 'users:send_mail' object.pk %}">{{ object.profile.usuario.email }}</a></td>
                     <td>{{ object.profile.turma|default:'-' }}</td>
                     <td><a class="btn btn-danger btn-sm" href="{% url 'cadastros:profile_delete' object.profile.usuario.pk %}">Excluir</a></td>
                 </tr>

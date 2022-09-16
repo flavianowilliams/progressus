@@ -17,6 +17,8 @@ package users{
 package chamadas{
     entity Chamada{
         id: integer
+        fk_id_tema: integer
+        fk_id_inscricao: integer
         nome = varchar(7)
         deadline_inscricao: date
         deadline_bibliografia: date
@@ -35,18 +37,53 @@ package chamadas{
     }
     entity Inscricao{
         id: integer
-        fk_id_chamada: integer
-        fk_id_tema: integer
-        fk_id_profile: integer
-        lider: varchar
+        fk_id_lider: integer
+        nota_projeto: float
         membro_1: varchar
         membro_2: varchar
         membro_3: varchar
         bibliografia: float
         introducao: float
     }
-    Tema "(1,N)" -- "(1,1)" Inscricao
+    Tema "(N,N)" -- "(N,N)" Inscricao
     Chamada "(1,1)" -- "(1,N)" Inscricao
+    entity Extra{
+        id: integer
+    }
+    Inscricao "(1,1)" - "(1,1)" Extra
+    entity Projeto{
+        id: integer
+    }
+    Inscricao "(1,1)" -- "(1,1)" Projeto
+    entity Bibliografia{
+        id: integer
+    }
+    Projeto "(1,1)" -- "(1,1)" Bibliografia
+    entity Introducao{
+        id: integer
+    }
+    Projeto "(1,1)" -- "(1,1)" Introducao
+    entity Teoria{
+        id: integer
+    }
+    Projeto "(1,1)" -- "(1,1)" Teoria
+    entity Metodologia{
+        id: integer
+    }
+    Projeto "(1,1)" -- "(1,1)" Metodologia
+    entity Resultado{
+        id: integer
+    }
+    Projeto "(1,1)" -- "(1,1)" Resultado
+}
+package pages{
+    entity Noticia{
+        id: integer
+        titulo: varchar(255)
+        texto: varchar
+        link: url
+        imagem: image        
+    }
 }
 package cadastros{
     entity CadastroProfile{
@@ -70,5 +107,12 @@ package cadastros{
         fk_id_tema: integer
     }
     CadastroTema "(1,1)" -- "(1,1)" Tema
+    entity CadastroNoticia{
+        id: integer
+        created: date
+        updated: date
+        fk_id_noticia: integer
+    }
+    CadastroNoticia "(1,1)" -- "(1,1)" Noticia
 }
 @enduml

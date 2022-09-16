@@ -44,3 +44,8 @@ class Chamada(models.Model):
 
     def __str__(self):
         return self.nome
+
+class Tema(models.Model):
+    titulo = models.CharField(max_length=255)
+    descricao = models.TextField()
+    requisitos = models.TextField()

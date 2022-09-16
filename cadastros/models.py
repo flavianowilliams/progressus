@@ -1,4 +1,4 @@
-from chamadas.models import Chamada
+from chamadas.models import Chamada, Tema
 from users.models import Profile
 from pages.models import Noticia
 from django.db import models
@@ -28,3 +28,11 @@ class CadastroNoticia(models.Model):
 
     def __str__(self):
         return self.noticia.titulo
+
+class CadastroTema(models.Model):
+    tema = models.OneToOneField(Tema, on_delete=models.CASCADE)
+    created = models.DateField(auto_now_add=True)
+    updated = models.DateField(auto_now=True)
+
+    def __str__(self):
+        return self.tema.titulo

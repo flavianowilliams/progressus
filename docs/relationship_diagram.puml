@@ -2,14 +2,14 @@
 package users{
     entity User{
         id: integer
-        username: varchar(50)
-        email: varchar(50)
+        username: varchar
+        email: varchar
     }
     entity Profile{
         id: integer
-        nome_completo: varchar(50)
-        turma: varchar(4)
-        usuario: varchar(50)
+        nome_completo: varchar
+        turma: varchar
+        usuario: varchar
         fk_id_usuario: integer
     }
     Profile "(1,1)" -- "(1,1)" User
@@ -19,31 +19,34 @@ package chamadas{
         id: integer
         fk_id_tema: integer
         fk_id_inscricao: integer
-        nome = varchar(7)
+        nome = varchar
         deadline_inscricao: date
         deadline_bibliografia: date
         deadline_proposta: date
         deadline_projeto: date
         deadline_chamada: date
-        resumo: varchar()
+        resumo: varchar
         edital: file
-        aviso = varchar()
+        aviso = varchar
     }
     entity Tema{
         id: integer
-        titulo: varchar(255)
+        titulo: varchar
         descricao: varchar
         requisitos: varchar
     }
     entity Inscricao{
         id: integer
         fk_id_lider: integer
+        ranking: integer
         nota_projeto: float
         membro_1: varchar
         membro_2: varchar
         membro_3: varchar
         bibliografia: float
         introducao: float
+        setNota_projeto()
+        setRanking()
     }
     Tema "(N,N)" -- "(N,N)" Inscricao
     Chamada "(1,1)" -- "(1,N)" Inscricao
@@ -79,7 +82,7 @@ package chamadas{
 package pages{
     entity Noticia{
         id: integer
-        titulo: varchar(255)
+        titulo: varchar
         texto: varchar
         link: url
         imagem: image        

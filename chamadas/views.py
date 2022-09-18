@@ -170,7 +170,7 @@ def inscricao_detail_view(request, pk):
 
     template_name = 'chamadas/inscricao_detail.html'
 
-    object = get_object_or_404(Inscricao, pk = pk)
+    object = get_object_or_404(Inscricao, pk = pk, lider = request.user.profile)
 
     context = {'object': object}
 

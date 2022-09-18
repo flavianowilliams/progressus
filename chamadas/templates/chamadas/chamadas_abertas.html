@@ -14,8 +14,10 @@
                 <em>{{ object.resumo }}</em>
             </p>
             <p><strong>Data limite para inscrição: {{ object.deadline_inscricao }}</strong></p>
-            <br>
-            <a class="btn btn-primary btn-sm" href="{{ object.edital.url }}">Edital</a>
+            <p><a class="btn btn-primary btn-sm" href="{{ object.edital.url }}">Edital</a></p>
+            {% if request.user.is_authenticated %}
+                <p><a class="btn btn-sm btn-primary" href="{% url 'chamadas:chamada_inscricao' object.pk %}">Inscrever</a></p>
+            {% endif %}
         {% empty %}
             <p>Nenhuma chamada em aberto até o momento...</p>
         {% endfor %}

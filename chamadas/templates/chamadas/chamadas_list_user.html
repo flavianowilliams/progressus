@@ -1,0 +1,39 @@
+{% extends 'pages/base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <div class="container col-xl-9 text-center">
+        <h3>Minhas inscrições</h3>
+        <hr>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <tr>
+                    <th>Chamada</th>
+                    <th>Tema</th>
+                    <th>Status</th>
+                    <th>Data</th>
+                    <th>Nome da equipe</th>
+                </tr>
+                {% for object in object_list %}
+                    <tr>
+                        <td>{{ object.chamada }}</td>
+                        <td>{{ object.tema }}</td>
+                        <td>{{ object.chamada.get_status}}</td>
+                        <td>{{ object.created }}</td>
+                        <td>
+                            <a href="{% url 'chamadas:inscricao_detail' object.pk %}">{{ object.equipe }}</a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="5">Não há inscrições até o momento.</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footnote %}
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'pages/base.html' %}
+
+{% block content %}
+<div class="container-fluid text-center">
+    <h3>Inscrições na chamada <strong>{{ chamada }}</strong></h3>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <colgroup>
+                <col style="width: 15vw;">
+                <col style="width: 10vw;">
+                <col style="width: 10vw;">
+                <col style="width: 20vw;">
+                <col style="width: 15vw;">
+                <col style="width: 15vw;">
+                <col style="width: 15vw;">
+            </colgroup>
+            <tr>
+                <th>Equipe</th>
+                <th>Data</th>
+                <th>Lider</th>
+                <th>Membro</th>
+                <th>Membro</th>
+                <th>Membro</th>
+                <th>Opções</th>
+                {% for object in object_list %}
+                    <tr>
+                        <td>{{ object.equipe }}</td>
+                        <td>{{ object.created|date:'d/m/Y' }}</td>
+                        <td>{{ object.lider }}</td>
+                        <td>{{ object.membro_1 }}</td>
+                        <td>{{ object.membro_2 }}</td>
+                        <td>{{ object.membro_3 }}</td>
+                        <td>
+                            <a class="btn btn-sm btn-primary" href="{% url 'chamadas:inscricao_sendmail' object.pk %}">Email</a>
+                            <a class="btn btn-sm btn-warning" href="{% url 'chamadas:inscricao_update' object.pk %}">Editar</a>
+                            <a class="btn btn-sm btn-danger" href="{% url 'chamadas:inscricao_delete' object.pk %}">Excluir</a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="1">Nenhuma equipe está inscrita nesta chamada.</td>
+                    </tr>
+                {% endfor %}
+            </tr>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block footnote %}
+{% endblock %}

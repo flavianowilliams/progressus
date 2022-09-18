@@ -18,7 +18,6 @@ package chamadas{
     entity Chamada{
         id: integer
         fk_id_tema: integer
-        fk_id_inscricao: integer
         nome = varchar
         deadline_inscricao: date
         deadline_bibliografia: date
@@ -27,7 +26,7 @@ package chamadas{
         deadline_chamada: date
         resumo: varchar
         edital: file
-        aviso = varchar
+        aviso: varchar
     }
     entity Tema{
         id: integer
@@ -38,44 +37,133 @@ package chamadas{
     entity Inscricao{
         id: integer
         fk_id_lider: integer
+        fk_id_chamada: integer
+        created: date
         ranking: integer
-        nota_projeto: float
+        equipe: varchar
         membro_1: varchar
         membro_2: varchar
         membro_3: varchar
-        bibliografia: float
-        introducao: float
-        setNota_projeto()
         setRanking()
     }
     Tema "(N,N)" -- "(N,N)" Inscricao
     Chamada "(1,1)" -- "(1,N)" Inscricao
-    entity Extra{
-        id: integer
-    }
-    Inscricao "(1,1)" - "(1,1)" Extra
     entity Projeto{
         id: integer
+        fk_id_inscricao: integer
+        updated: date
+        nota float
+        setNota()
     }
     Inscricao "(1,1)" -- "(1,1)" Projeto
+    entity Extra{
+        id: integer
+        fk_id_projeto: integer
+        penalidade: float
+        divulgacao: float
+    }
+    Projeto "(1,1)" - "(1,1)" Extra
     entity Bibliografia{
         id: integer
+        fk_id_projeto: integer
+        nota: float
+        consideracoes: varchar
     }
     Projeto "(1,1)" -- "(1,1)" Bibliografia
     entity Introducao{
         id: integer
+        fk_id_projeto: integer
+        item1_nota: float
+        item2_nota: float
+        item3_nota: float
+        item4_nota: float
+        item5_nota: float
+        item1_valor: float
+        item2_valor: float
+        item3_valor: float
+        item4_valor: float
+        item5_valor: float
+        item1_titulo: varchar
+        item2_titulo: varchar
+        item3_titulo: varchar
+        item4_titulo: varchar
+        item5_titulo: varchar
+        item1_consideracoes: varchar
+        item2_consideracoes: varchar
+        item3_consideracoes: varchar
+        item4_consideracoes: varchar
+        item5_consideracoes: varchar
+        nota: float
+        setNota()
+
     }
     Projeto "(1,1)" -- "(1,1)" Introducao
     entity Teoria{
         id: integer
+        fk_id_projeto: integer
+        nota: float
+        conceitos_titulo: varchar
+        conceitos_total: integer
+        conceitos_qde: integer
+        conceitos_consideracoes: varchar
+        setNota()
     }
     Projeto "(1,1)" -- "(1,1)" Teoria
     entity Metodologia{
         id: integer
+        fk_id_projeto: integer
+        item1_nota: float
+        item2_nota: float
+        item3_nota: float
+        item4_nota: float
+        item5_nota: float
+        item1_valor: float
+        item2_valor: float
+        item3_valor: float
+        item4_valor: float
+        item5_valor: float
+        item1_titulo: varchar
+        item2_titulo: varchar
+        item3_titulo: varchar
+        item4_titulo: varchar
+        item5_titulo: varchar
+        item1_consideracoes: varchar
+        item2_consideracoes: varchar
+        item3_consideracoes: varchar
+        item4_consideracoes: varchar
+        item5_consideracoes: varchar
     }
     Projeto "(1,1)" -- "(1,1)" Metodologia
     entity Resultado{
-        id: integer
+        id: integer       
+        fk_id_projeto: integer
+        criterio1_resultado: float
+        criterio2_resultado: float
+        criterio3_resultado: float
+        criterio4_resultado: float
+        criterio5_resultado: float
+        criterio1_nota: float
+        criterio2_nota: float
+        criterio3_nota: float
+        criterio4_nota: float
+        criterio5_nota: float
+        criterio1_valor: float
+        criterio2_valor: float
+        criterio3_valor: float
+        criterio4_valor: float
+        criterio5_valor: float
+        criterio1_titulo: varchar
+        criterio2_titulo: varchar
+        criterio3_titulo: varchar
+        criterio4_titulo: varchar
+        criterio5_titulo: varchar
+        criterio1_consideracoes: varchar
+        criterio2_consideracoes: varchar
+        criterio3_consideracoes: varchar
+        criterio4_consideracoes: varchar
+        criterio5_consideracoes: varchar
+        nota: float
+        setNota()
     }
     Projeto "(1,1)" -- "(1,1)" Resultado
 }
@@ -95,7 +183,7 @@ package cadastros{
         updated: date
         fk_id_profile: integer
     }
-    CadastroProfile "(1,1)" -- "(1,1)" Profile
+    CadastroProfile "(1,1)" --- "(1,1)" Profile
     entity CadastroChamada{
         id: integer
         created: date
@@ -116,6 +204,6 @@ package cadastros{
         updated: date
         fk_id_noticia: integer
     }
-    CadastroNoticia "(1,1)" -- "(1,1)" Noticia
+    CadastroNoticia "(1,1)" --- "(1,1)" Noticia
 }
 @enduml

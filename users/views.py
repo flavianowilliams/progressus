@@ -96,7 +96,7 @@ def enviar_email(request, pk):
 
     sender = EMAIL_HOST_USER
     receiver = usuario.usuario.email
-    subject = 'Plaforma progressus - Aviso!'
+    subject = 'Plaforma progressus - Atenção!'
 
     if request.method == 'POST':
         message = request.POST.get('message')

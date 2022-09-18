@@ -43,7 +43,15 @@
               <a class="navbar-brand" href="{% url 'pages:home' %}"><em>PROGRESSUS</em></a>
               <div class="collapse navbar-collapse" id="collapsenavbar">
                 <div class="navbar-nav ms-auto">
-                  {% if request.user.is_authenticated %}
+                  <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle active" id="dropdownchamada" role="button" href="#" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Chamadas</a>
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownchamada">
+                      <a class="dropdown-item" href="{% url 'chamadas:chamadas_abertas' %}">Abertas</a>
+                      <a class="dropdown-item" href="{% url 'chamadas:chamadas_andamento' %}">Em andamento</a>
+                      <a class="dropdown-item" href="{% url 'chamadas:chamadas_encerradas' %}">Encerradas</a>
+                    </div>
+                  </div>
+                {% if request.user.is_authenticated %}
                     {% if request.user.is_superuser %}
                       <div class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="dropdowncadastro" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" href="#">Cadastro</a>
@@ -61,25 +69,17 @@
                       </a>
                       <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownlogin">
                         {% if request.user.is_superuser %}
-                          <a class="dropdown-item" href="#">Chamadas</a>
+                          <a class="dropdown-item" href="{% url 'chamadas:chamadas_list_superuser' %}">Chamadas</a>
                         {% else %}
                           <a class="dropdown-item" href="{% url 'users:profile' %}">Meus dados</a>
-                          <a class="dropdown-item" href="#">Minhas inscrições</a>
+                          <a class="dropdown-item" href="{% url 'chamadas:chamadas_list_user' %}">Minhas inscrições</a>
                         {% endif %}
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{% url 'users:logout' %}">Sair</a>
                       </div>
                     </div>
-                  {% else %}
-                    <div class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle active" id="dropdownchamada" role="button" href="#" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Chamadas</a>
-                      <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownchamada">
-                        <a class="dropdown-item" href="{% url 'chamadas:chamadas_abertas' %}">Abertas</a>
-                        <a class="dropdown-item" href="{% url 'chamadas:chamadas_andamento' %}">Em andamento</a>
-                        <a class="dropdown-item" href="{% url 'chamadas:chamadas_encerradas' %}">Encerradas</a>
-                      </div>
-                    </div>
-                    <a class="nav-item nav-link active" href="{% url 'users:login' %}">Login</a>
+                    {% else %}
+                      <a class="nav-item nav-link active" href="{% url 'users:login' %}">Login</a>
                   {% endif %}
                 </div>
               </div>

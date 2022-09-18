@@ -1,0 +1,38 @@
+{% extends 'pages/base.html' %}
+
+{% block content %}
+    <div class="container col-xl-7 text-center">
+        <h3>Chamadas</h3>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <colgroup>
+                    <col style="width: 20vw;">
+                    <col style="width: 20vw;">
+                    <col style="width: 20vw;">
+                    <col style="width: 20vw;">
+                </colgroup>
+                <tr>
+                    <th>Chamada</th>
+                    <th>Data</th>
+                    <th>Status</th>
+                    <th>Inscrições</th>
+                </tr>
+                {% for object in object_list %}
+                    <tr>
+                        <td>{{ object }}</td>
+                        <td>{{ object.cadastrochamada.created }}</td>
+                        <td>{{ object.get_status }}</td>
+                        <td><a href="{% url 'chamadas:inscricoes_list_superuser' object.pk %}">Lista</a></td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="1">Nenhuma chamada registrada até o momento.</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footnote %}
+{% endblock %}

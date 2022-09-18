@@ -14,7 +14,12 @@
                 <em>{{ object.resumo }}</em>
             </p>
             <p><strong>Data limite para inscrição: {{ object.deadline_inscricao }}</strong></p>
-            <p><a class="btn btn-primary btn-sm" href="{{ object.edital.url }}">Edital</a></p>
+            <p>
+                <a class="btn btn-primary btn-sm" href="{{ object.edital.url }}">Edital</a>
+                {% if object.cadastrochamada.updated > object.cadastrochamada.created %}
+                    (Retificado em {{ object.cadastrochamada.updated }})
+                {% endif %}
+            </p>
             {% if request.user.is_authenticated %}
                 {% if request.user.profile.nome_completo %}
                     <p><a class="btn btn-sm btn-primary" href="{% url 'chamadas:chamada_inscricao' object.pk %}">Inscrever</a></p>

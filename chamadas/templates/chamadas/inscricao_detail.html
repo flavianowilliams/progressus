@@ -2,9 +2,30 @@
 
 {% block content %}
     <div class="container-fluid">
-        <p>Bem vindo {{ object.lider }}.</p>
+        <p>Bem vindo {{ object.lider }}.
+        <button class="btn btn-primary float-end" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+                Menu
+        </button>    
+        </p>
         <p>Chamada: {{ object.chamada }}.</p>
         <hr>
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasExampleLabel">Projeto</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div>
+                Escolha abaixo um dos itens referentes ao seu projeto.
+            </div>
+            <div class="list-group col-7 mx-3 mt-3">
+                <a href="#" class="list-group-item list-group-item-action">Revisão  bibliográfica</a>
+                <a href="#" class="list-group-item list-group-item-action">Introdução</a>
+                <a href="#" class="list-group-item list-group-item-action">Teoria</a>
+                <a href="#" class="list-group-item list-group-item-action">Metodologia</a>
+                <a href="#" class="list-group-item list-group-item-action">Resultados e conclusão</a>
+              </div>
+        </div>
     </div>
 {% endblock %}
 

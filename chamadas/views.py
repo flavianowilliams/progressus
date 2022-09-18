@@ -70,6 +70,18 @@ def inscricao_create_view(request, pk):
                 form.instance.chamada = chamada
                 form.instance.lider = request.user.profile
                 form.save()
+                sender = EMAIL_HOST_USER
+                receiver = form.instance.lider.usuario.email
+                message = (
+                        'Inscrição feita com sucesso na chamada {} em {}.\n\n'.format(form.instance.chamada, form.instance.created)+
+                        'Equipe: {}\n'.format(form.instance.equipe)+
+                        'Lider: {}\n'.format(form.instance.lider)+
+                        'Membro: {}\n'.format(form.instance.membro_1)+
+                        'Membro: {}\n'.format(form.instance.membro_2)+
+                        'Membro: {}\n'.format(form.instance.membro_3)
+                        )
+                subject = 'Plaforma progressus - Inscrição'
+                send_mail(subject, message, sender, [receiver], fail_silently=False)
                 return HttpResponseRedirect(reverse_lazy('chamadas:chamadas_abertas'))
         else:
             form = InscricaoForm()
@@ -102,7 +114,7 @@ def inscricao_delete_superuser(request, pk):
 
     if request.method == 'POST':
         object.delete()
-        return HttpResponseRedirect(reverse_lazy('chamadas:chamadas_list_superuser', kwargs = {'pk': object.chamada.pk}))
+        return HttpResponseRedirect(reverse_lazy('chamadas:inscricoes_list_superuser', kwargs = {'pk': object.chamada.pk}))
 
     context = {'object': object}
 

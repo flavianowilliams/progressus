@@ -52,17 +52,6 @@ def chamada_list_superuser_view(request):
 
     return render(request, template_name, context)
 
-@login_required
-def chamada_list_user(request):
-
-    template_name = 'chamadas/chamadas_list_user.html'
-
-    object_list = get_list_or_404(Inscricao, lider = request.user.profile)
-
-    context = {'object_list': object_list}
-
-    return render(request, template_name, context)
-
 # Inscricao
 
 @login_required
@@ -163,6 +152,17 @@ def enviar_email(request, pk):
     form = {'from': sender, 'to': receiver, 'message': message, 'subject': subject}
 
     context = {'nome': inscricao, 'botao': 'Enviar', 'form': form}
+
+    return render(request, template_name, context)
+
+@login_required
+def inscricao_list_user(request):
+
+    template_name = 'chamadas/inscricao_list_user.html'
+
+    object_list = Inscricao.objects.filter(lider = request.user.profile)
+
+    context = {'object_list': object_list}
 
     return render(request, template_name, context)
 

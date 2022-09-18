@@ -72,7 +72,7 @@
                           <a class="dropdown-item" href="{% url 'chamadas:chamadas_list_superuser' %}">Chamadas</a>
                         {% else %}
                           <a class="dropdown-item" href="{% url 'users:profile' %}">Meus dados</a>
-                          <a class="dropdown-item" href="{% url 'chamadas:chamadas_list_user' %}">Minhas inscrições</a>
+                          <a class="dropdown-item" href="{% url 'chamadas:inscricao_list_user' %}">Minhas inscrições</a>
                         {% endif %}
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{% url 'users:logout' %}">Sair</a>

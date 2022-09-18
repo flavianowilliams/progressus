@@ -16,7 +16,11 @@
             <p><strong>Data limite para inscrição: {{ object.deadline_inscricao }}</strong></p>
             <p><a class="btn btn-primary btn-sm" href="{{ object.edital.url }}">Edital</a></p>
             {% if request.user.is_authenticated %}
-                <p><a class="btn btn-sm btn-primary" href="{% url 'chamadas:chamada_inscricao' object.pk %}">Inscrever</a></p>
+                {% if request.user.profile.nome_completo %}
+                    <p><a class="btn btn-sm btn-primary" href="{% url 'chamadas:chamada_inscricao' object.pk %}">Inscrever</a></p>
+                {% else %}
+                    <p><span style="color: red;">Para se inscrever, você precisa finalizar o seu cadastro.</span><a href="{% url 'users:profile' %}"> Clique aqui</a></p>
+                {% endif %}
             {% endif %}
         {% empty %}
             <p>Nenhuma chamada em aberto até o momento...</p>

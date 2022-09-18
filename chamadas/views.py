@@ -102,7 +102,7 @@ def inscricao_delete_superuser(request, pk):
 
     if request.method == 'POST':
         object.delete()
-        return HttpResponseRedirect(reverse_lazy('chamadas:chamadas_list_superuser'))
+        return HttpResponseRedirect(reverse_lazy('chamadas:chamadas_list_superuser', kwargs = {'pk': object.chamada.pk}))
 
     context = {'object': object}
 
@@ -114,16 +114,16 @@ def inscricao_update_view(request, pk):
 
     template_name = 'chamadas/inscricao_editar.html'
 
-    inscricao = get_object_or_404(Inscricao, pk = pk)
+    object = get_object_or_404(Inscricao, pk = pk)
 
     if request.method == 'POST':
-        inscricao.delete()
-        form = InscricaoForm(request.POST, instance=inscricao)
+        object.delete()
+        form = InscricaoForm(request.POST, instance=object)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse_lazy('chamadas:inscricoes_list_superuser', kwargs = {'pk': inscricao.chamada.pk}))
+            return HttpResponseRedirect(reverse_lazy('chamadas:inscricoes_list_superuser', kwargs = {'pk': object.chamada.pk}))
     else:
-        form = InscricaoForm(instance=inscricao)
+        form = InscricaoForm(instance = object)
 
     context = {'botao': 'Editar', 'form': form}
 

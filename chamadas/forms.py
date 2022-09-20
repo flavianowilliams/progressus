@@ -1,5 +1,5 @@
 from django import forms
-from .models import Chamada, Tema, Inscricao
+from .models import Chamada, ProjetoModelo, Tema, Inscricao, Projeto
 
 class ChamadaFormCreate(forms.ModelForm):
 
@@ -14,6 +14,7 @@ class ChamadaFormCreate(forms.ModelForm):
                 'deadline_proposta',
                 'deadline_projeto',
                 'deadline_chamada',
+                'projetomodelo',
                 'edital',
                 ]
 
@@ -36,6 +37,7 @@ class ChamadaFormUpdate(forms.ModelForm):
                 'deadline_proposta',
                 'deadline_projeto',
                 'deadline_chamada',
+                'projetomodelo',
                 'edital',
                 ]
 
@@ -100,3 +102,28 @@ class InscricaoForm(forms.ModelForm):
         if Inscricao.objects.filter(membro_3 = data).exists():
             raise forms.ValidationError('{} já pertence a alguma equipe.'.format(data))
         return data
+
+class ProjetoModeloForm(forms.ModelForm):
+
+    class Meta:
+        model = ProjetoModelo
+        fields = [
+            'nome',
+            'bibliografia_total',
+            'introducao_titulo_1',
+             'introducao_peso_1',
+                ]
+
+    def clean_nome(self):
+        data = self.cleaned_data['nome']
+        if ProjetoModelo.objects.filter(nome = data).exists():
+            raise forms.ValidationError('O nome {} já está em uso.'.format(data))
+        return data
+
+class ProjetoForm(forms.ModelForm):
+
+    class Meta:
+        model = Projeto
+        fields = [
+            'modelo',
+                ]

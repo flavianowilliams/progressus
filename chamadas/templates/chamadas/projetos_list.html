@@ -1,0 +1,44 @@
+{% extends 'pages/base.html' %}
+
+{% block content %}
+<div class="container-fluid text-center">
+    <h3>Lista de projetos da chamada <strong>{{ chamada }}</strong></h3>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <colgroup>
+                <col style="width: 15vw;">
+                <col style="width: 10vw;">
+                <col style="width: 10vw;">
+                <col style="width: 20vw;">
+                <col style="width: 15vw;">
+                <col style="width: 15vw;">
+            </colgroup>
+            <tr>
+                <th>Equipe</th>
+                <th>Tema</th>
+                <th>Revisao bibliográfica</th>
+                <th>Proposta</th>
+                <th>Projeto</th>
+                <th>Extra</th>
+                {% for object in object_list %}
+                    <tr>
+                        <td>{{ object }}</td>
+                        <td>{{ object.tema }}</td>
+                        <td>{{ object.projeto }}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="6">Nenhum projeto está cadastrado nesta chamada.</td>
+                    </tr>
+                {% endfor %}
+            </tr>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block footnote %}
+{% endblock %}

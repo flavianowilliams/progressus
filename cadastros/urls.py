@@ -22,4 +22,9 @@ urlpatterns = [
     path('tema_create/', views.tema_create_view, name='tema_create'),
     path('tema_update/<int:pk>/', views.tema_update_view, name='tema_update'),
     path('tema_delete/<int:pk>/', views.tema_delete_view, name='tema_delete'),
+    # projetomodelo
+    path('projetomodelo_list/', views.projetomodelo_list_view, name='projetomodelo_list'),
+    path('projeto_create/', views.projetomodelo_create_view, name='projeto_create'),
+    path('projeto_update/<int:pk>/', views.projetomodelo_update_view, name='projeto_update'),
+    path('projeto_delete/<int:pk>/', views.projetomodelo_delete_view, name='projeto_delete'),
 ]

@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
-from chamadas.models import Chamada, Inscricao
-from chamadas.forms import InscricaoForm
+from chamadas.models import Chamada, Inscricao, Projeto
+from chamadas.forms import InscricaoForm, ProjetoForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -70,6 +70,7 @@ def inscricao_create_view(request, pk):
                 form.instance.chamada = chamada
                 form.instance.lider = request.user.profile
                 form.save()
+                Projeto.objects.create(inscricao = form.instance, modelo = chamada.projetomodelo)
                 sender = EMAIL_HOST_USER
                 receiver = form.instance.lider.usuario.email
                 message = (
@@ -185,5 +186,21 @@ def inscricao_detail_view(request, pk):
     object = get_object_or_404(Inscricao, pk = pk, lider = request.user.profile)
 
     context = {'object': object}
+
+    return render(request, template_name, context)
+
+# projetos
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser, login_url='users:login')
+def projeto_list_view(request, pk):
+
+    template_name = 'chamadas/projetos_list.html'
+
+    object = get_object_or_404(Chamada, pk = pk)
+
+    object_list = Inscricao.objects.filter(chamada = object)
+
+    context = {'object_list': object_list, 'chamada': object}
 
     return render(request, template_name, context)

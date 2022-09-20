@@ -5,7 +5,7 @@ from users.models import Profile
 # Create your models here.
 
 class ProjetoModelo(models.Model):
-    nome = models.CharField(max_length=100, default='Padrão')
+    nome = models.CharField(max_length=100)
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
     bibliografia_total = models.IntegerField(default=10, blank=True)

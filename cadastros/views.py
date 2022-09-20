@@ -1,3 +1,4 @@
+from operator import is_not
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
@@ -48,6 +49,15 @@ def chamadas_create_view(request):
 
     template_name = 'cadastros/forms_upload.html'
 
+    object_list = ProjetoModelo.objects.all()
+
+    if object_list:
+        pass
+    else:
+        ProjetoModelo.objects.create(nome = 'Padrão')
+        projeto = ProjetoModelo.objects.get(nome = 'Padrão')
+        CadastroProjeto.objects.create(projeto = projeto)
+
     if request.method == 'POST':
         form = ChamadaFormCreate(request.POST, request.FILES)
         if form.is_valid():
@@ -55,7 +65,7 @@ def chamadas_create_view(request):
             CadastroChamada.objects.create(chamada = form.instance)
             return HttpResponseRedirect(reverse_lazy('cadastros:chamadas_list'))
     else:
-        form = ChamadaFormCreate
+        form = ChamadaFormCreate()
 
     context = {'titulo': 'Novo cadastro de chamada', 'botao': 'Inscrever' ,'form': form}
 

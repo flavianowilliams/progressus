@@ -4,17 +4,22 @@
 
 {% block content %}
     <div class="container col-xl-6">
-        <h3>Exclusão de registro</h3>
-        <p class="lead">Confirme abaixo para excluir o registro definitivamente.</p>
-        <hr>
-        <form action="" method="POST">
-            <p>Deseja realmente excluir <strong>{{ object }}</strong>? Esta ação será definitiva!</p>
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button class="btn btn-danger" type="submit">
-                Excluir
-            </button>
-        </form>
+        {% if depend is not None %}
+            <p style="color: red;"><strong>Erro!</strong></p>
+            <p>Não foi possível excluir <strong>{{ object }}</strong>, devido a dependência com <strong>{{ depend }}.</strong></p>
+        {% else %}
+            <h3>Exclusão de registro</h3>
+            <p class="lead">Confirme abaixo para excluir o registro definitivamente.</p>
+            <hr>
+            <form action="" method="POST">
+                <p>Deseja realmente excluir <strong>{{ object }}</strong>? Esta ação será  definitiva!</p>
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="btn btn-danger" type="submit">
+                    Excluir
+                </button>
+            </form>
+        {% endif %}
     </div>
 {% endblock %}
 

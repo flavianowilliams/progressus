@@ -120,6 +120,17 @@ class ProjetoModeloForm(forms.ModelForm):
             raise forms.ValidationError('O nome {} já está em uso.'.format(data))
         return data
 
+class ProjetoModeloUpdateForm(forms.ModelForm):
+
+    class Meta:
+        model = ProjetoModelo
+        fields = [
+            'nome',
+            'bibliografia_total',
+            'introducao_titulo_1',
+             'introducao_peso_1',
+                ]
+
 class ProjetoForm(forms.ModelForm):
 
     class Meta:

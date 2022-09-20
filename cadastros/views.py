@@ -1,9 +1,8 @@
-from operator import is_not
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
-from chamadas.forms import ChamadaFormCreate, ChamadaFormUpdate, ProjetoModeloForm, TemaFormCreate, TemaFormUpdate
-from chamadas.models import ProjetoModelo
+from chamadas.forms import ChamadaFormCreate, ChamadaFormUpdate, ProjetoModeloForm, TemaFormCreate, TemaFormUpdate, ProjetoModeloUpdateForm
+from chamadas.models import Chamada, ProjetoModelo
 from pages.forms import NoticiaFormCreate, NoticiaFormUpdate
 from .models import CadastroChamada, CadastroProfile, CadastroNoticia, CadastroProjeto, CadastroTema
 from django.contrib.auth.models import User
@@ -297,14 +296,14 @@ def projetomodelo_update_view(request, pk):
     object = get_object_or_404(CadastroProjeto, pk = pk)
 
     if request.method == 'POST':
-        form = ProjetoModeloForm(request.POST, instance = object.projeto)
+        form = ProjetoModeloUpdateForm(request.POST, instance = object.projeto)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse_lazy('cadastros:projetomodelo_list'))
     else:
-        form = ProjetoModeloForm(instance = object.projeto)
+        form = ProjetoModeloUpdateForm(instance = object.projeto)
 
-    context = {'titulo': 'Edição de cadastro de tema', 'botao': 'Salvar', 'form': form}
+    context = {'titulo': 'Edição de cadastro de modelo de projeto', 'botao': 'Salvar', 'form': form}
 
     return render(request, template_name, context)
 
@@ -312,12 +311,18 @@ def projetomodelo_delete_view(request, pk):
 
     template_name = 'cadastros/forms_delete.html'
 
-    object = get_object_or_404(CadastroProjeto, pk = pk)
+    cadastroprojeto = get_object_or_404(CadastroProjeto, pk = pk)
+    chamada = Chamada.objects.filter(projetomodelo = cadastroprojeto.projeto)
+
+    if chamada.exists():
+        depend = Chamada.objects.get(projetomodelo = cadastroprojeto.projeto)
+    else:
+        depend = None
 
     if request.method == 'POST':
-        object.projeto.delete()
+        cadastroprojeto.projeto.delete()
         return HttpResponseRedirect(reverse_lazy('cadastros:projetomodelo_list'))
 
-    context = {'object': object}
+    context = {'object': cadastroprojeto, 'depend': depend}
 
     return render(request, template_name, context)

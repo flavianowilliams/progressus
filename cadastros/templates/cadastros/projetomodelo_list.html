@@ -5,7 +5,7 @@
 {% block content %}
     <div class="container-fluid">
         <h3 style="text-align: left;">
-            Lista de chamadas
+            Lista de modelos de projeto
             <a class="btn btn-primary btn-sm float-end" href="{% url 'cadastros:projeto_create' %}">Adicionar</a>
         </h3>
         <div class="table-responsive">
@@ -29,12 +29,16 @@
                         <td>{{ object.updated }}</td>
                         <td>
                             <a class="btn btn-warning btn-sm" href="{% url 'cadastros:projeto_update' object.pk %}">Editar</a>
-                            <a class="btn btn-danger btn-sm" href="{% url 'cadastros:projeto_delete' object.pk %}">Excluir</a>
+                            {% if chamada.projetomodelo != object.projeto %}
+                                <a class="btn btn-danger btn-sm" href="{% url 'cadastros:projeto_delete' object.pk %}">Excluir</a>
+                            {% endif %}
                         </td>
                     </tr>
                 {% empty %}
                     <tr>
-                        <td colspan="6" style="text-align: center;">Nenhuma modelo de projeto registrado até o momento.</td>
+                        <td colspan="6" style="text-align: center;">
+                            Nenhuma modelo de projeto registrado até o momento.
+                        </td>
                     </tr>
                 {% endfor %}
             </table>

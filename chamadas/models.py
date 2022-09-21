@@ -12,13 +12,64 @@ class ProjetoModelo(models.Model):
     introducao_titulo_1 = models.CharField(
         max_length=100,
         default='Qual é o significado?',
-        verbose_name = '1. Introdução: Título'
+        verbose_name = '1. Introdução (parâmetro): Título'
         )
     introducao_peso_1 = models.DecimalField(
         max_digits=6,
         decimal_places=3,
         default=0.25,
-        verbose_name='1. Introdução: Peso'
+        verbose_name='2. Introdução (parâmetro): Peso'
+        )
+    introducao_titulo_2 = models.CharField(
+        max_length=100,
+        default='Qual é a utilidade?',
+        verbose_name = '2. Introdução (parâmetro): Título'
+        )
+    introducao_peso_2 = models.DecimalField(
+        max_digits=6,
+        decimal_places=3,
+        default=0.25,
+        verbose_name='1. Introdução (parâmetro): Peso'
+        )
+    introducao_titulo_3 = models.CharField(
+        max_length=100,
+        default='Quais as vantagens e desvantagens?',
+        verbose_name = '3. Introdução (parâmetro): Título'
+        )
+    introducao_peso_3 = models.DecimalField(
+        max_digits=6,
+        decimal_places=3,
+        default=0.25,
+        verbose_name='3. Introdução (parâmetro): Peso'
+        )
+    introducao_titulo_4 = models.CharField(
+        max_length=100,
+        default='O que já foi feito sobre o assunto?',
+        verbose_name = '4. Introdução (parâmetro): Título'
+        )
+    introducao_peso_4 = models.DecimalField(
+        max_digits=6,
+        decimal_places=3,
+        default=0.25,
+        verbose_name='4. Introdução (parâmetro): Peso'
+        )
+    introducao_titulo_5 = models.CharField(
+        max_length=100,
+        default='As referências bibliográficas foram citadas corretamente?',
+        verbose_name = '5. Introdução (parâmetro): Título'
+        )
+    introducao_peso_5 = models.DecimalField(
+        max_digits=6,
+        decimal_places=3,
+        default=0.25,
+        verbose_name='5. Introdução (parâmetro): Peso'
+        )
+
+    introducao_peso = models.DecimalField(
+        max_digits=6,
+        decimal_places=3,
+        default=0,
+        verbose_name='Introdução: Peso'
         )
 
     def __str__(self):
@@ -26,7 +77,7 @@ class ProjetoModelo(models.Model):
 
 class Chamada(models.Model):
     nome = models.CharField(max_length=7, unique=True)
-    projetomodelo = models.ForeignKey(ProjetoModelo, default='Padrão', on_delete=models.PROTECT, null=True)
+    projetomodelo = models.ForeignKey(ProjetoModelo, on_delete=models.PROTECT, null=True)
     deadline_inscricao = models.DateField(verbose_name='Data limite da inscrição', null=True)
     deadline_bibliografia = models.DateField(verbose_name='Data limite da bibliografia', null=True)
     deadline_proposta = models.DateField(verbose_name='Data limite da proposta', null=True)
@@ -101,19 +152,53 @@ class Extra(models.Model):
         return self.nota
 
 class Projeto(models.Model):
+
+    created = models.DateField(auto_now_add=True)
+    updated = models.DateField(auto_now=True)
+
     inscricao = models.OneToOneField(Inscricao, on_delete=models.CASCADE)
-    modelo = models.ForeignKey(ProjetoModelo, on_delete=models.PROTECT, null=True)
-    introducao_nota_1 = models.DecimalField(max_digits=6, decimal_places=3, null=True, blank=True)
-    nota_introducao = models.DecimalField(max_digits=6, decimal_places=3, null=True, blank=True)
+    modelo = models.ForeignKey(ProjetoModelo, on_delete=models.PROTECT)
+
+    titulo = models.CharField(max_length=100, null=True, blank=True)
+
     nota = models.DecimalField(max_digits=6, decimal_places=3, null=True, blank=True)
 
-    def setNotaIntroducao(self):
-        self.nota_introducao = self.modelo.introducao_peso_1
-        return self.nota_introducao
-
     def setNota(self):
-        self.nota = self.nota_introducao
-        return self.nota
+        data = self.introducao.nota_introducao
+        return data
 
     def __str__(self):
-        return self.modelo.nome
+        return self.titulo
+
+class Introducao(models.Model):
+
+    created = models.DateField(auto_now_add=True)
+    updated = models.DateField(auto_now=True)
+
+    projeto = models.OneToOneField(Projeto, on_delete=models.CASCADE)
+
+    introducao_nota_1 = models.DecimalField(max_digits=6, decimal_places=3, default=0.0, blank=True)
+    introducao_nota_2 = models.DecimalField(max_digits=6, decimal_places=3, default=0.0, blank=True)
+    introducao_nota_3 = models.DecimalField(max_digits=6, decimal_places=3, default=0.0, blank=True)
+    introducao_nota_4 = models.DecimalField(max_digits=6, decimal_places=3, default=0.0, blank=True)
+    introducao_nota_5 = models.DecimalField(max_digits=6, decimal_places=3, default=0.0, blank=True)
+
+    nota_introducao = models.DecimalField(max_digits=6, decimal_places=3, default=0.0, blank=True)
+
+    def setNotaIntroducao(self):
+        data = self.projeto.modelo.introducao_peso_1*self.introducao_nota_1
+        data += self.projeto.modelo.introducao_peso_2*self.introducao_nota_2
+        data += self.projeto.modelo.introducao_peso_3*self.introducao_nota_3
+        data += self.projeto.modelo.introducao_peso_4*self.introducao_nota_4
+        data += self.projeto.modelo.introducao_peso_5*self.introducao_nota_5
+        data = data*self.projeto.modelo.introducao_peso
+        return data
+
+class Teoria(models.Model):
+
+    teoria_total = models.DecimalField(max_digits=6, decimal_places=3, default=0, blank=True)
+    teoria_qde = models.DecimalField(max_digits=6, decimal_places=3, default=0, blank=True)
+
+    def setNotaTeoria(self):
+        data = self.teoria_qte*100.0/self.teoria_total
+        return data

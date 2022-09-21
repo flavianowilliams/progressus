@@ -6,12 +6,12 @@
     <div class="table-responsive">
         <table class="table table-striped">
             <colgroup>
-                <col style="width: 15vw;">
-                <col style="width: 10vw;">
-                <col style="width: 10vw;">
                 <col style="width: 20vw;">
-                <col style="width: 15vw;">
-                <col style="width: 15vw;">
+                <col style="width: 40vw;">
+                <col style="width: 10vw;">
+                <col style="width: 10vw;">
+                <col style="width: 10vw;">
+                <col style="width: 10vw;">
             </colgroup>
             <tr>
                 <th>Equipe</th>
@@ -24,9 +24,11 @@
                     <tr>
                         <td>{{ object }}</td>
                         <td>{{ object.tema }}</td>
-                        <td>{{ object.projeto }}</td>
                         <td></td>
                         <td></td>
+                        <td>
+                            <a href="{% url 'chamadas:projeto_detail_superuser' object.chamada.pk %}">{{ object.projeto.updated|date:"d/m/Y" }}</a>
+                        </td>
                         <td></td>
                     </tr>
                 {% empty %}

@@ -1,0 +1,48 @@
+{% extends 'pages/base.html' %}
+
+{% block content %}
+<div class="container-fluid text-center">
+    <h3>Projetos das equipes inscritas na chamada <strong>{{ chamada }}</strong></h3>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <colgroup>
+                <col style="width: 20vw;">
+                <col style="width: 30vw;">
+                <col style="width: 10vw;">
+                <col style="width: 10vw;">
+                <col style="width: 10vw;">
+                <col style="width: 10vw;">
+                <col style="width: 10vw;">
+            </colgroup>
+            <tr>
+                <th>Equipe</th>
+                <th>Tema</th>
+                <th>Introdução</th>
+                <th>Teoria</th>
+                <th>Metodologia</th>
+                <th>Resultados</th>
+                <th>Nota</th>
+            </tr>
+            {% for object in object_list %}
+                <tr>
+                    <td>{{ object.inscricao }}</td>
+                    <td>{{ object.inscricao.tema }}</td>
+                    <td>
+                        <a href="{% url 'chamadas:introducao_detail_superuser' object.pk %}">{{ object.introducao.updated|date:"d/m/Y" }}</a>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>{{ object.nota }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block footnote %}
+{% endblock %}

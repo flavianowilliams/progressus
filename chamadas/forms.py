@@ -1,5 +1,6 @@
+from dataclasses import fields
 from django import forms
-from .models import Chamada, ProjetoModelo, Tema, Inscricao, Projeto
+from .models import Chamada, Introducao, ProjetoModelo, Tema, Inscricao, Projeto
 
 class ChamadaFormCreate(forms.ModelForm):
 
@@ -112,6 +113,15 @@ class ProjetoModeloForm(forms.ModelForm):
             'bibliografia_total',
             'introducao_titulo_1',
              'introducao_peso_1',
+            'introducao_titulo_2',
+             'introducao_peso_2',
+            'introducao_titulo_3',
+             'introducao_peso_3',
+            'introducao_titulo_4',
+             'introducao_peso_4',
+            'introducao_titulo_5',
+             'introducao_peso_5',
+             'introducao_peso',
                 ]
 
     def clean_nome(self):
@@ -129,6 +139,15 @@ class ProjetoModeloUpdateForm(forms.ModelForm):
             'bibliografia_total',
             'introducao_titulo_1',
              'introducao_peso_1',
+            'introducao_titulo_2',
+             'introducao_peso_2',
+            'introducao_titulo_3',
+             'introducao_peso_3',
+            'introducao_titulo_4',
+             'introducao_peso_4',
+            'introducao_titulo_5',
+             'introducao_peso_5',
+             'introducao_peso',
                 ]
 
 class ProjetoForm(forms.ModelForm):
@@ -137,4 +156,25 @@ class ProjetoForm(forms.ModelForm):
         model = Projeto
         fields = [
             'modelo',
+                ]
+
+class ProjetoIntroducaoAdmin(forms.ModelForm):
+
+    class Meta:
+        model = Introducao
+        fields = [
+            'introducao_nota_1',
+            'introducao_nota_2',
+            'introducao_nota_3',
+            'introducao_nota_4',
+            'introducao_nota_5',
+            'nota_introducao',
+        ]
+
+class ProjetoAdminForm(forms.ModelForm):
+
+    class Meta:
+        model = Projeto
+        fields = [
+            'nota',
                 ]

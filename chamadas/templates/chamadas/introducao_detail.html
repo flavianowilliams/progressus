@@ -1,0 +1,200 @@
+{% extends 'pages/base.html' %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+    <div class="container">
+        <h2>Equipe: {{ form.instance.inscricao }}</h2>
+        <h3>Projeto: {{ form.instance.titulo }}</h3>
+        <div class="card-body">
+            <h4 class="card-title text-center">Introdução</h4>
+            <form action="" method="POST">
+                <div class="border">
+                    {% csrf_token %}
+                    <div class="mx-3 my-3 mt-3 mb-3">
+                        <h5>Parâmetros de avaliação</h5>
+                        {% if form.instance.projeto.modelo.introducao_peso_1 > 0.0 %}
+                            <div class="row">
+                                <label class="col-sm-1 col-form-label" for="inpt1">
+                                    Parâmetro:
+                                </label>
+                                <div class="col-sm-10">
+                                    <input type="text" readonly class="form-control-plaintext" id="inpt1" value="{{ form.instance.projeto.modelo.introducao_titulo_1 }}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-1 col-form-label" for="inpt2">
+                                    Peso:
+                                </label>
+                                <div class="col-sm-10">
+                                    <input type="text" readonly class="form-control-plaintext" id="inpt2" value="{{ form.instance.projeto.modelo.introducao_peso_1 }}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-1 col-form-label" for="">
+                                    Nota:
+                                </label>
+                                <div class="col-sm-2">
+                                    {% render_field form.introducao_nota_1 class+="form-control" %}
+                                </div>
+                            </div>
+                            <hr>
+                        {% endif %}
+                        {% if form.instance.projeto.modelo.introducao_peso_2 > 0.0 %}
+                            <div class="row">
+                                <label class="col-sm-1 col-form-label" for="inpt1">
+                                    Parâmetro:
+                                </label>
+                                <div class="col-sm-10">
+                                    <input type="text" readonly class="form-control-plaintext" id="inpt1" value="{{ form.instance.projeto.modelo.introducao_titulo_2 }}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-1 col-form-label" for="inpt2">
+                                    Peso:
+                                </label>
+                                <div class="col-sm-10">
+                                    <input type="text" readonly class="form-control-plaintext" id="inpt2" value="{{ form.instance.projeto.modelo.introducao_peso_2 }}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-1 col-form-label" for="">
+                                    Nota:
+                                </label>
+                                <div class="col-sm-2">
+                                    {% render_field form.introducao_nota_2 class+="form-control" %}
+                                </div>
+                            </div>
+                            <hr>
+                        {% endif %}
+                        {% if form.instance.projeto.modelo.introducao_peso_3 > 0.0 %}
+                            <div class="row">
+                                <label class="col-sm-1 col-form-label" for="inpt1">
+                                    Parâmetro:
+                                </label>
+                                <div class="col-sm-10">
+                                    <input type="text" readonly class="form-control-plaintext" id="inpt1" value="{{ form.instance.projeto.modelo.introducao_titulo_3 }}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-1 col-form-label" for="inpt2">
+                                    Peso:
+                                </label>
+                                <div class="col-sm-10">
+                                    <input type="text" readonly class="form-control-plaintext" id="inpt2" value="{{ form.instance.projeto.modelo.introducao_peso_3 }}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-1 col-form-label" for="">
+                                    Nota:
+                                </label>
+                                <div class="col-sm-2">
+                                    {% render_field form.introducao_nota_3 class+="form-control" %}
+                                </div>
+                            </div>
+                            <hr>
+                        {% endif %}
+                        {% if form.instance.projeto.modelo.introducao_peso_4 > 0.0 %}
+                            <div class="row">
+                                <label class="col-sm-1 col-form-label" for="inpt1">
+                                    Parâmetro:
+                                </label>
+                                <div class="col-sm-10">
+                                    <input type="text" readonly class="form-control-plaintext" id="inpt1" value="{{ form.instance.projeto.modelo.introducao_titulo_4 }}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-1 col-form-label" for="inpt2">
+                                    Peso:
+                                </label>
+                                <div class="col-sm-10">
+                                    <input type="text" readonly class="form-control-plaintext" id="inpt2" value="{{ form.instance.projeto.modelo.introducao_peso_4 }}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-1 col-form-label" for="">
+                                    Nota:
+                                </label>
+                                <div class="col-sm-2">
+                                    {% render_field form.introducao_nota_4 class+="form-control" %}
+                                </div>
+                            </div>
+                            <hr>
+                        {% endif %}
+                        {% if form.instance.projeto.modelo.introducao_peso_5 > 0.0 %}
+                            <div class="row">
+                                <label class="col-sm-1 col-form-label" for="inpt1">
+                                    Parâmetro:
+                                </label>
+                                <div class="col-sm-10">
+                                    <input type="text" readonly class="form-control-plaintext" id="inpt1" value="{{ form.instance.projeto.modelo.introducao_titulo_5 }}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-1 col-form-label" for="inpt2">
+                                    Peso:
+                                </label>
+                                <div class="col-sm-10">
+                                    <input type="text" readonly class="form-control-plaintext" id="inpt2" value="{{ form.instance.projeto.modelo.introducao_peso_5 }}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-1 col-form-label" for="">
+                                    Nota:
+                                </label>
+                                <div class="col-sm-2">
+                                    {% render_field form.introducao_nota_5 class+="form-control" %}
+                                </div>
+                            </div>
+                            <hr>
+                        {% endif %}
+                        <div class="row">
+                            <label class="col-sm-2 col-form-label" for="inpt12">
+                                Peso da avaliação:
+                            </label>
+                            <div class="col-sm-10">
+                                <input type="text" readonly class="form-control-plaintext" id="inpt12" value="{{ form.instance.projeto.modelo.introducao_peso }}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-2 col-form-label" for="inpt13">
+                                Nota da avaliação:
+                            </label>
+                            <div class="col-sm-10">
+                                <input type="text" readonly class="form-control-plaintext" id="inpt13" value="{{ form.instance.nota_introducao }}">
+                            </div>
+                        </div>
+                                    
+                        <!--
+                        <div class="input-group mt-3 mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    {{ form.instance.modelo.introducao_titulo_1 }}
+                                </span>
+                            </div>
+                            <div>
+                                {% render_field form.nota class+="form-control" %}
+                            </div>
+                            <div class="input-group-append">
+                                <span class="input-group-text">
+                                    Peso: {{ form.instance.modelo.introducao_peso_1 }}
+                                </span>
+                            </div>
+                        </div>
+                        -->
+
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-sm">
+                                Avaliar
+                            </button>    
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footnote %}
+{% endblock %}

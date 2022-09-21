@@ -19,4 +19,6 @@ urlpatterns = [
     path('inscricao_detail/<int:pk>/', views.inscricao_detail_view, name='inscricao_detail'),
     # projeto
     path('projetos_list/<int:pk>/', views.projeto_list_view, name='projetos_list'),
+    path('projeto_detail_superuser/<int:pk>/', views.projeto_detail_list_view, name='projeto_detail_superuser'),
+    path('introducao_detail_superuser/<int:pk>/', views.introducao_detail_superuser, name='introducao_detail_superuser'),
 ]

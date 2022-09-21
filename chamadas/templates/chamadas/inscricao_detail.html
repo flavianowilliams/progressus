@@ -9,24 +9,95 @@
         </p>
         <p>Chamada: {{ object.chamada }}.</p>
         <hr>
-        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-        <div class="offcanvas-header">
-          <h5 class="offcanvas-title" id="offcanvasExampleLabel">Projeto</h5>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <div>
-                Escolha abaixo um dos itens referentes ao seu projeto.
+        <div class="row">
+            <div class="border col-5 mx-5">
+                <form>
+                    <div class="form-group row mx-3 mt-3">
+                        <label class="col-sm-2 col-form-label" for="x">Equipe:</label>
+                        <div class="col-sm-6">
+                            <input type="text" readonly class="form-control-plaintext" value="{{ object.equipe }}">
+                        </div>
+                    </div>
+                    <div class="form-group row mx-3">
+                        <label class="col-sm-2 col-form-label" for="x">Lider:</label>
+                        <div class="col-sm-6">
+                            <input type="text" readonly class="form-control-plaintext" value="{{ object.lider }}">
+                        </div>
+                    </div>
+                    <div class="form-group row mx-3">
+                        <label class="col-sm-2 col-form-label" for="x">Membro:</label>
+                        <div class="col-sm-6">
+                            <input type="text" readonly class="form-control-plaintext" value="{{ object.membro_1 }}">
+                        </div>
+                    </div>
+                    <div class="form-group row mx-3">
+                        <label class="col-sm-2 col-form-label" for="x">Membro:</label>
+                        <div class="col-sm-6">
+                            <input type="text" readonly class="form-control-plaintext" value="{{ object.membro_2 }}">
+                        </div>
+                    </div>
+                    <div class="form-group row mx-3">
+                        <label class="col-sm-2 col-form-label" for="x">Membro:</label>
+                        <div class="col-sm-6">
+                            <input type="text" readonly class="form-control-plaintext" value="{{ object.membro_3 }}">
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="list-group col-7 mx-3 mt-3">
-                <a href="#" class="list-group-item list-group-item-action">Revisão  bibliográfica</a>
-                <a href="{% url 'chamadas:inscricao_list_user' %}" class="list-group-item list-group-item-action">Introdução</a>
-                <a href="#" class="list-group-item list-group-item-action">Teoria</a>
-                <a href="#" class="list-group-item list-group-item-action">Metodologia</a>
-                <a href="#" class="list-group-item list-group-item-action">Resultados e conclusão</a>
-              </div>
+            <div class="text-center col-5 mx-5">
+            <h3>Datas importantes</h3>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <colgroup>
+                        <col style="width: 50vw;">
+                        <col style="width: 50vw;">
+                    </colgroup>
+                    <tr>
+                        <th>Evento</th>
+                        <th>Data limite</th>
+                    </tr>
+                    <tr>
+                        <td>Inscrição</td>
+                        <td>{{ object.chamada.deadline_inscricao }}</td>
+                    </tr>
+                    <tr>
+                        <td>Revisão bibliográfica</td>
+                        <td>{{ object.chamada.deadline_bibliografia }}</td>
+                    </tr>
+                    <tr>
+                        <td>Envio da proposta</td>
+                        <td>{{ object.chamada.deadline_proposta }}</td>
+                    </tr>
+                    <tr>
+                        <td>Envio do projeto</td>
+                        <td>{{ object.chamada.deadline_projeto }}</td>
+                    </tr>
+                    <tr>
+                        <td>Finalização dos trabalhos</td>
+                        <td>{{ object.chamada.deadline_chamada }}</td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasExampleLabel">Projeto</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <div class="text-center">
+                    Itens referentes ao seu projeto.
+                </div>
+                <div class="list-group col-7 mx-3 mt-3">
+                    <a href="#" class="list-group-item list-group-item-action">Revisão  bibliográfica</a>
+                    <a href="{% url 'chamadas:inscricao_list_user' %}" class="list-group-item list-group-item-action">Introdução</a>
+                    <a href="#" class="list-group-item list-group-item-action">Teoria</a>
+                    <a href="#" class="list-group-item list-group-item-action">Metodologia</a>
+                    <a href="#" class="list-group-item list-group-item-action">Resultados e conclusão</a>
+                </div>
+            </div>
+        </div>
 {% endblock %}
 
 {% block footnote %}

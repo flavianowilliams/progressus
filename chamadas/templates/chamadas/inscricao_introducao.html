@@ -1,0 +1,40 @@
+{% extends 'pages/base.html' %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+    <div class="container">
+        <h3>
+            <form class="form-inline" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="projeto.titulo">Projeto:</label>
+                    <input type="text" name="projeto" id="projeto" value="{{ form.instance.projeto.titulo }}">
+                    <button type="submit" class="btn btn-sm btn-primary">Alterar nome</button>    
+                </div>    
+            </form>
+        </h3>
+        <div class="card-body">
+            <h4 class="card-title text-center">Introdução</h4>
+            <div class="table-responsive text-center">
+                <table class="table table-striped">
+                    <tr>
+                        <th>Parâmetros de avaliação</th>
+                        <th>Considerações do avaliador</th>
+                        <th>Peso</th>
+                        <th>Nota</th>
+                    </tr>
+                    <tr>
+                        <td>{{ object.projeto.modelo.introducao_titulo_1 }}</td>
+                        <td>{{ object.introducao_consideracoes_1|default:"Aguarde..." }}</td>
+                        <td>{{ object.projeto.modelo.introducao_peso_1 }}</td>
+                        <td>{{ object.introducao_nota_1 }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footnote %}
+{% endblock %}

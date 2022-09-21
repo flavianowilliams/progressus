@@ -17,7 +17,7 @@ class ProjetoModelo(models.Model):
     introducao_peso_1 = models.DecimalField(
         max_digits=6,
         decimal_places=3,
-        default=0.25,
+        default=0.2,
         verbose_name='2. Introdução (parâmetro): Peso'
         )
     introducao_titulo_2 = models.CharField(
@@ -28,7 +28,7 @@ class ProjetoModelo(models.Model):
     introducao_peso_2 = models.DecimalField(
         max_digits=6,
         decimal_places=3,
-        default=0.25,
+        default=0.2,
         verbose_name='1. Introdução (parâmetro): Peso'
         )
     introducao_titulo_3 = models.CharField(
@@ -39,7 +39,7 @@ class ProjetoModelo(models.Model):
     introducao_peso_3 = models.DecimalField(
         max_digits=6,
         decimal_places=3,
-        default=0.25,
+        default=0.2,
         verbose_name='3. Introdução (parâmetro): Peso'
         )
     introducao_titulo_4 = models.CharField(
@@ -50,7 +50,7 @@ class ProjetoModelo(models.Model):
     introducao_peso_4 = models.DecimalField(
         max_digits=6,
         decimal_places=3,
-        default=0.25,
+        default=0.2,
         verbose_name='4. Introdução (parâmetro): Peso'
         )
     introducao_titulo_5 = models.CharField(
@@ -61,7 +61,7 @@ class ProjetoModelo(models.Model):
     introducao_peso_5 = models.DecimalField(
         max_digits=6,
         decimal_places=3,
-        default=0.25,
+        default=0.2,
         verbose_name='5. Introdução (parâmetro): Peso'
         )
 
@@ -160,8 +160,8 @@ class Projeto(models.Model):
     modelo = models.ForeignKey(ProjetoModelo, on_delete=models.PROTECT)
 
     titulo = models.CharField(max_length=100, null=True, blank=True)
-
     nota = models.DecimalField(max_digits=6, decimal_places=3, null=True, blank=True)
+    arquivo = models.FileField(upload_to='pdf/%Y/%m/%d/', null=True)
 
     def setNota(self):
         data = self.introducao.nota_introducao
@@ -182,6 +182,11 @@ class Introducao(models.Model):
     introducao_nota_3 = models.DecimalField(max_digits=6, decimal_places=3, default=0.0, blank=True)
     introducao_nota_4 = models.DecimalField(max_digits=6, decimal_places=3, default=0.0, blank=True)
     introducao_nota_5 = models.DecimalField(max_digits=6, decimal_places=3, default=0.0, blank=True)
+    introducao_consideracao_1 = models.CharField(max_length=255, null=True, blank=True)
+    introducao_consideracao_2 = models.CharField(max_length=255, null=True, blank=True)
+    introducao_consideracao_3 = models.CharField(max_length=255, null=True, blank=True)
+    introducao_consideracao_4 = models.CharField(max_length=255, null=True, blank=True)
+    introducao_consideracao_5 = models.CharField(max_length=255, null=True, blank=True)
 
     nota_introducao = models.DecimalField(max_digits=6, decimal_places=3, default=0.0, blank=True)
 
@@ -198,6 +203,7 @@ class Teoria(models.Model):
 
     teoria_total = models.DecimalField(max_digits=6, decimal_places=3, default=0, blank=True)
     teoria_qde = models.DecimalField(max_digits=6, decimal_places=3, default=0, blank=True)
+    nota_teoria = models.DecimalField(max_digits=6, decimal_places=3, default=0.0, blank=True)
 
     def setNotaTeoria(self):
         data = self.teoria_qte*100.0/self.teoria_total

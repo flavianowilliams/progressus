@@ -155,7 +155,8 @@ class ProjetoForm(forms.ModelForm):
     class Meta:
         model = Projeto
         fields = [
-            'modelo',
+            'titulo',
+            'arquivo',
                 ]
 
 class ProjetoIntroducaoAdmin(forms.ModelForm):
@@ -168,6 +169,11 @@ class ProjetoIntroducaoAdmin(forms.ModelForm):
             'introducao_nota_3',
             'introducao_nota_4',
             'introducao_nota_5',
+            'introducao_consideracao_1',
+            'introducao_consideracao_2',
+            'introducao_consideracao_3',
+            'introducao_consideracao_4',
+            'introducao_consideracao_5',
             'nota_introducao',
         ]
 

@@ -7,7 +7,8 @@
         <table class="table table-striped">
             <colgroup>
                 <col style="width: 20vw;">
-                <col style="width: 30vw;">
+                <col style="width: 20vw;">
+                <col style="width: 10vw;">
                 <col style="width: 10vw;">
                 <col style="width: 10vw;">
                 <col style="width: 10vw;">
@@ -21,6 +22,7 @@
                 <th>Teoria</th>
                 <th>Metodologia</th>
                 <th>Resultados</th>
+                <th>Opções</th>
                 <th>Nota</th>
             </tr>
             {% for object in object_list %}
@@ -36,6 +38,7 @@
                     </td>
                     <td>
                     </td>
+                    <td><a class="btn btn-sm btn-primary" href="{{ object.arquivo.url }}">Arquivo</a></td>
                     <td>{{ object.nota }}</td>
                 </tr>
             {% endfor %}

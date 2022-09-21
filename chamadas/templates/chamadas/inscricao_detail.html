@@ -13,31 +13,37 @@
             <div class="border col-5 mx-5">
                 <form>
                     <div class="form-group row mx-3 mt-3">
-                        <label class="col-sm-2 col-form-label" for="x">Equipe:</label>
+                        <label class="col-sm-2 col-form-label" for="x"><em>Equipe</em></label>
                         <div class="col-sm-6">
                             <input type="text" readonly class="form-control-plaintext" value="{{ object.equipe }}">
                         </div>
                     </div>
                     <div class="form-group row mx-3">
-                        <label class="col-sm-2 col-form-label" for="x">Lider:</label>
+                        <label class="col-sm-2 col-form-label" for="x"><em>Projeto</em></label>
+                        <div class="col-sm-6">
+                            <input type="text" readonly class="form-control-plaintext" value="{{ object.projeto.titulo }}">
+                        </div>
+                    </div>
+                    <div class="form-group row mx-3">
+                        <label class="col-sm-2 col-form-label" for="x"><em>Lider</em></label>
                         <div class="col-sm-6">
                             <input type="text" readonly class="form-control-plaintext" value="{{ object.lider }}">
                         </div>
                     </div>
                     <div class="form-group row mx-3">
-                        <label class="col-sm-2 col-form-label" for="x">Membro:</label>
+                        <label class="col-sm-2 col-form-label" for="x"><em>Membro</em></label>
                         <div class="col-sm-6">
                             <input type="text" readonly class="form-control-plaintext" value="{{ object.membro_1 }}">
                         </div>
                     </div>
                     <div class="form-group row mx-3">
-                        <label class="col-sm-2 col-form-label" for="x">Membro:</label>
+                        <label class="col-sm-2 col-form-label" for="x"><em>Membro</em></label>
                         <div class="col-sm-6">
                             <input type="text" readonly class="form-control-plaintext" value="{{ object.membro_2 }}">
                         </div>
                     </div>
                     <div class="form-group row mx-3">
-                        <label class="col-sm-2 col-form-label" for="x">Membro:</label>
+                        <label class="col-sm-2 col-form-label" for="x"><em>Membro</em></label>
                         <div class="col-sm-6">
                             <input type="text" readonly class="form-control-plaintext" value="{{ object.membro_3 }}">
                         </div>
@@ -91,10 +97,9 @@
                 </div>
                 <div class="list-group col-7 mx-3 mt-3">
                     <a href="#" class="list-group-item list-group-item-action">Revisão  bibliográfica</a>
-                    <a href="{% url 'chamadas:inscricao_list_user' %}" class="list-group-item list-group-item-action">Introdução</a>
-                    <a href="#" class="list-group-item list-group-item-action">Teoria</a>
-                    <a href="#" class="list-group-item list-group-item-action">Metodologia</a>
-                    <a href="#" class="list-group-item list-group-item-action">Resultados e conclusão</a>
+                    <a href="#" class="list-group-item list-group-item-action">Proposta</a>
+                    <a href="{% url 'chamadas:inscricao_projeto' object.pk %}" class="list-group-item list-group-item-action">Projeto</a>
+                    <a href="#" class="list-group-item list-group-item-action">Financeiro</a>
                 </div>
             </div>
         </div>

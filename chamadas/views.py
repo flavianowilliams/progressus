@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from chamadas.models import Chamada, Inscricao, Introducao, Projeto
-from chamadas.forms import InscricaoForm, ProjetoIntroducaoAdmin, ProjetoAdminForm
+from chamadas.forms import InscricaoForm, ProjetoForm, ProjetoIntroducaoAdmin, ProjetoAdminForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -245,6 +245,50 @@ def introducao_detail_superuser(request, pk):
         introducao = Introducao.objects.get(projeto = object)
         form.instance.nota_introducao = introducao.setNotaIntroducao()
  
+    context = {'form': form}
+
+    return render(request, template_name, context)
+
+# usuario
+
+@login_required
+def inscricao_projeto_view(request, pk):
+
+    template_name = 'chamadas/inscricao_projeto.html'
+
+    inscricao = get_object_or_404(Inscricao, pk = pk)
+
+    object = Projeto.objects.get(inscricao = inscricao)
+
+    if request.method == 'POST':
+        form = ProjetoForm(request.POST, request.FILES, instance=object)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse_lazy('chamadas:inscricao_detail', kwargs = {'pk': object.inscricao.pk}))
+    else:
+        form = ProjetoForm(instance=object)
+
+    context = {'form': form}
+
+    return render(request, template_name, context)
+
+@login_required
+def inscricao_introducao_view(request, pk):
+
+    template_name = 'chamadas/inscricao_introducao.html'
+
+    inscricao = get_object_or_404(Inscricao, pk = pk)
+
+    object = Introducao.objects.get(projeto = inscricao.projeto)
+
+    if request.method == 'POST':
+        form = ProjetoIntroducaoAdmin(request.POST, instance=object)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse_lazy('chamadas:inscricao_detail', kwargs = {'pk': object.projeto.inscricao.pk}))
+    else:
+        form = ProjetoIntroducaoAdmin(instance=object)
+
     context = {'form': form}
 
     return render(request, template_name, context)

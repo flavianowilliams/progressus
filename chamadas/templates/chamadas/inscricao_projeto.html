@@ -1,0 +1,136 @@
+{% extends 'pages/base.html' %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+    <div class="container">
+        <h3>
+        <form class="form-inline" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="input-group">
+                <span class="input-group-text">Projeto:</span>
+                <div>
+                    {% render_field form.titulo class+="form-control" %}
+                </div>
+            </div>
+            </h3>
+            <div class="card-body">
+                <h4 class="card-title text-center">
+                    Introdução
+                    <span class="float-end">Nota: {{ form.instance.introducao.nota_introducao|floatformat:"0" }}</span>
+                </h4>
+                <div class="table-responsive text-center">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Parâmetros de avaliação</th>
+                            <th>Peso</th>
+                            <th>Considerações do avaliador</th>
+                            <th>Nota</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                {{ form.instance.modelo.introducao_titulo_1 }}
+                            </td>
+                            <td>
+                                {{ form.instance.modelo.introducao_peso_1 }}
+                            </td>
+                            <td>
+                                {{ form.instance.introducao.introducao_consideracoes_1|default:"Aguarde..." }}
+                            </td>
+                            <td>
+                                {{ form.instance.introducao.introducao_nota_1|  default:"Aguarde..." }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                {{ form.instance.modelo.introducao_titulo_2 }}
+                            </td>
+                            <td>
+                                {{ form.instance.modelo.introducao_peso_2 }}
+                            </td>
+                            <td>
+                                {{ form.instance.introducao.introducao_consideracoes_2|default:"Aguarde..." }}
+                            </td>
+                            <td>
+                                {{ form.instance.introducao.introducao_nota_2|default:"Aguarde..." }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                {{ form.instance.modelo.introducao_titulo_3 }}
+                            </td>
+                            <td>
+                                {{ form.instance.modelo.introducao_peso_3 }}
+                            </td>
+                            <td>
+                                {{ form.instance.introducao.introducao_consideracoes_3|default:"Aguarde..." }}
+                            </td>
+                            <td>
+                                {{ form.instance.introducao.introducao_nota_3|default:"Aguarde..." }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                {{ form.instance.modelo.introducao_titulo_4 }}
+                            </td>
+                            <td>
+                                {{ form.instance.modelo.introducao_peso_4 }}
+                            </td>
+                            <td>
+                                {{ form.instance.introducao.introducao_consideracoes_4|default:"Aguarde..." }}
+                            </td>
+                            <td>
+                                {{ form.instance.introducao.introducao_nota_4|default:"Aguarde..." }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                {{ form.instance.modelo.introducao_titulo_5 }}
+                            </td>
+                            <td>
+                                {{ form.instance.modelo.introducao_peso_5 }}
+                            </td>
+                            <td>
+                                {{ form.instance.introducao.introducao_consideracoes_5| default:"Aguarde..." }}
+                            </td>
+                            <td>
+                                {{ form.instance.introducao.introducao_nota_5|default:"Aguarde..." }}
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="card-body">
+                        <h4 class="card-title text-center">
+                            Teoria
+                            <span class="float-end">Nota: {{ form.instance.teoria.nota_teoria|floatformat:"0" }}</span>
+                        </h4>
+                        <div class="table-responsive text-center">
+                            <table class="table table-striped">
+                                <tr>
+                                    <th>Total de conceitos</th>
+                                    <th>Conceitos apresentados</th>
+                                    <th>Considerações do avaliador</th>
+                                    <th>Nota</th>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <span class="float-start"><a class="btn btn-sm btn-primary" href="">Submeter</a></span>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="float-start">
+                                {% render_field form.arquivo class+="custom-file-input" %}
+                            </div>
+                            <div class="invalid-feedback">
+                                Campo obrigatório
+                            </div>    
+                        </div>
+                    </div>    
+                    <button type="submit" class="btn btn-sm btn-primary">Enviar projeto</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footnote %}
+{% endblock %}

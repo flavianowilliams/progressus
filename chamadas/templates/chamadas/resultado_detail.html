@@ -1,0 +1,125 @@
+{% extends 'pages/base.html' %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+    <div class="container">
+        <h2>Equipe: {{ form.instance.projeto.inscricao }}</h2>
+        <h3>Projeto: {{ form.instance.projeto.titulo }}</h3>
+        <div class="card-body">
+            <h4 class="card-title text-center">Resultados e conclusão</h4>
+            <form action="" method="POST">
+                <div class="border">
+                    {% csrf_token %}
+                    <div class="mx-3 my-3 mt-3 mb-3">
+                        <h5>Critérios de qualidade</h5>
+                        {% if form.instance.projeto.modelo.resultado_peso_1 > 0.0 %}
+                            <div class="row mb-2">
+                                <label class="col-sm-3 col-form-label" for="inpt2">
+                                    Critério 1 (custo financeito)
+                                </label>
+                            </div>
+                            <div class="row mb-2">
+                                <label class="col-sm-2 col-form-label" for="inpt2">
+                                    Peso:
+                                </label>
+                                <div class="col-sm-2 mx-1">
+                                    <input type="text" readonly class="form-control-plaintext" id="inpt2" value="{{ form.instance.projeto.modelo.resultado_peso_1 }}">
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <label class="col-sm-2 col-form-label" for="inpt2">
+                                    Valor encontrado:
+                                </label>
+                                <div class="col-sm-2 mx-1">
+                                    <input type="text" readonly class="form-control-plaintext" id="inpt2" value="{{ form.instance.resultado_input_1 }}">
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <label class="col-sm-2 col-form-label" for="">
+                                    Valor a ser atribuído:
+                                </label>
+                                <div class="col-sm-2 mx-1">
+                                    {% render_field form.resultado_fback_1 class+="form-control" %}
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <label class="col-sm-2 col-form-label" for="inpt2">
+                                    Nota:
+                                </label>
+                                <div class="col-sm-2 mx-1">
+                                    <input type="text" readonly class="form-control-plaintext" id="inpt2" value="{{ form.instance.resultado_nota_1 }}">
+                                </div>
+                            </div>
+                            <hr>
+                        {% endif %}
+                        {% if form.instance.projeto.modelo.resultado_peso_2 > 0.0 %}
+                            <div class="row mb-2">
+                                <label class="col-sm-3 col-form-label" for="inpt2">
+                                    Critério 1 (custo financeito)
+                                </label>
+                            </div>
+                            <div class="row mb-2">
+                                <label class="col-sm-2 col-form-label" for="inpt2">
+                                    Peso:
+                                </label>
+                                <div class="col-sm-2 mx-1">
+                                    <input type="text" readonly class="form-control-plaintext" id="inpt2" value="{{ form.instance.projeto.modelo.resultado_peso_2 }}">
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <label class="col-sm-2 col-form-label" for="inpt2">
+                                    Valor encontrado:
+                                </label>
+                                <div class="col-sm-2 mx-1">
+                                    <input type="text" readonly class="form-control-plaintext" id="inpt2" value="{{ form.instance.resultado_input_2 }}">
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <label class="col-sm-2 col-form-label" for="">
+                                    Valor a ser atribuído:
+                                </label>
+                                <div class="col-sm-2 mx-1">
+                                    {% render_field form.resultado_fback_2 class+="form-control" %}
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <label class="col-sm-2 col-form-label" for="inpt2">
+                                    Nota:
+                                </label>
+                                <div class="col-sm-2 mx-1">
+                                    <input type="text" readonly class="form-control-plaintext" id="inpt2" value="{{ form.instance.resultado_nota_2 }}">
+                                </div>
+                            </div>
+                            <hr>
+                        {% endif %}
+                        <div class="row">
+                            <label class="col-sm-2 col-form-label" for="inpt12">
+                                Peso da avaliação:
+                            </label>
+                            <div class="col-sm-6 mx-3">
+                                <input type="text" readonly class="form-control-plaintext" id="inpt12" value="{{ form.instance.projeto.modelo.resultado_peso }}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-2 col-form-label" for="inpt13">
+                                Nota da avaliação:
+                            </label>
+                            <div class="col-sm-2 mx-3">
+                                <input type="text" readonly class="form-control-plaintext" id="inpt13" value="{{ form.instance.nota_resultado }}">
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-sm">
+                                Avaliar
+                            </button>    
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footnote %}
+{% endblock %}

@@ -7,35 +7,35 @@
         <h2>Equipe: {{ form.instance.projeto.inscricao }}</h2>
         <h3>Projeto: {{ form.instance.projeto.titulo }}</h3>
         <div class="card-body">
-            <h4 class="card-title text-center">Introdução</h4>
+            <h4 class="card-title text-center">Metodologia</h4>
             <form action="" method="POST">
                 <div class="border">
                     {% csrf_token %}
                     <div class="mx-3 my-3 mt-3 mb-3">
                         <h5>Parâmetros de avaliação</h5>
-                        {% if form.instance.projeto.modelo.introducao_peso_1 > 0.0 %}
+                        {% if form.instance.projeto.modelo.metodologia_peso_1 > 0.0 %}
                             <div class="row mb-2">
                                 <label class="col-sm-1 col-form-label" for="inpt1">
                                     Parâmetro:
                                 </label>
-                                <div class="col-sm-6 mx-3">
-                                    <input type="text" readonly class="form-control-plaintext" id="inpt1" value="{{ form.instance.projeto.modelo.introducao_titulo_1 }}">
+                                <div class="col-sm-7 mx-3">
+                                    <input type="text" readonly class="form-control-plaintext" id="inpt1" value="{{ form.instance.projeto.modelo.metodologia_titulo_1 }}">
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <label class="col-sm-1 col-form-label" for="inpt2">
                                     Peso:
                                 </label>
-                                <div class="col-sm-6 mx-3">
-                                    <input type="text" readonly class="form-control-plaintext" id="inpt2" value="{{ form.instance.projeto.modelo.introducao_peso_1 }}">
+                                <div class="col-sm-7 mx-3">
+                                    <input type="text" readonly class="form-control-plaintext" id="inpt2" value="{{ form.instance.projeto.modelo.metodologia_peso_1 }}">
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <label class="col-sm-1 col-form-label" for="">
                                     Consideracao:
                                 </label>
-                                <div class="col-sm-6 mx-3">
-                                    {% render_field form.introducao_consideracao_1 class+="form-control" %}
+                                <div class="col-sm-7 mx-3">
+                                    {% render_field form.metodologia_consideracao_1 class+="form-control" %}
                                 </div>
                             </div>
                             <div class="row">
@@ -43,34 +43,34 @@
                                     Nota:
                                 </label>
                                 <div class="col-sm-2 mx-3">
-                                    {% render_field form.introducao_nota_1 class+="form-control" %}
+                                    {% render_field form.metodologia_nota_1 class+="form-control" %}
                                 </div>
                             </div>
                             <hr>
                         {% endif %}
-                        {% if form.instance.projeto.modelo.introducao_peso_2 > 0.0 %}
+                        {% if form.instance.projeto.modelo.metodologia_peso_2 > 0.0 %}
                             <div class="row">
                                 <label class="col-sm-1 col-form-label" for="inpt1">
                                     Parâmetro:
                                 </label>
                                 <div class="col-sm-6 mx-3">
-                                    <input type="text" readonly class="form-control-plaintext" id="inpt1" value="{{ form.instance.projeto.modelo.introducao_titulo_2 }}">
+                                    <input type="text" readonly class="form-control-plaintext" id="inpt1" value="{{ form.instance.projeto.modelo.metodologia_titulo_2 }}">
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <label class="col-sm-1 col-form-label" for="inpt2">
                                     Peso:
                                 </label>
-                                <div class="col-sm-6 mx-3">
-                                    <input type="text" readonly class="form-control-plaintext" id="inpt2" value="{{ form.instance.projeto.modelo.introducao_peso_2 }}">
+                                <div class="col-sm-7 mx-3">
+                                    <input type="text" readonly class="form-control-plaintext" id="inpt2" value="{{ form.instance.projeto.modelo.metodologia_peso_2 }}">
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <label class="col-sm-1 col-form-label" for="">
                                     Consideracao:
                                 </label>
-                                <div class="col-sm-6 mx-3">
-                                    {% render_field form.introducao_consideracao_2 class+="form-control" %}
+                                <div class="col-sm-7 mx-3">
+                                    {% render_field form.metodologia_consideracao_2 class+="form-control" %}
                                 </div>
                             </div>
                             <div class="row">
@@ -78,18 +78,18 @@
                                     Nota:
                                 </label>
                                 <div class="col-sm-2 mx-3">
-                                    {% render_field form.introducao_nota_2 class+="form-control" %}
+                                    {% render_field form.metodologia_nota_2 class+="form-control" %}
                                 </div>
                             </div>
                             <hr>
                         {% endif %}
-                        {% if form.instance.projeto.modelo.introducao_peso_3 > 0.0 %}
+                        {% if form.instance.projeto.modelo.metodologia_peso_3 > 0.0 %}
                             <div class="row">
                                 <label class="col-sm-1 col-form-label" for="inpt1">
                                     Parâmetro:
                                 </label>
-                                <div class="col-sm-6 mx-3">
-                                    <input type="text" readonly class="form-control-plaintext" id="inpt1" value="{{ form.instance.projeto.modelo.introducao_titulo_3 }}">
+                                <div class="col-sm-7 mx-3">
+                                    <input type="text" readonly class="form-control-plaintext" id="inpt1" value="{{ form.instance.projeto.modelo.metodologia_titulo_3 }}">
                                 </div>
                             </div>
                             <div class="row">
@@ -97,15 +97,15 @@
                                     Peso:
                                 </label>
                                 <div class="col-sm-6 mx-3">
-                                    <input type="text" readonly class="form-control-plaintext" id="inpt2" value="{{ form.instance.projeto.modelo.introducao_peso_3 }}">
+                                    <input type="text" readonly class="form-control-plaintext" id="inpt2" value="{{ form.instance.projeto.modelo.metodologia_peso_3 }}">
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <label class="col-sm-1 col-form-label" for="">
                                     Consideracao:
                                 </label>
-                                <div class="col-sm-6 mx-3">
-                                    {% render_field form.introducao_consideracao_3 class+="form-control" %}
+                                <div class="col-sm-7 mx-3">
+                                    {% render_field form.metodologia_consideracao_3 class+="form-control" %}
                                 </div>
                             </div>
                             <div class="row">
@@ -113,34 +113,34 @@
                                     Nota:
                                 </label>
                                 <div class="col-sm-2 mx-3">
-                                    {% render_field form.introducao_nota_3 class+="form-control" %}
+                                    {% render_field form.metodologia_nota_3 class+="form-control" %}
                                 </div>
                             </div>
                             <hr>
                         {% endif %}
-                        {% if form.instance.projeto.modelo.introducao_peso_4 > 0.0 %}
+                        {% if form.instance.projeto.modelo.metodologia_peso_4 > 0.0 %}
                             <div class="row">
                                 <label class="col-sm-1 col-form-label" for="inpt1">
                                     Parâmetro:
                                 </label>
-                                <div class="col-sm-6 mx-3">
-                                    <input type="text" readonly class="form-control-plaintext" id="inpt1" value="{{ form.instance.projeto.modelo.introducao_titulo_4 }}">
+                                <div class="col-sm-7 mx-3">
+                                    <input type="text" readonly class="form-control-plaintext" id="inpt1" value="{{ form.instance.projeto.modelo.metodologia_titulo_4 }}">
                                 </div>
                             </div>
                             <div class="row">
                                 <label class="col-sm-1 col-form-label" for="inpt2">
                                     Peso:
                                 </label>
-                                <div class="col-sm-6 mx-3">
-                                    <input type="text" readonly class="form-control-plaintext" id="inpt2" value="{{ form.instance.projeto.modelo.introducao_peso_4 }}">
+                                <div class="col-sm-7 mx-3">
+                                    <input type="text" readonly class="form-control-plaintext" id="inpt2" value="{{ form.instance.projeto.modelo.metodologia_peso_4 }}">
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <label class="col-sm-1 col-form-label" for="">
                                     Consideracao:
                                 </label>
-                                <div class="col-sm-6 mx-3">
-                                    {% render_field form.introducao_consideracao_4 class+="form-control" %}
+                                <div class="col-sm-7 mx-3">
+                                    {% render_field form.metodologia_consideracao_4 class+="form-control" %}
                                 </div>
                             </div>
                             <div class="row">
@@ -148,34 +148,34 @@
                                     Nota:
                                 </label>
                                 <div class="col-sm-2 mx-3">
-                                    {% render_field form.introducao_nota_4 class+="form-control" %}
+                                    {% render_field form.metodologia_nota_4 class+="form-control" %}
                                 </div>
                             </div>
                             <hr>
                         {% endif %}
-                        {% if form.instance.projeto.modelo.introducao_peso_5 > 0.0 %}
+                        {% if form.instance.projeto.modelo.metodologia_peso_5 > 0.0 %}
                             <div class="row">
                                 <label class="col-sm-1 col-form-label" for="inpt1">
                                     Parâmetro:
                                 </label>
-                                <div class="col-sm-6 mx-3">
-                                    <input type="text" readonly class="form-control-plaintext" id="inpt1" value="{{ form.instance.projeto.modelo.introducao_titulo_5 }}">
+                                <div class="col-sm-7 mx-3">
+                                    <input type="text" readonly class="form-control-plaintext" id="inpt1" value="{{ form.instance.projeto.modelo.metodologia_titulo_5 }}">
                                 </div>
                             </div>
                             <div class="row">
                                 <label class="col-sm-1 col-form-label" for="inpt2">
                                     Peso:
                                 </label>
-                                <div class="col-sm-6 mx-3">
-                                    <input type="text" readonly class="form-control-plaintext" id="inpt2" value="{{ form.instance.projeto.modelo.introducao_peso_5 }}">
+                                <div class="col-sm-7 mx-3">
+                                    <input type="text" readonly class="form-control-plaintext" id="inpt2" value="{{ form.instance.projeto.modelo.metodologia_peso_5 }}">
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <label class="col-sm-1 col-form-label" for="">
                                     Consideracao:
                                 </label>
-                                <div class="col-sm-6 mx-3">
-                                    {% render_field form.introducao_consideracao_5 class+="form-control" %}
+                                <div class="col-sm-7 mx-3">
+                                    {% render_field form.metodologia_consideracao_5 class+="form-control" %}
                                 </div>
                             </div>
                             <div class="row">
@@ -183,7 +183,7 @@
                                     Nota:
                                 </label>
                                 <div class="col-sm-2 mx-3">
-                                    {% render_field form.introducao_nota_5 class+="form-control" %}
+                                    {% render_field form.metodologia_nota_5 class+="form-control" %}
                                 </div>
                             </div>
                             <hr>
@@ -193,7 +193,7 @@
                                 Peso da avaliação:
                             </label>
                             <div class="col-sm-6 mx-3">
-                                <input type="text" readonly class="form-control-plaintext" id="inpt12" value="{{ form.instance.projeto.modelo.introducao_peso }}">
+                                <input type="text" readonly class="form-control-plaintext" id="inpt12" value="{{ form.instance.projeto.modelo.metodologia_peso }}">
                             </div>
                         </div>
                         <div class="row">
@@ -201,7 +201,7 @@
                                 Nota da avaliação:
                             </label>
                             <div class="col-sm-2 mx-3">
-                                <input type="text" readonly class="form-control-plaintext" id="inpt13" value="{{ form.instance.nota_introducao }}">
+                                <input type="text" readonly class="form-control-plaintext" id="inpt13" value="{{ form.instance.nota_metodologia }}">
                             </div>
                         </div>
                         <div class="text-center">

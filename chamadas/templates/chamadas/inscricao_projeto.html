@@ -4,15 +4,18 @@
 
 {% block content %}
     <div class="container">
-        <h3>
         <form class="form-inline" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            <div class="input-group">
-                <span class="input-group-text">Projeto:</span>
-                <div>
-                    {% render_field form.titulo class+="form-control" %}
+            <h3>
+                <div class="input-group">
+                    <span class="input-group-text">Projeto:</span>
+                    <div class="col-sm-8">
+                        {% render_field form.titulo class+="form-control" %}
+                    </div>
+                    <span class="input-group-text" style="margin-left: 4cm;">
+                        Nota: {{ form.instance.nota|default:"Aguarde..." }}
+                    </span>
                 </div>
-            </div>
             </h3>
             <div class="card-body">
                 <h4 class="card-title text-center">
@@ -35,7 +38,7 @@
                                 {{ form.instance.modelo.introducao_peso_1 }}
                             </td>
                             <td>
-                                {{ form.instance.introducao.introducao_consideracoes_1|default:"Aguarde..." }}
+                                {{ form.instance.introducao.introducao_consideracao_1|default:"Aguarde..." }}
                             </td>
                             <td>
                                 {{ form.instance.introducao.introducao_nota_1|  default:"Aguarde..." }}
@@ -49,7 +52,7 @@
                                 {{ form.instance.modelo.introducao_peso_2 }}
                             </td>
                             <td>
-                                {{ form.instance.introducao.introducao_consideracoes_2|default:"Aguarde..." }}
+                                {{ form.instance.introducao.introducao_consideracao_2|default:"Aguarde..." }}
                             </td>
                             <td>
                                 {{ form.instance.introducao.introducao_nota_2|default:"Aguarde..." }}
@@ -63,7 +66,7 @@
                                 {{ form.instance.modelo.introducao_peso_3 }}
                             </td>
                             <td>
-                                {{ form.instance.introducao.introducao_consideracoes_3|default:"Aguarde..." }}
+                                {{ form.instance.introducao.introducao_consideracao_3|default:"Aguarde..." }}
                             </td>
                             <td>
                                 {{ form.instance.introducao.introducao_nota_3|default:"Aguarde..." }}
@@ -77,7 +80,7 @@
                                 {{ form.instance.modelo.introducao_peso_4 }}
                             </td>
                             <td>
-                                {{ form.instance.introducao.introducao_consideracoes_4|default:"Aguarde..." }}
+                                {{ form.instance.introducao.introducao_consideracao_4|default:"Aguarde..." }}
                             </td>
                             <td>
                                 {{ form.instance.introducao.introducao_nota_4|default:"Aguarde..." }}
@@ -91,7 +94,7 @@
                                 {{ form.instance.modelo.introducao_peso_5 }}
                             </td>
                             <td>
-                                {{ form.instance.introducao.introducao_consideracoes_5| default:"Aguarde..." }}
+                                {{ form.instance.introducao.introducao_consideracao_5| default:"Aguarde..." }}
                             </td>
                             <td>
                                 {{ form.instance.introducao.introducao_nota_5|default:"Aguarde..." }}
@@ -111,11 +114,171 @@
                                     <th>Considerações do avaliador</th>
                                     <th>Nota</th>
                                 </tr>
+                                <tr>
+                                    <td>
+                                        {{ form.instance.teoria.teoria_total|default:"Aguarde..." }}
+                                    </td>
+                                    <td>
+                                        {{ form.instance.teoria.teoria_qde|default:"Aguarde..." }}
+                                    </td>
+                                    <td>
+                                        {{ form.instance.teoria.teoria_consideracao|default:"Aguarde..." }}
+                                    </td>
+                                    <td>
+                                        {{ form.instance.teoria.nota_teoria|default:"Aguarde..." }}
+                                    </td>
+                                </tr>
                             </table>
                         </div>
                     </div>
-                    <span class="float-start"><a class="btn btn-sm btn-primary" href="">Submeter</a></span>
-                    <div class="input-group">
+                    <div class="card-body">
+                        <h4 class="card-title text-center">
+                            Metodologia
+                            <span class="float-end">Nota: {{ form.instance.teoria.nota_teoria|floatformat:"0" }}</span>
+                        </h4>
+                        <div class="table-responsive text-center">
+                            <table class="table table-striped">
+                                <tr>
+                                    <th>Parâmetros de avaliação</th>
+                                    <th>Peso</th>
+                                    <th>Considerações do avaliador</th>
+                                    <th>Nota</th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        {{ form.instance.modelo.metodologia_titulo_1 }}
+                                    </td>
+                                    <td>
+                                        {{ form.instance.modelo.metodologia_peso_1 }}
+                                    </td>
+                                    <td>
+                                        {{ form.instance.metodologia.metodologia_consideracao_1|default:"Aguarde..." }}
+                                    </td>
+                                    <td>
+                                        {{ form.instance.metodologia.metodologia_nota_1|  default:"Aguarde..." }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        {{ form.instance.modelo.metodologia_titulo_2 }}
+                                    </td>
+                                    <td>
+                                        {{ form.instance.modelo.metodologia_peso_2 }}
+                                    </td>
+                                    <td>
+                                        {{ form.instance.metodologia.metodologia_consideracao_2|default:"Aguarde..." }}
+                                    </td>
+                                    <td>
+                                        {{ form.instance.metodologia.metodologia_nota_2|default:"Aguarde..." }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        {{ form.instance.modelo.metodologia_titulo_3 }}
+                                    </td>
+                                    <td>
+                                        {{ form.instance.modelo.metodologia_peso_3 }}
+                                    </td>
+                                    <td>
+                                        {{ form.instance.metodologia.metodologia_consideracao_3|default:"Aguarde..." }}
+                                    </td>
+                                    <td>
+                                        {{ form.instance.metodologia.metodologia_nota_3|default:"Aguarde..." }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        {{ form.instance.modelo.metodologia_titulo_4 }}
+                                    </td>
+                                    <td>
+                                        {{ form.instance.modelo.metodologia_peso_4 }}
+                                    </td>
+                                    <td>
+                                        {{ form.instance.metodologia.metodologia_consideracao_4|default:"Aguarde..." }}
+                                    </td>
+                                    <td>
+                                        {{ form.instance.metodologia.metodologia_nota_4|default:"Aguarde..." }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        {{ form.instance.modelo.metodologia_titulo_5 }}
+                                    </td>
+                                    <td>
+                                        {{ form.instance.modelo.metodologia_peso_5 }}
+                                    </td>
+                                    <td>
+                                        {{ form.instance.metodologia.metodologia_consideracao_5| default:"Aguarde..." }}
+                                    </td>
+                                    <td>
+                                        {{ form.instance.metodologia.metodologia_nota_5|default:"Aguarde..." }}
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title text-center">
+                            Resultados e conclusão
+                            <span class="float-end">Nota: {{ form.instance.resultado.nota_resultado|floatformat:"0" }}</span>
+                        </h4>
+                        <div class="table-responsive text-center">
+                            <table class="table table-striped">
+                                <tr>
+                                    <th></th>
+                                    <th>Critério de qualidade</th>
+                                    <th>Peso</th>
+                                    <th style="text-align:start;">Valor encontrado</th>
+                                    <th>Valor considerado</th>
+                                    <th>Valor de referência</th>
+                                    <th>Nota</th>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>
+                                        Custo financeiro
+                                    </td>
+                                    <td>{{ form.instance.modelo.resultado_peso_1 }}</td>
+                                    <td>
+                                        <div class="row text-center">
+                                            <div class="col-sm-4 center-block">
+                                                <input type="text" class="form-control form-control-sm" name="resultado_input_1" value="{{ form.instance.resultado.resultado_input_1|floatformat:'0' }}">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        {{ form.instance.resultado.resultado_fback_1|default:"Aguarde..." }}
+                                    </td>    
+                                    <td>{{ min_input_1 }}</td>
+                                    <td>
+                                        {{ form.instance.resultado.resultado_nota_1 }}
+                                    </td>    
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>
+                                        Critério 2
+                                    </td>
+                                    <td>{{ form.instance.modelo.resultado_peso_2 }}</td>
+                                    <td>
+                                        <div class="row text-center">
+                                            <div class="col-sm-4 center-block">
+                                                <input type="text" class="form-control form-control-sm" name="resultado_input_2" value="{{ form.instance.resultado.resultado_input_2|floatformat:'0' }}">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        {{ form.instance.resultado.resultado_fback_2|default:"Aguarde..." }}
+                                    </td>    
+                                    <td>{{ max_input_2 }}</td>
+                                    <td>
+                                        {{ form.instance.resultado.resultado_nota_2 }}
+                                    </td>    
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="input-group input-group-sm">
                         <div class="input-group-prepend">
                             <div class="float-start">
                                 {% render_field form.arquivo class+="custom-file-input" %}
@@ -124,8 +287,10 @@
                                 Campo obrigatório
                             </div>    
                         </div>
-                    </div>    
-                    <button type="submit" class="btn btn-sm btn-primary">Enviar projeto</button>
+                    </div>
+                    <div class="my-5">
+                        <button type="submit" class="btn btn-sm btn-primary">Enviar projeto</button>
+                    </div>
                 </form>
             </div>
         </div>

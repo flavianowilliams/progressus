@@ -9,6 +9,7 @@ class ProjetoModelo(models.Model):
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
     bibliografia_total = models.IntegerField(default=10, blank=True)
+
     introducao_titulo_1 = models.CharField(
         max_length=100,
         default='Qual é o significado?',
@@ -17,7 +18,7 @@ class ProjetoModelo(models.Model):
     introducao_peso_1 = models.DecimalField(
         max_digits=6,
         decimal_places=3,
-        default=0.2,
+        default=0.002,
         verbose_name='2. Introdução (parâmetro): Peso'
         )
     introducao_titulo_2 = models.CharField(
@@ -28,8 +29,8 @@ class ProjetoModelo(models.Model):
     introducao_peso_2 = models.DecimalField(
         max_digits=6,
         decimal_places=3,
-        default=0.2,
-        verbose_name='1. Introdução (parâmetro): Peso'
+        default=0.002,
+        verbose_name='2. Introdução (parâmetro): Peso'
         )
     introducao_titulo_3 = models.CharField(
         max_length=100,
@@ -39,7 +40,7 @@ class ProjetoModelo(models.Model):
     introducao_peso_3 = models.DecimalField(
         max_digits=6,
         decimal_places=3,
-        default=0.2,
+        default=0.002,
         verbose_name='3. Introdução (parâmetro): Peso'
         )
     introducao_titulo_4 = models.CharField(
@@ -50,7 +51,7 @@ class ProjetoModelo(models.Model):
     introducao_peso_4 = models.DecimalField(
         max_digits=6,
         decimal_places=3,
-        default=0.2,
+        default=0.002,
         verbose_name='4. Introdução (parâmetro): Peso'
         )
     introducao_titulo_5 = models.CharField(
@@ -61,15 +62,134 @@ class ProjetoModelo(models.Model):
     introducao_peso_5 = models.DecimalField(
         max_digits=6,
         decimal_places=3,
-        default=0.2,
+        default=0.002,
         verbose_name='5. Introdução (parâmetro): Peso'
+        )
+
+    metodologia_titulo_1 = models.CharField(
+        max_length=100,
+        default='Como o equipamento ou experimento poderia ser reproduzido?',
+        verbose_name = '1. Metodologia (parâmetro): Título'
+        )
+    metodologia_peso_1 = models.DecimalField(
+        max_digits=6,
+        decimal_places=3,
+        default=0.002,
+        verbose_name='2. Metodologia (parâmetro): Peso'
+        )
+    metodologia_titulo_2 = models.CharField(
+        max_length=100,
+        default='A lista de materiais e/ou softwares necessários foi fornecido?',
+        verbose_name = '2. Metodologia (parâmetro): Título'
+        )
+    metodologia_peso_2 = models.DecimalField(
+        max_digits=6,
+        decimal_places=3,
+        default=0.002,
+        verbose_name='2. Metodologia (parâmetro): Peso'
+        )
+    metodologia_titulo_3 = models.CharField(
+        max_length=100,
+        default='O custo financeiro total ou detalhado por item foi fornecido?',
+        verbose_name = '3. Metodologia (parâmetro): Título'
+        )
+    metodologia_peso_3 = models.DecimalField(
+        max_digits=6,
+        decimal_places=3,
+        default=0.002,
+        verbose_name='3. Metodologia (parâmetro): Peso'
+        )
+    metodologia_titulo_4 = models.CharField(
+        max_length=100,
+        default='O procedimento para a perfeita utilização foi apresentado de maneira clara e objetiva?',
+        verbose_name = '4. Metodologia (parâmetro): Título'
+        )
+    metodologia_peso_4 = models.DecimalField(
+        max_digits=6,
+        decimal_places=3,
+        default=0.002,
+        verbose_name='4. Metodologia (parâmetro): Peso'
+        )
+    metodologia_titulo_5 = models.CharField(
+        max_length=100,
+        default='Uma imagem clara do dispositivo, ou no caso de software o link para o seu repositório foi fornecido?',
+        verbose_name = '5. Metodologia (parâmetro): Título'
+        )
+    metodologia_peso_5 = models.DecimalField(
+        max_digits=6,
+        decimal_places=3,
+        default=0.002,
+        verbose_name='5. Metodologia (parâmetro): Peso'
+        )
+
+    resultado_peso_1 = models.DecimalField(
+        max_digits=6,
+        decimal_places=3,
+        default=0.005,
+        verbose_name='1. Resultado (parâmetro): Peso'
+        )
+
+    resultado_peso_2 = models.DecimalField(
+        max_digits=6,
+        decimal_places=3,
+        default=0.005,
+        verbose_name='2. Resultado (parâmetro): Peso'
+        )
+
+    resultado_peso_3 = models.DecimalField(
+        max_digits=6,
+        decimal_places=3,
+        default=0.0,
+        verbose_name='3. Resultado (parâmetro): Peso'
+        )
+
+    resultado_peso_4 = models.DecimalField(
+        max_digits=6,
+        decimal_places=3,
+        default=0.0,
+        verbose_name='4. Resultado (parâmetro): Peso'
+        )
+
+    resultado_peso_5 = models.DecimalField(
+        max_digits=6,
+        decimal_places=3,
+        default=0.0,
+        verbose_name='5. Resultado (parâmetro): Peso'
         )
 
     introducao_peso = models.DecimalField(
         max_digits=6,
         decimal_places=3,
-        default=0,
+        default=1,
         verbose_name='Introdução: Peso'
+        )
+
+    teoria_peso = models.DecimalField(
+        max_digits=6,
+        decimal_places=3,
+        default=25,
+        verbose_name='Teoria: Peso'
+        )
+
+    metodologia_peso = models.DecimalField(
+        max_digits=6,
+        decimal_places=3,
+        default=1,
+        verbose_name='Metodologia: Peso'
+        )
+
+    resultado_peso = models.DecimalField(
+        max_digits=6,
+        decimal_places=3,
+        default=25,
+        verbose_name='Resultado: Peso'
+        )
+
+    apresentacao_peso = models.DecimalField(
+        max_digits=6,
+        decimal_places=3,
+        default=1,
+        verbose_name='Apresentacao: Peso'
         )
 
     def __str__(self):
@@ -83,6 +203,7 @@ class Chamada(models.Model):
     deadline_proposta = models.DateField(verbose_name='Data limite da proposta', null=True)
     deadline_projeto = models.DateField(verbose_name='Data limite do projeto', null=True)
     deadline_chamada = models.DateField(verbose_name='Data limite da chamada', null=True)
+    orcamento = models.DecimalField(max_digits=6, decimal_places=3, default=0.0, blank=True)
     resumo = models.TextField()
     edital = models.FileField(upload_to='pdf/%Y/%m/%d/')
     aviso = models.TextField(null=True, blank=True)
@@ -140,17 +261,6 @@ class Inscricao(models.Model):
     def __str__(self):
         return self.equipe
 
-class Extra(models.Model):
-    created = models.DateField(auto_now_add=True)
-    updated = models.DateField(auto_now=True)
-    penalidade = models.DecimalField(max_digits=6, decimal_places=3, default=0, blank=True)
-    divulgacao = models.DecimalField(max_digits=6, decimal_places=3, default=0, blank=True)
-    nota = models.DecimalField(max_digits=6, decimal_places=3, default=0, blank=True)
-
-    def setNota(self):
-        self.nota = self.penalidade+self.divulgacao
-        return self.nota
-
 class Projeto(models.Model):
 
     created = models.DateField(auto_now_add=True)
@@ -162,9 +272,14 @@ class Projeto(models.Model):
     titulo = models.CharField(max_length=100, null=True, blank=True)
     nota = models.DecimalField(max_digits=6, decimal_places=3, null=True, blank=True)
     arquivo = models.FileField(upload_to='pdf/%Y/%m/%d/', null=True)
+    resumo = models.TextField(null=True)
+    imagem = models.ImageField(upload_to='img/', max_length=100, null=True)
 
     def setNota(self):
-        data = self.introducao.nota_introducao
+        data = float(self.introducao.nota_introducao)
+        data += float(self.teoria.nota_teoria)
+        data += float(self.metodologia.nota_metodologia)
+        data += float(self.resultado.nota_resultado)
         return data
 
     def __str__(self):
@@ -177,34 +292,226 @@ class Introducao(models.Model):
 
     projeto = models.OneToOneField(Projeto, on_delete=models.CASCADE)
 
-    introducao_nota_1 = models.DecimalField(max_digits=6, decimal_places=3, default=0.0, blank=True)
-    introducao_nota_2 = models.DecimalField(max_digits=6, decimal_places=3, default=0.0, blank=True)
-    introducao_nota_3 = models.DecimalField(max_digits=6, decimal_places=3, default=0.0, blank=True)
-    introducao_nota_4 = models.DecimalField(max_digits=6, decimal_places=3, default=0.0, blank=True)
-    introducao_nota_5 = models.DecimalField(max_digits=6, decimal_places=3, default=0.0, blank=True)
+    introducao_nota_1 = models.DecimalField(max_digits=7, decimal_places=3, default=0.0, blank=True)
+    introducao_nota_2 = models.DecimalField(max_digits=7, decimal_places=3, default=0.0, blank=True)
+    introducao_nota_3 = models.DecimalField(max_digits=7, decimal_places=3, default=0.0, blank=True)
+    introducao_nota_4 = models.DecimalField(max_digits=7, decimal_places=3, default=0.0, blank=True)
+    introducao_nota_5 = models.DecimalField(max_digits=7, decimal_places=3, default=0.0, blank=True)
     introducao_consideracao_1 = models.CharField(max_length=255, null=True, blank=True)
     introducao_consideracao_2 = models.CharField(max_length=255, null=True, blank=True)
     introducao_consideracao_3 = models.CharField(max_length=255, null=True, blank=True)
     introducao_consideracao_4 = models.CharField(max_length=255, null=True, blank=True)
     introducao_consideracao_5 = models.CharField(max_length=255, null=True, blank=True)
 
-    nota_introducao = models.DecimalField(max_digits=6, decimal_places=3, default=0.0, blank=True)
+    nota_introducao = models.DecimalField(max_digits=7, decimal_places=3, default=0.0, blank=True)
 
     def setNotaIntroducao(self):
-        data = self.projeto.modelo.introducao_peso_1*self.introducao_nota_1
-        data += self.projeto.modelo.introducao_peso_2*self.introducao_nota_2
-        data += self.projeto.modelo.introducao_peso_3*self.introducao_nota_3
-        data += self.projeto.modelo.introducao_peso_4*self.introducao_nota_4
-        data += self.projeto.modelo.introducao_peso_5*self.introducao_nota_5
-        data = data*self.projeto.modelo.introducao_peso
+        data = float(self.projeto.modelo.introducao_peso_1)*float(self.introducao_nota_1)
+        data += float(self.projeto.modelo.introducao_peso_2)*float(self.introducao_nota_2)
+        data += float(self.projeto.modelo.introducao_peso_3)*float(self.introducao_nota_3)
+        data += float(self.projeto.modelo.introducao_peso_4)*float(self.introducao_nota_4)
+        data += float(self.projeto.modelo.introducao_peso_5)*float(self.introducao_nota_5)
+        data = data*float(self.projeto.modelo.introducao_peso)
         return data
 
 class Teoria(models.Model):
 
-    teoria_total = models.DecimalField(max_digits=6, decimal_places=3, default=0, blank=True)
-    teoria_qde = models.DecimalField(max_digits=6, decimal_places=3, default=0, blank=True)
+    created = models.DateField(auto_now_add=True)
+    updated = models.DateField(auto_now=True)
+
+    teoria_total = models.IntegerField(default=0, blank=True)
+    teoria_qde = models.IntegerField(default=0, blank=True)
+    teoria_consideracao = models.CharField(max_length=255, null=True, blank=True)
     nota_teoria = models.DecimalField(max_digits=6, decimal_places=3, default=0.0, blank=True)
 
+    projeto = models.OneToOneField(Projeto, on_delete=models.CASCADE)
+
     def setNotaTeoria(self):
-        data = self.teoria_qte*100.0/self.teoria_total
+        data = 0.0
+        try:
+            data = float(self.teoria_qde)/float(self.teoria_total)
+            data = data*float(self.projeto.modelo.teoria_peso)
+        except:
+            self.teoria_total = 0
         return data
+
+class Metodologia(models.Model):
+
+    created = models.DateField(auto_now_add=True)
+    updated = models.DateField(auto_now=True)
+
+    metodologia_nota_1 = models.DecimalField(max_digits=7, decimal_places=3, default=0.0, blank=True)
+    metodologia_nota_2 = models.DecimalField(max_digits=7, decimal_places=3, default=0.0, blank=True)
+    metodologia_nota_3 = models.DecimalField(max_digits=7, decimal_places=3, default=0.0, blank=True)
+    metodologia_nota_4 = models.DecimalField(max_digits=7, decimal_places=3, default=0.0, blank=True)
+    metodologia_nota_5 = models.DecimalField(max_digits=7, decimal_places=3, default=0.0, blank=True)
+    metodologia_consideracao_1 = models.CharField(max_length=255, null=True, blank=True)
+    metodologia_consideracao_2 = models.CharField(max_length=255, null=True, blank=True)
+    metodologia_consideracao_3 = models.CharField(max_length=255, null=True, blank=True)
+    metodologia_consideracao_4 = models.CharField(max_length=255, null=True, blank=True)
+    metodologia_consideracao_5 = models.CharField(max_length=255, null=True, blank=True)
+
+    nota_metodologia = models.DecimalField(max_digits=7, decimal_places=3, default=0.0, blank=True)
+
+    projeto = models.OneToOneField(Projeto, on_delete=models.CASCADE)
+
+    def setNotaMetodologia(self):
+        data = float(self.projeto.modelo.metodologia_peso_1)*float(self.metodologia_nota_1)
+        data += float(self.projeto.modelo.metodologia_peso_2)*float(self.metodologia_nota_2)
+        data += float(self.projeto.modelo.metodologia_peso_3)*float(self.metodologia_nota_3)
+        data += float(self.projeto.modelo.metodologia_peso_4)*float(self.metodologia_nota_4)
+        data += float(self.projeto.modelo.metodologia_peso_5)*float(self.metodologia_nota_5)
+        data = data*float(self.projeto.modelo.metodologia_peso)
+        return data
+
+class Resultado(models.Model):
+
+    created = models.DateField(auto_now_add=True)
+    updated = models.DateField(auto_now=True)
+
+    resultado_input_1 = models.DecimalField(
+        max_digits=7,
+        decimal_places=3,
+        default=0.0, blank=True)
+
+    resultado_input_2 = models.DecimalField(
+        max_digits=7,
+        decimal_places=3,
+        default=0.0,
+        blank=True)
+
+    resultado_input_3 = models.DecimalField(
+        max_digits=7,
+        decimal_places=3,
+        default=0.0,
+        blank=True)
+
+    resultado_input_4 = models.DecimalField(
+        max_digits=7,
+        decimal_places=3,
+        default=0.0,
+        blank=True)
+
+    resultado_input_5 = models.DecimalField(
+        max_digits=7,
+        decimal_places=3,
+        default=0.0,
+        blank=True)
+
+    resultado_fback_1 = models.DecimalField(
+        default=0.0,
+        max_digits=7,
+        decimal_places=3,
+        null=True)
+
+    resultado_fback_2 = models.DecimalField(
+        default=0.0,
+        max_digits=7,
+        decimal_places=3,
+        null=True)
+
+    resultado_fback_3 = models.DecimalField(
+        default=0.0,
+        max_digits=7,
+        decimal_places=3,
+        null=True)
+
+    resultado_fback_4 = models.DecimalField(
+        default=0.0,
+        max_digits=7,
+        decimal_places=3,
+        null=True)
+
+    resultado_fback_5 = models.DecimalField(
+        default=0.0,
+        max_digits=7,
+        decimal_places=3,
+        null=True)
+
+    resultado_nota_1 = models.DecimalField(
+        max_digits=7,
+        decimal_places=3,
+        default=0.0,
+        blank=True)
+
+    resultado_nota_2 = models.DecimalField(
+        max_digits=7,
+        decimal_places=3,
+        default=0.0,
+        blank=True)
+
+    resultado_nota_3 = models.DecimalField(
+        max_digits=7,
+        decimal_places=3,
+        default=0.0,
+        blank=True)
+
+    resultado_nota_4 = models.DecimalField(
+        max_digits=7,
+        decimal_places=3,
+        default=0.0,
+        blank=True)
+
+    resultado_nota_5 = models.DecimalField(
+        max_digits=7,
+        decimal_places=3,
+        default=0.0,
+        blank=True)
+
+    nota_resultado = models.DecimalField(
+        max_digits=6,
+        decimal_places=3,
+        default=0.0,
+        blank=True)
+
+    projeto = models.OneToOneField(Projeto, on_delete=models.CASCADE)
+
+    def setNotaResultado(self):
+        data = float(self.projeto.modelo.resultado_peso_1)*float(self.resultado_nota_1)
+        data += float(self.projeto.modelo.resultado_peso_2)*float(self.resultado_nota_2)
+        data += float(self.projeto.modelo.resultado_peso_3)*float(self.resultado_nota_3)
+        data += float(self.projeto.modelo.resultado_peso_4)*float(self.resultado_nota_4)
+        data += float(self.projeto.modelo.resultado_peso_5)*float(self.resultado_nota_5)
+        data = data*float(self.projeto.modelo.resultado_peso)
+        return data
+
+class Extra(models.Model):
+
+    created = models.DateField(auto_now_add=True)
+    updated = models.DateField(auto_now=True)
+
+    nota_extra = models.DecimalField(max_digits=6, decimal_places=3, default=0, blank=True)
+    penalidade = models.DecimalField(max_digits=6, decimal_places=3, default=0, blank=True)
+    divulgacao = models.DecimalField(max_digits=6, decimal_places=3, default=0, blank=True)
+
+    projeto = models.OneToOneField(Projeto, on_delete=models.CASCADE)
+
+    def setNotaExtra(self):
+        self.nota = self.penalidade+self.divulgacao
+        return self.nota
+
+class Bibliografia(models.Model):
+
+    created = models.DateField(auto_now_add=True)
+    updated = models.DateField(auto_now=True)
+
+    nota_bibliografia = models.DecimalField(max_digits=6, decimal_places=3, default=0.0, blank=True)
+
+    projeto = models.OneToOneField(Projeto, on_delete=models.CASCADE)
+
+#    def setNotaBibliografia(self):
+#        data = self.teoria_qte*100.0/self.teoria_total
+#        return data
+
+class Proposta(models.Model):
+
+    created = models.DateField(auto_now_add=True)
+    updated = models.DateField(auto_now=True)
+
+    nota_proposta = models.DecimalField(max_digits=6, decimal_places=3, default=0.0, blank=True)
+
+    projeto = models.OneToOneField(Projeto, on_delete=models.CASCADE)
+
+#    def setNotaProposta(self):
+#        data = self.teoria_qte*100.0/self.teoria_total
+#        return data

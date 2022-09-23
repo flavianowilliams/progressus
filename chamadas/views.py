@@ -1,11 +1,14 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from chamadas.models import Chamada, Inscricao, Introducao, Projeto
-from chamadas.forms import InscricaoForm, ProjetoForm, ProjetoIntroducaoAdmin, ProjetoAdminForm
+from django.shortcuts import render, get_object_or_404
+from chamadas.models import Chamada, Inscricao, Introducao, Metodologia, Projeto, Resultado, Teoria
+from chamadas.forms import InscricaoForm, ProjetoForm, ProjetoIntroducaoAdmin
+from chamadas.forms import ProjetoTeoriaAdmin, ProjetoResultadoAdmin
+from chamadas.forms import ProjetoMetodologiaAdmin
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required, user_passes_test
 from progressus.settings import EMAIL_HOST_USER
 from django.core.mail import send_mail
+from chamadas.utils import Valor
 
 # Chamada
 
@@ -73,6 +76,9 @@ def inscricao_create_view(request, pk):
                 Projeto.objects.create(inscricao = form.instance, modelo = chamada.projetomodelo)
                 projeto = Projeto.objects.get(inscricao = form.instance)
                 Introducao.objects.create(projeto = projeto)
+                Teoria.objects.create(projeto = projeto)
+                Metodologia.objects.create(projeto = projeto)
+                Resultado.objects.create(projeto = projeto)
                 sender = EMAIL_HOST_USER
                 receiver = form.instance.lider.usuario.email
                 message = (
@@ -249,6 +255,90 @@ def introducao_detail_superuser(request, pk):
 
     return render(request, template_name, context)
 
+@login_required
+@user_passes_test(lambda u: u.is_superuser, login_url='users:login')
+def teoria_detail_superuser(request, pk):
+
+    template_name = 'chamadas/teoria_detail.html'
+
+    object = get_object_or_404(Projeto, pk = pk)
+
+    if request.method == 'POST':
+        form = ProjetoTeoriaAdmin(request.POST, instance=object.teoria)
+        if form.is_valid():
+            form.save()
+            teoria = Teoria.objects.get(projeto = object)
+            form.instance.nota_teoria = teoria.setNotaTeoria()
+            form.save()
+            object.nota = object.setNota()
+            object.save()
+            return HttpResponseRedirect(reverse_lazy('chamadas:projeto_detail_superuser', kwargs = {'pk': object.inscricao.chamada.pk}))
+    else:
+        form = ProjetoTeoriaAdmin(instance=object.teoria)
+        teoria = Teoria.objects.get(projeto = object)
+        form.instance.nota_teoria = teoria.setNotaTeoria()
+ 
+    context = {'form': form}
+
+    return render(request, template_name, context)
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser, login_url='users:login')
+def metodologia_detail_superuser(request, pk):
+
+    template_name = 'chamadas/metodologia_detail.html'
+
+    object = get_object_or_404(Projeto, pk = pk)
+
+    if request.method == 'POST':
+        form = ProjetoMetodologiaAdmin(request.POST, instance=object.metodologia)
+        if form.is_valid():
+            form.save()
+            metodologia = Metodologia.objects.get(projeto = object)
+            form.instance.nota_metodologia = metodologia.setNotaMetodologia()
+            form.save()
+            object.nota = object.setNota()
+            object.save()
+            return HttpResponseRedirect(reverse_lazy('chamadas:projeto_detail_superuser', kwargs = {'pk': object.inscricao.chamada.pk}))
+    else:
+        form = ProjetoMetodologiaAdmin(instance=object.metodologia)
+        metodologia = Metodologia.objects.get(projeto = object)
+        form.instance.nota_metodologia = metodologia.setNotaMetodologia()
+ 
+    context = {'form': form}
+
+    return render(request, template_name, context)
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser, login_url='users:login')
+def resultado_detail_superuser(request, pk):
+
+    template_name = 'chamadas/resultado_detail.html'
+
+    object = get_object_or_404(Projeto, pk = pk)
+    result = Resultado.objects.get(projeto = object)
+
+    if request.method == 'POST':
+        form = ProjetoResultadoAdmin(request.POST, instance=object.resultado)
+        if form.is_valid():
+            form.save()
+            args = {'tema': object.inscricao.tema, 'atributo': 'resultado_fback_1', 'valor': form.cleaned_data['resultado_fback_1']}
+            form.instance.resultado_nota_1 = Valor(args).setValorInv()
+            args = {'tema': object.inscricao.tema, 'atributo': 'resultado_fback_2', 'valor': form.cleaned_data['resultado_fback_2']}
+            form.instance.resultado_nota_2 = Valor(args).setValor()
+            form.instance.nota_resultado = result.setNotaResultado()
+            form.save()
+            object.nota = object.setNota()
+            object.save()
+            return HttpResponseRedirect(reverse_lazy('chamadas:projeto_detail_superuser', kwargs = {'pk': object.inscricao.chamada.pk}))
+    else:
+        form = ProjetoResultadoAdmin(instance=object.resultado)
+        form.instance.nota_resultado = result.setNotaResultado()
+ 
+    context = {'form': form}
+
+    return render(request, template_name, context)
+
 # usuario
 
 @login_required
@@ -258,17 +348,31 @@ def inscricao_projeto_view(request, pk):
 
     inscricao = get_object_or_404(Inscricao, pk = pk)
 
-    object = Projeto.objects.get(inscricao = inscricao)
+    object = get_object_or_404(Projeto, inscricao = inscricao)
+    resultado = get_object_or_404(Resultado, projeto = object)
+
+    input_1 = [resultado.resultado_fback_1 for resultado in Resultado.objects.all()]
+    input_2 = [resultado.resultado_fback_2 for resultado in Resultado.objects.all()]
 
     if request.method == 'POST':
         form = ProjetoForm(request.POST, request.FILES, instance=object)
         if form.is_valid():
+            resultado.resultado_input_1 = form.cleaned_data['resultado_input_1']
+            resultado.resultado_fback_1 = form.cleaned_data['resultado_input_1']
+            resultado.resultado_input_2 = form.cleaned_data['resultado_input_2']
+            resultado.resultado_fback_2 = form.cleaned_data['resultado_input_2']
+            resultado.save()
             form.save()
             return HttpResponseRedirect(reverse_lazy('chamadas:inscricao_detail', kwargs = {'pk': object.inscricao.pk}))
     else:
         form = ProjetoForm(instance=object)
 
-    context = {'form': form}
+    context = {'form': form,
+    'max_input_1': max(input_1),
+    'max_input_2': max(input_2),
+    'min_input_1': min(input_1),
+    'min_input_2': min(input_2),
+    }
 
     return render(request, template_name, context)
 

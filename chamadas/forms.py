@@ -1,6 +1,6 @@
-from dataclasses import fields
+from email.policy import default
 from django import forms
-from .models import Chamada, Introducao, ProjetoModelo, Tema, Inscricao, Projeto
+from .models import Chamada, Introducao, Metodologia, ProjetoModelo, Tema, Inscricao, Projeto, Teoria, Resultado
 
 class ChamadaFormCreate(forms.ModelForm):
 
@@ -10,6 +10,7 @@ class ChamadaFormCreate(forms.ModelForm):
             'nome',
              'resumo',
               'aviso',
+              'orcamento',
                'deadline_inscricao',
                 'deadline_bibliografia',
                 'deadline_proposta',
@@ -33,6 +34,7 @@ class ChamadaFormUpdate(forms.ModelForm):
             'nome',
              'resumo',
               'aviso',
+              'orcamento',
                'deadline_inscricao',
                 'deadline_bibliografia',
                 'deadline_proposta',
@@ -121,7 +123,25 @@ class ProjetoModeloForm(forms.ModelForm):
              'introducao_peso_4',
             'introducao_titulo_5',
              'introducao_peso_5',
+            'metodologia_titulo_1',
+             'metodologia_peso_1',
+            'metodologia_titulo_2',
+             'metodologia_peso_2',
+            'metodologia_titulo_3',
+             'metodologia_peso_3',
+            'metodologia_titulo_4',
+             'metodologia_peso_4',
+            'metodologia_titulo_5',
+             'metodologia_peso_5',
+             'resultado_peso_1',
+             'resultado_peso_2',
+             'resultado_peso_3',
+             'resultado_peso_4',
+             'resultado_peso_5',
              'introducao_peso',
+             'teoria_peso',
+             'metodologia_peso',
+             'resultado_peso',
                 ]
 
     def clean_nome(self):
@@ -147,10 +167,31 @@ class ProjetoModeloUpdateForm(forms.ModelForm):
              'introducao_peso_4',
             'introducao_titulo_5',
              'introducao_peso_5',
+            'metodologia_titulo_1',
+             'metodologia_peso_1',
+            'metodologia_titulo_2',
+             'metodologia_peso_2',
+            'metodologia_titulo_3',
+             'metodologia_peso_3',
+            'metodologia_titulo_4',
+             'metodologia_peso_4',
+            'metodologia_titulo_5',
+             'metodologia_peso_5',
+             'resultado_peso_1',
+             'resultado_peso_2',
+             'resultado_peso_3',
+             'resultado_peso_4',
+             'resultado_peso_5',
              'introducao_peso',
+             'teoria_peso',
+             'metodologia_peso',
+             'resultado_peso',
                 ]
 
 class ProjetoForm(forms.ModelForm):
+
+    resultado_input_1 = forms.DecimalField()
+    resultado_input_2 = forms.DecimalField()
 
     class Meta:
         model = Projeto
@@ -175,6 +216,49 @@ class ProjetoIntroducaoAdmin(forms.ModelForm):
             'introducao_consideracao_4',
             'introducao_consideracao_5',
             'nota_introducao',
+        ]
+
+class ProjetoTeoriaAdmin(forms.ModelForm):
+
+    class Meta:
+        model = Teoria
+        fields = [
+            'teoria_total',
+            'teoria_qde',
+            'teoria_consideracao',
+            'nota_teoria',
+        ]
+
+class ProjetoMetodologiaAdmin(forms.ModelForm):
+
+    class Meta:
+        model = Metodologia
+        fields = [
+            'metodologia_nota_1',
+            'metodologia_nota_2',
+            'metodologia_nota_3',
+            'metodologia_nota_4',
+            'metodologia_nota_5',
+            'metodologia_consideracao_1',
+            'metodologia_consideracao_2',
+            'metodologia_consideracao_3',
+            'metodologia_consideracao_4',
+            'metodologia_consideracao_5',
+            'nota_metodologia',
+        ]
+
+class ProjetoResultadoAdmin(forms.ModelForm):
+
+    class Meta:
+        model = Resultado
+        fields = [
+            'resultado_input_1',
+            'resultado_input_2',
+            'resultado_fback_1',
+            'resultado_fback_2',
+            'resultado_nota_1',
+            'resultado_nota_2',
+            'nota_resultado',
         ]
 
 class ProjetoAdminForm(forms.ModelForm):

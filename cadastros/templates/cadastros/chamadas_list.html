@@ -11,30 +11,34 @@
         <div class="table-responsive">
             <table class="table table-striped" style="text-align: center;">
                 <colgroup>
-                    <col style="width: 10vw;">
-                    <col style="width: 20vw;">
                     <col style="width: 20vw;">
                     <col style="width: 10vw;">
                     <col style="width: 10vw;">
                     <col style="width: 10vw;">
+                    <col style="width: 10vw;">
+                    <col style="width: 10vw;">
+                    <col style="width: 10vw;">
+                    <col style="width: 20vw;">
                 </colgroup>
                 <tr>
                     <th>Nome</th>
                     <th>Data</th>
                     <th>Atualização</th>
-                    <th>Edital</th>
                     <th>Status</th>
+                    <th>Orçamento</th>
                     <th>Projeto</th>
+                    <th>Edital</th>
                     <th>Opções</th>
                 </tr>
                 {% for object in object_list %}
                     <tr>
                         <td>{{ object }}</td>
-                        <td>{{ object.created }}</td>
-                        <td>{{ object.updated }}</td>
-                        <td><a class="btn btn-primary btn-sm" href="{{ object.chamada.edital.url }}">Ver</a></td>
+                        <td>{{ object.created|date:"d/m/Y" }}</td>
+                        <td>{{ object.updated|date:"d/m/Y" }}</td>
                         <td>{{ object.chamada.get_status }}</td>
+                        <td>{{ object.chamada.orcamento }}</td>
                         <td>{{ object.chamada.projetomodelo }}</td>
+                        <td><a class="btn btn-primary btn-sm" href="{{ object.chamada.edital.url }}">Ver</a></td>
                         <td>
                             <a class="btn btn-warning btn-sm" href="{% url 'cadastros:chamada_update' object.pk %}">Editar</a>
                             <a class="btn btn-danger btn-sm" href="{% url 'cadastros:chamada_delete' object.pk %}">Excluir</a>
@@ -42,7 +46,7 @@
                     </tr>
                 {% empty %}
                     <tr>
-                        <td colspan="7" style="text-align: center;">Nenhuma chamada registrada.</td>
+                        <td colspan="8" style="text-align: center;">Nenhuma chamada registrada até o momento.</td>
                     </tr>
                 {% endfor %}
             </table>

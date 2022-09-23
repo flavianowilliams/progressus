@@ -1,0 +1,70 @@
+{% extends 'pages/base.html' %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+    <div class="container">
+        <h2>Equipe: {{ form.instance.projeto.inscricao }}</h2>
+        <h3>Projeto: {{ form.instance.projeto.titulo }}</h3>
+        <div class="card-body">
+            <h4 class="card-title text-center">Teoria</h4>
+            <form action="" method="POST">
+                <div class="border">
+                    {% csrf_token %}
+                    <div class="mx-3 my-3 mt-3 mb-3">
+                        <h5>Parâmetros de avaliação</h5>
+                            <div class="row mb-2">
+                                <label class="col-sm-4 col-form-label" for="">
+                                    Quantidade mínima de conceitos obrigatórios:
+                                </label>
+                                <div class="col-sm-1">
+                                    {% render_field form.teoria_total class+="form-control" %}
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <label class="col-sm-4 col-form-label" for="">
+                                    Quantidade de conceitos apresentados:
+                                </label>
+                                <div class="col-sm-1">
+                                    {% render_field form.teoria_qde class+="form-control" %}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-4 col-form-label" for="">
+                                    Considerações:
+                                </label>
+                                <div class="col-sm-6">
+                                    {% render_field form.teoria_consideracao class+="form-control" %}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label" for="inpt12">
+                                    Peso da avaliação:
+                                </label>
+                                <div class="col-sm-6 mx-3">
+                                    <input type="text" readonly class="form-control-plaintext" id="inpt12" value="{{ form.instance.projeto.modelo.teoria_peso }}">
+                                </div>
+                            </div>
+                            <div class="row">
+                            <label class="col-sm-2 col-form-label" for="inpt13">
+                                Nota da avaliação:
+                            </label>
+                            <div class="col-sm-2 mx-3">
+                                <input type="text" readonly class="form-control-plaintext" id="inpt13" value="{{ form.instance.nota_teoria }}">
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-sm">
+                                Avaliar
+                            </button>    
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footnote %}
+{% endblock %}

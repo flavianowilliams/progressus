@@ -1,0 +1,219 @@
+{% extends 'pages/base.html' %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+    <div class="container">
+        <h2>Equipe: {{ form.instance.inscricao }}</h2>
+        <div class="card-body">
+            <h4 class="card-title text-center">Apresentação</h4>
+            <form action="" method="POST">
+                <div class="border">
+                    {% csrf_token %}
+                    <div class="mx-3 my-3 mt-3 mb-3">
+                        <h5>Parâmetros de avaliação</h5>
+                        {% if form.instance.modelo.apresentacao_peso_1 > 0.0 %}
+                            <div class="row mb-2">
+                                <label class="col-sm-1 col-form-label" for="inpt1">
+                                    Parâmetro:
+                                </label>
+                                <div class="col-sm-6 mx-3">
+                                    <input type="text" readonly class="form-control-plaintext" id="inpt1" value="{{ form.instance.modelo.apresentacao_titulo_1 }}">
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <label class="col-sm-1 col-form-label" for="inpt2">
+                                    Peso:
+                                </label>
+                                <div class="col-sm-6 mx-3">
+                                    <input type="text" readonly class="form-control-plaintext" id="inpt2" value="{{ form.instance.modelo.apresentacao_peso_1 }}">
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <label class="col-sm-1 col-form-label" for="">
+                                    Consideracao:
+                                </label>
+                                <div class="col-sm-6 mx-3">
+                                    {% render_field form.apresentacao_consideracao_1 class+="form-control" %}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-1 col-form-label" for="">
+                                    Nota:
+                                </label>
+                                <div class="col-sm-2 mx-3">
+                                    {% render_field form.apresentacao_nota_1 class+="form-control" %}
+                                </div>
+                            </div>
+                            <hr>
+                        {% endif %}
+                        {% if form.instance.modelo.apresentacao_peso_2 > 0.0 %}
+                            <div class="row">
+                                <label class="col-sm-1 col-form-label" for="inpt1">
+                                    Parâmetro:
+                                </label>
+                                <div class="col-sm-6 mx-3">
+                                    <input type="text" readonly class="form-control-plaintext" id="inpt1" value="{{ form.instance.modelo.apresentacao_titulo_2 }}">
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <label class="col-sm-1 col-form-label" for="inpt2">
+                                    Peso:
+                                </label>
+                                <div class="col-sm-6 mx-3">
+                                    <input type="text" readonly class="form-control-plaintext" id="inpt2" value="{{ form.instance.modelo.apresentacao_peso_2 }}">
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <label class="col-sm-1 col-form-label" for="">
+                                    Consideracao:
+                                </label>
+                                <div class="col-sm-6 mx-3">
+                                    {% render_field form.apresentacao_consideracao_2 class+="form-control" %}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-1 col-form-label" for="">
+                                    Nota:
+                                </label>
+                                <div class="col-sm-2 mx-3">
+                                    {% render_field form.apresentacao_nota_2 class+="form-control" %}
+                                </div>
+                            </div>
+                            <hr>
+                        {% endif %}
+                        {% if form.instance.modelo.apresentacao_peso_3 > 0.0 %}
+                            <div class="row">
+                                <label class="col-sm-1 col-form-label" for="inpt1">
+                                    Parâmetro:
+                                </label>
+                                <div class="col-sm-6 mx-3">
+                                    <input type="text" readonly class="form-control-plaintext" id="inpt1" value="{{ form.instance.modelo.apresentacao_titulo_3 }}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-1 col-form-label" for="inpt2">
+                                    Peso:
+                                </label>
+                                <div class="col-sm-6 mx-3">
+                                    <input type="text" readonly class="form-control-plaintext" id="inpt2" value="{{ form.instance.modelo.apresentacao_peso_3 }}">
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <label class="col-sm-1 col-form-label" for="">
+                                    Consideracao:
+                                </label>
+                                <div class="col-sm-6 mx-3">
+                                    {% render_field form.apresentacao_consideracao_3 class+="form-control" %}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-1 col-form-label" for="">
+                                    Nota:
+                                </label>
+                                <div class="col-sm-2 mx-3">
+                                    {% render_field form.apresentacao_nota_3 class+="form-control" %}
+                                </div>
+                            </div>
+                            <hr>
+                        {% endif %}
+                        {% if form.instance.modelo.introducao_peso_4 > 0.0 %}
+                            <div class="row">
+                                <label class="col-sm-1 col-form-label" for="inpt1">
+                                    Parâmetro:
+                                </label>
+                                <div class="col-sm-6 mx-3">
+                                    <input type="text" readonly class="form-control-plaintext" id="inpt1" value="{{ form.instance.modelo.apresentacao_titulo_4 }}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-1 col-form-label" for="inpt2">
+                                    Peso:
+                                </label>
+                                <div class="col-sm-6 mx-3">
+                                    <input type="text" readonly class="form-control-plaintext" id="inpt2" value="{{ form.instance.modelo.apresentacao_peso_4 }}">
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <label class="col-sm-1 col-form-label" for="">
+                                    Consideracao:
+                                </label>
+                                <div class="col-sm-6 mx-3">
+                                    {% render_field form.apresentacao_consideracao_4 class+="form-control" %}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-1 col-form-label" for="">
+                                    Nota:
+                                </label>
+                                <div class="col-sm-2 mx-3">
+                                    {% render_field form.apresentacao_nota_4 class+="form-control" %}
+                                </div>
+                            </div>
+                            <hr>
+                        {% endif %}
+                        {% if form.instance.modelo.apresentacao_peso_5 > 0.0 %}
+                            <div class="row">
+                                <label class="col-sm-1 col-form-label" for="inpt1">
+                                    Parâmetro:
+                                </label>
+                                <div class="col-sm-6 mx-3">
+                                    <input type="text" readonly class="form-control-plaintext" id="inpt1" value="{{ form.instance.modelo.apresentacao_titulo_5 }}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-1 col-form-label" for="inpt2">
+                                    Peso:
+                                </label>
+                                <div class="col-sm-6 mx-3">
+                                    <input type="text" readonly class="form-control-plaintext" id="inpt2" value="{{ form.instance.modelo.apresentacao_peso_5 }}">
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <label class="col-sm-1 col-form-label" for="">
+                                    Consideracao:
+                                </label>
+                                <div class="col-sm-6 mx-3">
+                                    {% render_field form.apresentacao_consideracao_5 class+="form-control" %}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-1 col-form-label" for="">
+                                    Nota:
+                                </label>
+                                <div class="col-sm-2 mx-3">
+                                    {% render_field form.apresentacao_nota_5 class+="form-control" %}
+                                </div>
+                            </div>
+                            <hr>
+                        {% endif %}
+                        <div class="row">
+                            <label class="col-sm-2 col-form-label" for="inpt12">
+                                Peso da avaliação:
+                            </label>
+                            <div class="col-sm-6 mx-3">
+                                <input type="text" readonly class="form-control-plaintext" id="inpt12" value="{{ form.instance.modelo.apresentacao_peso }}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-2 col-form-label" for="inpt13">
+                                Nota da avaliação:
+                            </label>
+                            <div class="col-sm-2 mx-3">
+                                <input type="text" readonly class="form-control-plaintext" id="inpt13" value="{{ form.instance.nota_apresentacao }}">
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-sm">
+                                Avaliar
+                            </button>    
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footnote %}
+{% endblock %}

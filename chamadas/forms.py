@@ -1,6 +1,6 @@
 from email.policy import default
 from django import forms
-from .models import Chamada, Introducao, Metodologia, ProjetoModelo, Tema, Inscricao, Projeto, Teoria, Resultado
+from .models import Apresentacao, Bibliografia, Chamada, Introducao, Metodologia, ProjetoModelo, Tema, Inscricao, Projeto, Teoria, Resultado
 
 class ChamadaFormCreate(forms.ModelForm):
 
@@ -133,6 +133,16 @@ class ProjetoModeloForm(forms.ModelForm):
              'metodologia_peso_4',
             'metodologia_titulo_5',
              'metodologia_peso_5',
+            'apresentacao_titulo_1',
+             'apresentacao_peso_1',
+            'apresentacao_titulo_2',
+             'apresentacao_peso_2',
+            'apresentacao_titulo_3',
+             'apresentacao_peso_3',
+            'apresentacao_titulo_4',
+             'apresentacao_peso_4',
+            'apresentacao_titulo_5',
+             'apresentacao_peso_5',
              'resultado_peso_1',
              'resultado_peso_2',
              'resultado_peso_3',
@@ -142,6 +152,9 @@ class ProjetoModeloForm(forms.ModelForm):
              'teoria_peso',
              'metodologia_peso',
              'resultado_peso',
+             'apresentacao_peso',
+             'bibliografia_peso',
+             'proposta_peso',
                 ]
 
     def clean_nome(self):
@@ -177,6 +190,16 @@ class ProjetoModeloUpdateForm(forms.ModelForm):
              'metodologia_peso_4',
             'metodologia_titulo_5',
              'metodologia_peso_5',
+            'apresentacao_titulo_1',
+             'apresentacao_peso_1',
+            'apresentacao_titulo_2',
+             'apresentacao_peso_2',
+            'apresentacao_titulo_3',
+             'apresentacao_peso_3',
+            'apresentacao_titulo_4',
+             'apresentacao_peso_4',
+            'apresentacao_titulo_5',
+             'apresentacao_peso_5',
              'resultado_peso_1',
              'resultado_peso_2',
              'resultado_peso_3',
@@ -186,6 +209,9 @@ class ProjetoModeloUpdateForm(forms.ModelForm):
              'teoria_peso',
              'metodologia_peso',
              'resultado_peso',
+             'apresentacao_peso',
+             'bibliografia_peso',
+             'proposta_peso',
                 ]
 
 class ProjetoForm(forms.ModelForm):
@@ -197,6 +223,14 @@ class ProjetoForm(forms.ModelForm):
         model = Projeto
         fields = [
             'titulo',
+            'arquivo',
+                ]
+
+class BibliografiaForm(forms.ModelForm):
+
+    class Meta:
+        model = Bibliografia
+        fields = [
             'arquivo',
                 ]
 
@@ -216,6 +250,24 @@ class ProjetoIntroducaoAdmin(forms.ModelForm):
             'introducao_consideracao_4',
             'introducao_consideracao_5',
             'nota_introducao',
+        ]
+
+class ProjetoApresentacaoAdmin(forms.ModelForm):
+
+    class Meta:
+        model = Apresentacao
+        fields = [
+            'apresentacao_nota_1',
+            'apresentacao_nota_2',
+            'apresentacao_nota_3',
+            'apresentacao_nota_4',
+            'apresentacao_nota_5',
+            'apresentacao_consideracao_1',
+            'apresentacao_consideracao_2',
+            'apresentacao_consideracao_3',
+            'apresentacao_consideracao_4',
+            'apresentacao_consideracao_5',
+            'nota_apresentacao',
         ]
 
 class ProjetoTeoriaAdmin(forms.ModelForm):
@@ -259,6 +311,16 @@ class ProjetoResultadoAdmin(forms.ModelForm):
             'resultado_nota_1',
             'resultado_nota_2',
             'nota_resultado',
+        ]
+
+class ProjetoBibliografiaAdmin(forms.ModelForm):
+
+    class Meta:
+        model = Bibliografia
+        fields = [
+            'bibliografia_qde',
+            'consideracoes',
+            'nota_bibliografia',
         ]
 
 class ProjetoAdminForm(forms.ModelForm):

@@ -96,10 +96,11 @@
                     Itens referentes ao seu projeto.
                 </div>
                 <div class="list-group col-7 mx-3 mt-3">
-                    <a href="#" class="list-group-item list-group-item-action">Revisão  bibliográfica</a>
+                    <a href="{% url 'chamadas:inscricao_bibliografia' object.pk %}" class="list-group-item list-group-item-action">Revisão  bibliográfica</a>
                     <a href="#" class="list-group-item list-group-item-action">Proposta</a>
                     <a href="{% url 'chamadas:inscricao_projeto' object.pk %}" class="list-group-item list-group-item-action">Projeto</a>
                     <a href="#" class="list-group-item list-group-item-action">Financeiro</a>
+                    <a href="{% url 'chamadas:inscricao_apresentacao' object.pk %}" class="list-group-item list-group-item-action">Apresentação oral</a>
                 </div>
             </div>
         </div>

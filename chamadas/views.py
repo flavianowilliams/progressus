@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
-from chamadas.models import Chamada, Inscricao, Introducao, Metodologia, Projeto, Resultado, Teoria
-from chamadas.forms import InscricaoForm, ProjetoForm, ProjetoIntroducaoAdmin
+from chamadas.models import Apresentacao, Bibliografia, Chamada, Inscricao, Introducao, Metodologia, Projeto, Proposta, Resultado, Teoria, Extra
+from chamadas.forms import BibliografiaForm, InscricaoForm, ProjetoApresentacaoAdmin, ProjetoBibliografiaAdmin, ProjetoForm, ProjetoIntroducaoAdmin
 from chamadas.forms import ProjetoTeoriaAdmin, ProjetoResultadoAdmin
 from chamadas.forms import ProjetoMetodologiaAdmin
 from django.http import HttpResponseRedirect
@@ -74,6 +74,10 @@ def inscricao_create_view(request, pk):
                 form.instance.lider = request.user.profile
                 form.save()
                 Projeto.objects.create(inscricao = form.instance, modelo = chamada.projetomodelo)
+                Bibliografia.objects.create(inscricao = form.instance, modelo = chamada.projetomodelo)
+                Apresentacao.objects.create(inscricao = form.instance, modelo = chamada.projetomodelo)
+                Extra.objects.create(inscricao = form.instance)
+                Proposta.objects.create(inscricao = form.instance)
                 projeto = Projeto.objects.get(inscricao = form.instance)
                 Introducao.objects.create(projeto = projeto)
                 Teoria.objects.create(projeto = projeto)
@@ -215,6 +219,56 @@ def projeto_list_view(request, pk):
 
 @login_required
 @user_passes_test(lambda u: u.is_superuser, login_url='users:login')
+def bibliografia_detail_superuser(request, pk):
+
+    template_name = 'chamadas/bibliografia_detail.html'
+
+    object = get_object_or_404(Inscricao, pk = pk)
+
+    if request.method == 'POST':
+        form = ProjetoBibliografiaAdmin(request.POST, instance=object.bibliografia)
+        if form.is_valid():
+            form.save()
+            bibliografia = Bibliografia.objects.get(inscricao = object)
+            form.instance.nota_bibliografia = bibliografia.setNotaBibliografia()
+            form.save()
+            return HttpResponseRedirect(reverse_lazy('chamadas:projetos_list', kwargs = {'pk': object.chamada.pk}))
+    else:
+        form = ProjetoBibliografiaAdmin(instance=object.bibliografia)
+        bibliografia = Bibliografia.objects.get(inscricao = object)
+        form.instance.nota_bibliografia = bibliografia.setNotaBibliografia()
+ 
+    context = {'form': form}
+
+    return render(request, template_name, context)
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser, login_url='users:login')
+def apresentacao_detail_superuser(request, pk):
+
+    template_name = 'chamadas/apresentacao_detail.html'
+
+    object = get_object_or_404(Inscricao, pk = pk)
+
+    if request.method == 'POST':
+        form = ProjetoApresentacaoAdmin(request.POST, instance=object.apresentacao)
+        if form.is_valid():
+            form.save()
+            apresentacao = Apresentacao.objects.get(inscricao = object)
+            form.instance.nota_apresentacao = apresentacao.setNotaApresentacao()
+            form.save()
+            return HttpResponseRedirect(reverse_lazy('chamadas:projetos_list', kwargs = {'pk': object.chamada.pk}))
+    else:
+        form = ProjetoApresentacaoAdmin(instance=object.apresentacao)
+        apresentacao = Apresentacao.objects.get(inscricao = object)
+        form.instance.nota_apresentacao = apresentacao.setNotaApresentacao()
+ 
+    context = {'form': form}
+
+    return render(request, template_name, context)
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser, login_url='users:login')
 def projeto_detail_list_view(request, pk):
 
     template_name = 'chamadas/projetos_detail_list.html'
@@ -284,6 +338,9 @@ def teoria_detail_superuser(request, pk):
 
 @login_required
 @user_passes_test(lambda u: u.is_superuser, login_url='users:login')
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser, login_url='users:login')
 def metodologia_detail_superuser(request, pk):
 
     template_name = 'chamadas/metodologia_detail.html'
@@ -327,8 +384,8 @@ def resultado_detail_superuser(request, pk):
             args = {'tema': object.inscricao.tema, 'atributo': 'resultado_fback_2', 'valor': form.cleaned_data['resultado_fback_2']}
             form.instance.resultado_nota_2 = Valor(args).setValor()
             form.instance.nota_resultado = result.setNotaResultado()
-            form.save()
             object.nota = object.setNota()
+            form.save()
             object.save()
             return HttpResponseRedirect(reverse_lazy('chamadas:projeto_detail_superuser', kwargs = {'pk': object.inscricao.chamada.pk}))
     else:
@@ -373,6 +430,48 @@ def inscricao_projeto_view(request, pk):
     'min_input_1': min(input_1),
     'min_input_2': min(input_2),
     }
+
+    return render(request, template_name, context)
+
+@login_required
+def inscricao_bibliografia_view(request, pk):
+
+    template_name = 'chamadas/inscricao_bibliografia.html'
+
+    inscricao = get_object_or_404(Inscricao, pk = pk)
+
+    object = get_object_or_404(Bibliografia, inscricao = inscricao)
+
+    if request.method == 'POST':
+        form = BibliografiaForm(request.POST, request.FILES, instance=object)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse_lazy('chamadas:inscricao_detail', kwargs = {'pk': inscricao.pk}))
+    else:
+        form = BibliografiaForm(instance=object)
+
+    context = {'form': form}
+
+    return render(request, template_name, context)
+
+@login_required
+def inscricao_apresentacao_view(request, pk):
+
+    template_name = 'chamadas/inscricao_apresentacao.html'
+
+    inscricao = get_object_or_404(Inscricao, pk = pk)
+
+    object = get_object_or_404(Bibliografia, inscricao = inscricao)
+
+    if request.method == 'POST':
+        form = BibliografiaForm(request.POST, request.FILES, instance=object)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse_lazy('chamadas:inscricao_detail', kwargs = {'pk': inscricao.pk}))
+    else:
+        form = BibliografiaForm(instance=object)
+
+    context = {'form': form}
 
     return render(request, template_name, context)
 

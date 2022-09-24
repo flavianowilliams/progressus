@@ -1,0 +1,69 @@
+{% extends 'pages/base.html' %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+    <div class="container">
+        <form class="form-inline" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h3>
+                <div class="input-group">
+                    <span class="input-group-text">Projeto:</span>
+                    <div class="col-sm-6 mx-3">
+                        <input type="text" readonly class="form-control-plaintext" id="inpt12" value="{{ form.instance.inscricao.projeto.titulo }}">
+                    </div>
+                    <span class="input-group-text" style="margin-left: 5cm;">
+                        Nota: {{ form.instance.nota_bibliografia|default:"Aguarde..." }}
+                    </span>
+                </div>
+            </h3>
+                    <div class="card-body">
+                        <h4 class="card-title text-center">
+                            Revisão bibliográfica
+                        </h4>
+                        <div class="table-responsive text-center">
+                            <table class="table table-striped">
+                                <tr>
+                                    <th>Quantidade mínima de referências aceitáveis</th>
+                                    <th>Quantidade de referências apresentadas</th>
+                                    <th>Considerações do avaliador</th>
+                                    <th>Nota</th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        {{ form.instance.modelo.bibliografia_total|default:"Aguarde..." }}
+                                    </td>
+                                    <td>
+                                        {{ form.instance.bibliografia_qde|default:"Aguarde..." }}
+                                    </td>
+                                    <td>
+                                        {{ form.instance.consideracoes|default:"Aguarde..." }}
+                                    </td>
+                                    <td>
+                                        {{ form.instance.nota_bibliografia|default:"Aguarde..." }}
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend">
+                            <div class="float-start">
+                                {% render_field form.arquivo class+="custom-file-input" %}
+                            </div>
+                            <div class="invalid-feedback">
+                                Campo obrigatório
+                            </div>    
+                        </div>
+                    </div>
+                    <div class="my-5 text-center">
+                        <button type="submit" class="btn btn-sm btn-primary">Enviar bibliografia</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footnote %}
+{% endblock %}

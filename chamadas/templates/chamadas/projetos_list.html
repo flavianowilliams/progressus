@@ -1,45 +1,52 @@
 {% extends 'pages/base.html' %}
 
 {% block content %}
-<div class="container-fluid text-center">
-    <h3>Lista de projetos da chamada <strong>{{ chamada }}</strong></h3>
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <colgroup>
-                <col style="width: 20vw;">
-                <col style="width: 40vw;">
-                <col style="width: 10vw;">
-                <col style="width: 10vw;">
-                <col style="width: 10vw;">
-                <col style="width: 10vw;">
-            </colgroup>
-            <tr>
-                <th>Equipe</th>
-                <th>Tema</th>
-                <th>Revisao bibliográfica</th>
-                <th>Proposta</th>
-                <th>Projeto</th>
-                <th>Extra</th>
-                {% for object in object_list %}
-                    <tr>
-                        <td>{{ object }}</td>
-                        <td>{{ object.tema }}</td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <a href="{% url 'chamadas:projeto_detail_superuser' object.chamada.pk %}">{{ object.projeto.updated|date:"d/m/Y" }}</a>
-                        </td>
-                        <td></td>
-                    </tr>
-                {% empty %}
-                    <tr>
-                        <td colspan="6">Nenhum projeto está cadastrado nesta chamada.</td>
-                    </tr>
-                {% endfor %}
-            </tr>
-        </table>
+    <div class="container-fluid text-center">
+        <h3>Lista de projetos da chamada <strong>{{ chamada }}</strong></h3>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <colgroup>
+                    <col style="width: 20vw;">
+                    <col style="width: 30vw;">
+                    <col style="width: 10vw;">
+                    <col style="width: 10vw;">
+                    <col style="width: 10vw;">
+                    <col style="width: 10vw;">
+                    <col style="width: 10vw;">
+                </colgroup>
+                <tr>
+                    <th>Equipe</th>
+                    <th>Tema</th>
+                    <th>Revisao bibliográfica</th>
+                    <th>Proposta</th>
+                    <th>Projeto</th>
+                    <th>Apresentação</th>
+                    <th>Extra</th>
+                    {% for object in object_list %}
+                        <tr>
+                            <td>{{ object }}</td>
+                            <td>{{ object.tema }}</td>
+                            <td>
+                                <a href="{% url 'chamadas:bibliografia_detail_superuser' object.pk %}">{{ object.bibliografia.updated|date:"d/m/Y" }}</a>
+                            </td>
+                            <td></td>
+                            <td>
+                                <a href="{% url 'chamadas:projeto_detail_superuser' object.chamada.pk %}">{{ object.projeto.updated|date:"d/m/Y" }}</a>
+                            </td>
+                            <td>
+                                <a href="{% url 'chamadas:apresentacao_detail_superuser' object.pk %}">{{ object.apresentacao.updated|date:"d/m/Y" }}</a>
+                            </td>
+                            <td></td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="6">Nenhum projeto está cadastrado nesta chamada.</td>
+                        </tr>
+                    {% endfor %}
+                </tr>
+            </table>
+        </div>
     </div>
-</div>
 {% endblock %}
 
 {% block footnote %}

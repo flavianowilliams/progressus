@@ -1,0 +1,122 @@
+{% extends 'pages/base.html' %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+    <div class="container">
+        <form class="form-inline" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h3>
+                <div class="input-group">
+                    <span class="input-group-text">Projeto:</span>
+                    <div class="col-sm-6 mx-3">
+                        <input type="text" readonly class="form-control-plaintext" id="inpt12" value="{{ form.instance.inscricao.projeto.titulo }}">
+                    </div>
+                    <span class="input-group-text" style="margin-left: 5cm;">
+                        Nota: {{ form.instance.nota_bibliografia|default:"Aguarde..." }}
+                    </span>
+                </div>
+            </h3>
+                    <div class="card-body">
+                        <h4 class="card-title text-center">
+                            Apresentação oral
+                        </h4>
+                        <div class="table-responsive text-center">
+                            <table class="table table-striped">
+                                <tr>
+                                    <th>Parâmetros de avaliação</th>
+                                    <th>Considerações do avaliador</th>
+                                    <th>Peso</th>
+                                    <th>Nota</th>
+                                </tr>
+                                {% if form.instance.modelo.apresentacao_peso_1 > 0.0 %}
+                                    <tr>
+                                        <td>
+                                            {{ form.instance.modelo.apresentacao_titulo_1|default:"Aguarde" }}
+                                        </td>
+                                        <td>
+                                            {{ form.instance.apresentacao_consideracao_1|default:"Aguarde" }}
+                                        </td>
+                                        <td>
+                                            {{ form.instance.modelo.apresentacao_peso_1|default:"Aguarde" }}
+                                        </td>
+                                        <td>
+                                            {{ form.instance.apresentacao_nota_1|default:"Aguarde" }}
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                                {% if form.instance.modelo.apresentacao_peso_2 > 0.0 %}
+                                    <tr>
+                                        <td>
+                                            {{ form.instance.modelo.apresentacao_titulo_2|default:"Aguarde" }}
+                                        </td>
+                                        <td>
+                                            {{ form.instance.apresentacao_consideracao_2|default:"Aguarde" }}
+                                        </td>
+                                        <td>
+                                            {{ form.instance.modelo.apresentacao_peso_2|default:"Aguarde" }}
+                                        </td>
+                                        <td>
+                                            {{ form.instance.apresentacao_nota_2|default:"Aguarde" }}
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                                {% if form.instance.modelo.apresentacao_peso_3 > 0.0 %}
+                                    <tr>
+                                        <td>
+                                            {{ form.instance.modelo.apresentacao_titulo_3|default:"Aguarde" }}
+                                        </td>
+                                        <td>
+                                            {{ form.instance.apresentacao_consideracao_3|default:"Aguarde" }}
+                                        </td>
+                                        <td>
+                                            {{ form.instance.modelo.apresentacao_peso_3|default:"Aguarde" }}
+                                        </td>
+                                        <td>
+                                            {{ form.instance.apresentacao_nota_3|default:"Aguarde" }}
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                                {% if form.instance.modelo.apresentacao_peso_4 > 0.0 %}
+                                    <tr>
+                                        <td>
+                                            {{ form.instance.modelo.apresentacao_titulo_4|default:"Aguarde" }}
+                                        </td>
+                                        <td>
+                                            {{ form.instance.apresentacao_consideracao_4|default:"Aguarde" }}
+                                        </td>
+                                        <td>
+                                            {{ form.instance.modelo.apresentacao_peso_4|default:"Aguarde" }}
+                                        </td>
+                                        <td>
+                                            {{ form.instance.apresentacao_nota_4|default:"Aguarde" }}
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                                {% if form.instance.modelo.apresentacao_peso_5 > 0.0 %}
+                                    <tr>
+                                        <td>
+                                            {{ form.instance.modelo.apresentacao_titulo_5|default:"Aguarde" }}
+                                        </td>
+                                        <td>
+                                            {{ form.instance.apresentacao_consideracao_5|default:"Aguarde" }}
+                                        </td>
+                                        <td>
+                                            {{ form.instance.modelo.apresentacao_peso_5|default:"Aguarde" }}
+                                        </td>
+                                        <td>
+                                            {{ form.instance.apresentacao_nota_5|default:"Aguarde" }}
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            </table>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </di5>
+    </div>
+{% endblock %}
+
+{% block footnote %}
+{% endblock %}

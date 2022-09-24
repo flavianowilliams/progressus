@@ -1,4 +1,4 @@
-from chamadas.models import Inscricao, Projeto, Resultado
+from chamadas.models import Inscricao
 
 class Valor():
 

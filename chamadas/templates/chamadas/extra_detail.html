@@ -1,0 +1,70 @@
+{% extends 'pages/base.html' %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+    <div class="container">
+        <h2>Equipe: {{ form.instance.inscricao }}</h2>
+        <div class="card-body">
+            <h4 class="card-title text-center">Avaliações extras</h4>
+            <form action="" method="POST">
+                <div class="border">
+                    {% csrf_token %}
+                    <div class="mx-3 my-3 mt-3 mb-3">
+                        <h5>Penalidades</h5>
+                        <div class="row mb-2">
+                            <label class="col-sm-1 col-form-label" for="">
+                                Consideracao:
+                            </label>
+                            <div class="col-sm-6 mx-3">
+                                {% render_field form.penalidade_consideracao class+="form-control" %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-1 col-form-label" for="">
+                                Nota:
+                            </label>
+                            <div class="col-sm-2 mx-3">
+                                {% render_field form.penalidade_nota class+="form-control" %}
+                            </div>
+                        </div>
+                        <hr>
+                        <h5>Divulgações</h5>
+                        <div class="row mb-2">
+                            <label class="col-sm-1 col-form-label" for="">
+                                Consideracao:
+                            </label>
+                            <div class="col-sm-6 mx-3">
+                                {% render_field form.divulgacao_consideracao class+="form-control" %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-1 col-form-label" for="">
+                                Nota:
+                            </label>
+                            <div class="col-sm-2 mx-3">
+                                {% render_field form.divulgacao_nota class+="form-control" %}
+                            </div>
+                        </div>
+                        <hr>
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label" for="inpt13">
+                            Nota da avaliação:
+                        </label>
+                        <div class="col-sm-2 mx-3">
+                            <input type="text" readonly class="form-control-plaintext" id="inpt13" value="{{ form.instance.nota_extra }}">
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-sm">
+                                Avaliar
+                            </button>    
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footnote %}
+{% endblock %}

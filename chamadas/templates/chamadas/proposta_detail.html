@@ -1,0 +1,69 @@
+{% extends 'pages/base.html' %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+    <div class="container">
+        <h2>Equipe: {{ form.instance.inscricao }}</h2>
+        <div class="card-body">
+            <h4 class="card-title text-center">Proposta de trabalho da equipe</h4>
+            <form action="" method="POST">
+                <div class="border">
+                    {% csrf_token %}
+                    <div class="mx-3 my-3 mt-3 mb-3">
+                        <h5>Proposta apresentada pela equipe</h5>
+                            <div class="row mb-2">
+                                <label class="col-sm-1 col-form-label" for="">
+                                    Proposta:
+                                </label>
+                                <div class="col-sm-8 mx-1">
+                                    <textarea name="" id="inpt12" cols="30" rows="10" readonly class="form-control">{{ form.instance.conteudo }}</textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label" for="">
+                                    Considerações:
+                                </label>
+                                <div class="col-sm-6 mx-1">
+                                    {% render_field form.consideracoes class+="form-control" %}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label" for="">
+                                    Avaliação:
+                                </label>
+                                <div class="col-sm-6 mx-1">
+                                    {% render_field form.proposta_status class+="form-control" %}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label" for="inpt12">
+                                    Peso da avaliação:
+                                </label>
+                                <div class="col-sm-6 mx-3">
+                                    <input type="text" readonly class="form-control-plaintext" id="inpt12" value="{{ form.instance.modelo.proposta_peso }}">
+                                </div>
+                            </div>
+                            <div class="row">
+                            <label class="col-sm-2 col-form-label" for="inpt13">
+                                Nota da avaliação:
+                            </label>
+                            <div class="col-sm-2 mx-1">
+                                {% render_field form.nota_proposta class+="form-control" %}
+                            </div>
+                    </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-sm">
+                                Avaliar
+                            </button>    
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footnote %}
+{% endblock %}

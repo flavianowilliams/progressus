@@ -1,6 +1,6 @@
 from email.policy import default
 from django import forms
-from .models import Apresentacao, Bibliografia, Chamada, Introducao, Metodologia, ProjetoModelo, Tema, Inscricao, Projeto, Teoria, Resultado
+from .models import Apresentacao, Bibliografia, Chamada, Extra, Financeiro, Introducao, Metodologia, ProjetoModelo, Proposta, Tema, Inscricao, Projeto, Teoria, Resultado
 
 class ChamadaFormCreate(forms.ModelForm):
 
@@ -234,6 +234,24 @@ class BibliografiaForm(forms.ModelForm):
             'arquivo',
                 ]
 
+class FinanceiroForm(forms.ModelForm):
+
+    class Meta:
+        model = Financeiro
+        fields = [
+            'comprovante_1',
+            'comprovante_2',
+            'comprovante_3',
+                ]
+
+class PropostaForm(forms.ModelForm):
+
+    class Meta:
+        model = Proposta
+        fields = [
+            'conteudo',
+                ]
+
 class ProjetoIntroducaoAdmin(forms.ModelForm):
 
     class Meta:
@@ -268,6 +286,35 @@ class ProjetoApresentacaoAdmin(forms.ModelForm):
             'apresentacao_consideracao_4',
             'apresentacao_consideracao_5',
             'nota_apresentacao',
+        ]
+
+class ProjetoPropostaAdmin(forms.ModelForm):
+
+    class Meta:
+        model = Proposta
+        fields = [
+            'consideracoes',
+            'proposta_status',
+            'nota_proposta',
+        ]
+
+class ProjetoFinanceiroAdmin(forms.ModelForm):
+
+    class Meta:
+        model = Financeiro
+        fields = [
+            'consideracoes',
+        ]
+
+class ProjetoExtraAdmin(forms.ModelForm):
+
+    class Meta:
+        model = Extra
+        fields = [
+            'penalidade_consideracao',
+            'penalidade_nota',
+            'divulgacao_consideracao',
+            'divulgacao_nota',
         ]
 
 class ProjetoTeoriaAdmin(forms.ModelForm):
@@ -328,5 +375,5 @@ class ProjetoAdminForm(forms.ModelForm):
     class Meta:
         model = Projeto
         fields = [
-            'nota',
+            'nota_projeto',
                 ]

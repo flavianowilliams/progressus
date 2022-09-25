@@ -1,0 +1,63 @@
+{% extends 'pages/base.html' %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+    <div class="container">
+        <form class="form-inline" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h3>
+                <div class="input-group">
+                    <span class="input-group-text">Projeto:</span>
+                    <div class="col-sm-6 mx-3">
+                        <input type="text" readonly class="form-control-plaintext" id="inpt12" value="{{ object.inscricao.projeto.titulo }}">
+                    </div>
+                    <span class="input-group-text" style="margin-left: 5cm;">
+                        Nota: {{ object.nota_extra|default:"Aguarde..." }}
+                    </span>
+                </div>
+            </h3>
+                    <div class="card-body">
+                        <h4 class="card-title text-center">
+                            Avaliações extras
+                        </h4>
+                        <div class="table-responsive text-center">
+                            <table class="table table-striped">
+                                <tr>
+                                    <th>Parâmetros de avaliação</th>
+                                    <th>Considerações do avaliador</th>
+                                    <th>Nota</th>
+                                </tr>
+                                    <tr>
+                                        <td>
+                                            Penalidades
+                                        </td>
+                                        <td>
+                                            {{ object.penalidade_consideracao|default:"Aguarde" }}
+                                        </td>
+                                        <td>
+                                            {{ object.penalidade_nota|default:"Aguarde" }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Divulgação
+                                        </td>
+                                        <td>
+                                            {{ object.divulgacao_consideracao|default:"Aguarde" }}
+                                        </td>
+                                        <td>
+                                            {{ object.divulgacao_nota|default:"Aguarde" }}
+                                        </td>
+                                    </tr>
+                            </table>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </di5>
+    </div>
+{% endblock %}
+
+{% block footnote %}
+{% endblock %}

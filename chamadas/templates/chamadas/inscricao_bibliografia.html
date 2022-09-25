@@ -6,6 +6,7 @@
     <div class="container">
         <form class="form-inline" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
+            <p class="text-center" style="color: red;">O prazo para o envio da revisão bibliográfica encerrou em {{ form.instance.inscricao.chamada.deadline_bibliografia }}</p>
             <h3>
                 <div class="input-group">
                     <span class="input-group-text">Projeto:</span>
@@ -46,19 +47,27 @@
                             </table>
                         </div>
                     </div>
-                    <div class="input-group input-group-sm">
-                        <div class="input-group-prepend">
-                            <div class="float-start">
-                                {% render_field form.arquivo class+="custom-file-input" %}
+                    {% if form.instance.inscricao.chamada.get_bibliografia %}
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <div class="float-start">
+                                    {% render_field form.arquivo class+="custom-file-input" %}
+                                </div>
+                                <div class="invalid-feedback">
+                                    Campo obrigatório
+                                </div>    
                             </div>
-                            <div class="invalid-feedback">
-                                Campo obrigatório
-                            </div>    
                         </div>
-                    </div>
-                    <div class="my-5 text-center">
-                        <button type="submit" class="btn btn-sm btn-primary">Enviar bibliografia</button>
-                    </div>
+                    {% else %}
+                        {% if form.instance.arquivo %}
+                            <a class="btn btn-sm btn-primary" href="{{ form.instance.arquivo.url }}">Ver arquivo</a>
+                        {% endif %}
+                    {% endif %}
+                    {% if form.instance.inscricao.chamada.get_bibliografia %}
+                        <div class="my-5 text-center">
+                            <button type="submit" class="btn btn-sm btn-primary">Enviar bibliografia</button>
+                        </div>
+                    {% endif %}
                 </form>
             </div>
         </div>

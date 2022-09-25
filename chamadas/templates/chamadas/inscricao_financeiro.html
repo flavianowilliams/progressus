@@ -1,0 +1,124 @@
+{% extends 'pages/base.html' %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+    <div class="container">
+        <h3>
+            <div class="input-group">
+                <span class="input-group-text">Projeto:</span>
+                <div class="col-sm-6 mx-3">
+                    <input type="text" readonly class="form-control-plaintext" id="inpt12" value="{{ form.instance.inscricao.projeto.titulo }}">
+                </div>
+            </div>
+        </h3>
+        <div class="card-body">
+            <h4 class="card-title text-center">Prestação de contas</h4>
+            <form action="" method="POST" enctype="multipart/form-data">
+                <div class="border">
+                    {% csrf_token %}
+                    <div class="mx-3 my-3 mt-3 mb-3">
+                        <h5>Comprovantes</h5>
+                        {% if form.instance.inscricao.chamada.get_projeto %}
+                            <div class="row mb-2">
+                                <label class="col-sm-2 col-form-label" for="">
+                                    Comprovante 1:
+                                </label>
+                                <div class="col-sm-5">
+                                    {% render_field form.comprovante_1 class+="form-control" %}
+                                </div>
+                                <div class="invalid-feedback">
+                                    Campo obrigatório
+                                </div>
+                            </div>
+                            {% else %}
+                                <div class="row mb-2">
+                                    <label class="col-sm-3 col-form-label" for="">
+                                        Comprovante 1:
+                                    </label>
+                                    <div class="col-sm-5">
+                                    {% if form.instance.comprovante_1 %}
+                                        <a href="{{ form.instance.comprovante_1.url }}">Ver</a>
+                                    {% else %}
+                                        <span class="col-sm-1">Sem comprovante</span>
+                                    {% endif %}
+                                    </div>
+                            </div>
+                            {% endif %}
+                            {% if form.instance.inscricao.chamada.get_projeto %}
+                            <div class="row mb-2">
+                                <label class="col-sm-2 col-form-label" for="">
+                                    Comprovante 1:
+                                </label>
+                                <div class="col-sm-5">
+                                    {% render_field form.comprovante_1 class+="form-control" %}
+                                </div>
+                                <div class="invalid-feedback">
+                                    Campo obrigatório
+                                </div>
+                            </div>
+                            {% else %}
+                                <div class="row mb-2">
+                                    <label class="col-sm-3 col-form-label" for="">
+                                        Comprovante 1:
+                                    </label>
+                                    <div class="col-sm-5">
+                                    {% if form.instance.comprovante_1 %}
+                                        <a href="{{ form.instance.comprovante_1.url }}">Ver</a>
+                                    {% else %}
+                                        <span class="col-sm-1">Sem comprovante</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if form.instance.inscricao.chamada.get_projeto %}
+                            <div class="row mb-2">
+                                <label class="col-sm-2 col-form-label" for="">
+                                    Comprovante 1:
+                                </label>
+                                <div class="col-sm-5">
+                                    {% render_field form.comprovante_1 class+="form-control" %}
+                                </div>
+                                <div class="invalid-feedback">
+                                    Campo obrigatório
+                                </div>
+                            </div>
+                            {% else %}
+                                <div class="row mb-2">
+                                    <label class="col-sm-3 col-form-label" for="">
+                                        Comprovante 1:
+                                    </label>
+                                    <div class="col-sm-5">
+                                    {% if form.instance.comprovante_1 %}
+                                        <a href="{{ form.instance.comprovante_1.url }}">Ver</a>
+                                    {% else %}
+                                        <span class="col-sm-1">Sem comprovante</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% endif %}
+                        <hr>
+                        <div class="row">
+                            <label class="col-sm-3 col-form-label" for="inpt12">
+                                Considerações do avaliador:
+                            </label>
+                            <div class="col-sm-8 mx-1">
+                                <input type="text" readonly class="form-control-plaintext" id="inpt12" value="{{ form.instance.consideracoes }}">
+                            </div>
+                        </div>
+                        {% if form.instance.inscricao.chamada.get_projeto %}
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary btn-sm mt-3">
+                                    Enviar
+                                </button>    
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footnote %}
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'pages/base.html' %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+    <div class="container">
+        <p class="text-center" style="color: red;">
+            O prazo para o envio da proposta de trabalho encerrou em {{ form.instance.inscricao.chamada.deadline_proposta }}
+        </p>
+        <h3>
+            <div class="input-group">
+                <span class="input-group-text">Projeto:</span>
+                <div class="col-sm-6 mx-3">
+                    <input type="text" readonly class="form-control-plaintext" id="inpt12" value="{{ form.instance.inscricao.projeto.titulo }}">
+                </div>
+            </div>
+        </h3>
+        <div class="card-body">
+            <h4 class="card-title text-center">Proposta de trabalho da equipe</h4>
+            <form action="" method="POST" enctype="multipart/form-data">
+                <div class="border">
+                    {% csrf_token %}
+                    <div class="mx-3 my-3 mt-3 mb-3">
+                        <h5>Escreva abaixo um texto informando a sua proposta de trabalho.</h5>
+                        <div class="row mb-2">
+                            <label class="col-sm-2 col-form-label" for="">
+                                Proposta:
+                            </label>
+                            {% if form.instance.inscricao.chamada.get_proposta %}
+                                <div class="col-sm-7">
+                                    {% render_field form.conteudo rows="10" value="foobar"  class+="form-control" %}
+                                </div>
+                            {% else %}
+                                <div class="col-sm-8 mx-1">
+                                    <textarea name="" id="inpt12" cols="30" rows="10" readonly class="form-control">{{ form.instance.conteudo }}</textarea>
+                                </div>
+                            {% endif %}
+                            <div class="invalid-feedback">
+                                Campo obrigatório
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <label class="col-sm-3 col-form-label" for="inpt12">
+                                Considerações do avaliador:
+                            </label>
+                            <div class="col-sm-8 mx-1">
+                                <input type="text" readonly class="form-control-plaintext" id="inpt12" value="{{ form.instance.consideracoes|default:"Aguarde" }}">
+                            </div>
+                        </div>
+                        {% if form.instance.inscricao.chamada.get_proposta %}
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary btn-sm mt-3">
+                                    Enviar
+                                </button>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footnote %}
+{% endblock %}

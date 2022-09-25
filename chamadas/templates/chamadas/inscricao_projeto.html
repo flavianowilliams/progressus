@@ -9,11 +9,17 @@
             <h3>
                 <div class="input-group">
                     <span class="input-group-text">Projeto:</span>
-                    <div class="col-sm-8">
-                        {% render_field form.titulo class+="form-control" %}
-                    </div>
+                    {% if form.instance.inscricao.chamada.get_projeto %}
+                        <div class="col-sm-8">
+                            {% render_field form.titulo class+="form-control" %}
+                        </div>
+                    {% else %}
+                        <div class="col-sm-6 mx-3">
+                            <input type="text" readonly class="form-control-plaintext" id="inpt12" value="{{ form.instance.inscricao.projeto.titulo }}">
+                        </div>
+                    {% endif %}
                     <span class="input-group-text" style="margin-left: 4cm;">
-                        Nota: {{ form.instance.nota|default:"Aguarde..." }}
+                        Nota: {{ form.instance.nota_projeto|default:"Aguarde..." }}
                     </span>
                 </div>
             </h3>
@@ -240,11 +246,15 @@
                                     </td>
                                     <td>{{ form.instance.modelo.resultado_peso_1 }}</td>
                                     <td>
-                                        <div class="row text-center">
-                                            <div class="col-sm-4 center-block">
-                                                <input type="text" class="form-control form-control-sm" name="resultado_input_1" value="{{ form.instance.resultado.resultado_input_1|floatformat:'0' }}">
+                                        {% if form.instance.inscricao.chamada.get_projeto %}
+                                            <div class="row text-center">
+                                                <div class="col-sm-4 center-block">
+                                                    <input type="text" class="form-control form-control-sm" name="resultado_input_1" value="{{ form.instance.resultado.resultado_input_1|floatformat:'0' }}">
+                                                </div>
                                             </div>
-                                        </div>
+                                        {% else %}
+                                            {{ form.instance.resultado.resultado_input_1 }}
+                                        {% endif %}
                                     </td>
                                     <td>
                                         {{ form.instance.resultado.resultado_fback_1|default:"Aguarde..." }}
@@ -261,11 +271,15 @@
                                     </td>
                                     <td>{{ form.instance.modelo.resultado_peso_2 }}</td>
                                     <td>
-                                        <div class="row text-center">
-                                            <div class="col-sm-4 center-block">
-                                                <input type="text" class="form-control form-control-sm" name="resultado_input_2" value="{{ form.instance.resultado.resultado_input_2|floatformat:'0' }}">
+                                        {% if form.instance.inscricao.chamada.get_projeto %}
+                                            <div class="row text-center">
+                                                <div class="col-sm-4 center-block">
+                                                    <input type="text" class="form-control form-control-sm" name="resultado_input_1" value="{{ form.instance.resultado.resultado_input_2|floatformat:'0' }}">
+                                                </div>
                                             </div>
-                                        </div>
+                                        {% else %}
+                                            {{ form.instance.resultado.resultado_input_2 }}
+                                        {% endif %}
                                     </td>
                                     <td>
                                         {{ form.instance.resultado.resultado_fback_2|default:"Aguarde..." }}
@@ -278,6 +292,7 @@
                             </table>
                         </div>
                     </div>
+                    {% if form.instance.inscricao.chamada.get_projeto %}
                     <div class="input-group input-group-sm">
                         <div class="input-group-prepend">
                             <div class="float-start">
@@ -288,9 +303,16 @@
                             </div>    
                         </div>
                     </div>
-                    <div class="my-5">
-                        <button type="submit" class="btn btn-sm btn-primary">Enviar projeto</button>
-                    </div>
+                    {% else %}
+                        {% if form.instance.arquivo %}
+                            <a class="btn btn-sm btn-primary" href="{{ form.instance.arquivo.url }}">Ver arquivo</a>
+                        {% endif %}
+                    {% endif %}
+                    {% if form.instance.inscricao.chamada.get_projeto %}
+                        <div class="my-5">
+                            <button type="submit" class="btn btn-sm btn-primary">Enviar projeto</button>
+                        </div>
+                    {% endif %}
                 </form>
             </div>
         </div>

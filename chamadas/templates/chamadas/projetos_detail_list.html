@@ -1,8 +1,20 @@
 {% extends 'pages/base.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block content %}
 <div class="container-fluid text-center">
-    <h3>Projetos das equipes inscritas na chamada <strong>{{ chamada }}</strong></h3>
+    <h3>
+        <span style="text-align:left;">
+            Projetos das equipes inscritas na chamada <strong>{{ chamada }}</strong>
+        </span>
+        <span class="float-end">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-sm btn-primary">Avaliar</button>
+            </form>
+        </span>
+    </h3>
     <div class="table-responsive">
         <table class="table table-striped">
             <colgroup>
@@ -50,7 +62,7 @@
                             Nenhum arquivo até o momento.
                         {% endif %}
                     </td>
-                    <td>{{ object.nota }}</td>
+                    <td>{{ object.nota_projeto }}</td>
                 </tr>
             {% endfor %}
         </table>

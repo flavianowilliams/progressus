@@ -2,12 +2,21 @@
 
 {% block content %}
     <div class="container-fluid text-center">
-        <h3>Lista de projetos da chamada <strong>{{ chamada }}</strong></h3>
+        <h3>
+            Lista de projetos da chamada <strong>{{ chamada }}</strong>
+            <span class="float-end">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm btn-primary">Avaliar</button>
+                </form>
+            </span>    
+        </h3>
         <div class="table-responsive">
             <table class="table table-striped">
                 <colgroup>
                     <col style="width: 20vw;">
-                    <col style="width: 30vw;">
+                    <col style="width: 20vw;">
+                    <col style="width: 10vw;">
                     <col style="width: 10vw;">
                     <col style="width: 10vw;">
                     <col style="width: 10vw;">
@@ -22,6 +31,8 @@
                     <th>Projeto</th>
                     <th>Apresentação</th>
                     <th>Extra</th>
+                    <th>Financeiro</th>
+                    <th>Nota</th>
                     {% for object in object_list %}
                         <tr>
                             <td>{{ object }}</td>
@@ -29,14 +40,23 @@
                             <td>
                                 <a href="{% url 'chamadas:bibliografia_detail_superuser' object.pk %}">{{ object.bibliografia.updated|date:"d/m/Y" }}</a>
                             </td>
-                            <td></td>
+                            <td>
+                                <a href="{% url 'chamadas:proposta_detail_superuser' object.pk %}">{{ object.proposta.updated|date:"d/m/Y" }}</a>
+                            </td>
+                            </td>
                             <td>
                                 <a href="{% url 'chamadas:projeto_detail_superuser' object.chamada.pk %}">{{ object.projeto.updated|date:"d/m/Y" }}</a>
                             </td>
                             <td>
                                 <a href="{% url 'chamadas:apresentacao_detail_superuser' object.pk %}">{{ object.apresentacao.updated|date:"d/m/Y" }}</a>
                             </td>
-                            <td></td>
+                            <td>
+                                <a href="{% url 'chamadas:extra_detail_superuser' object.pk %}">{{ object.extra.updated|date:"d/m/Y" }}</a>
+                            </td>
+                            <td>
+                                <a href="{% url 'chamadas:financeiro_detail_superuser' object.pk %}">{{ object.financeiro.updated|date:"d/m/Y" }}</a>
+                            </td>
+                            <td>{{ object.nota }}</td>
                         </tr>
                     {% empty %}
                         <tr>

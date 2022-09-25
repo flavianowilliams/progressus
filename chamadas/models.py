@@ -160,7 +160,7 @@ class ProjetoModelo(models.Model):
     introducao_peso = models.DecimalField(
         max_digits=6,
         decimal_places=3,
-        default=1,
+        default=10,
         verbose_name='Introdução: Peso'
         )
 
@@ -174,7 +174,7 @@ class ProjetoModelo(models.Model):
     metodologia_peso = models.DecimalField(
         max_digits=6,
         decimal_places=3,
-        default=1,
+        default=10,
         verbose_name='Metodologia: Peso'
         )
 
@@ -208,7 +208,7 @@ class ProjetoModelo(models.Model):
 
     apresentacao_titulo_1 = models.CharField(
         max_length=100,
-        default='A apresentação aconteceu dentro do tempo limite?',
+        default='A apresentação aconteceu no tempo previsto?',
         verbose_name = '1. Apresentação (parâmetro): Título'
         )
     apresentacao_peso_1 = models.DecimalField(
@@ -219,7 +219,7 @@ class ProjetoModelo(models.Model):
         )
     apresentacao_titulo_2 = models.CharField(
         max_length=100,
-        default='A equipe mostrou ter domínio dos conceitos teóricos?',
+        default='O apresentador mostrou ter domínio dos conceitos teóricos?',
         verbose_name = '2. Apresentação (parâmetro): Título'
         )
     apresentacao_peso_2 = models.DecimalField(
@@ -230,7 +230,7 @@ class ProjetoModelo(models.Model):
         )
     apresentacao_titulo_3 = models.CharField(
         max_length=100,
-        default='Qualidade dos recursos visuais (aspectos visuais, qualidade das imagens e do texto)',
+        default='Qualidade dos recursos audiovisuais (aspectos visuais e auditivos, qualidade das imagens, vídeos e texto)',
         verbose_name = '3. Apresentação (parâmetro): Título'
         )
     apresentacao_peso_3 = models.DecimalField(
@@ -241,7 +241,7 @@ class ProjetoModelo(models.Model):
         )
     apresentacao_titulo_4 = models.CharField(
         max_length=100,
-        default='A apresentação foi feita de maneira clara e objetiva?',
+        default='A apresentação ocorreu de maneira clara e objetiva?',
         verbose_name = '4. Apresentação (parâmetro): Título'
         )
     apresentacao_peso_4 = models.DecimalField(
@@ -326,6 +326,7 @@ class Inscricao(models.Model):
     membro_1 = models.CharField(max_length=100, null=True, blank=True)
     membro_2 = models.CharField(max_length=100, null=True, blank=True)
     membro_3 = models.CharField(max_length=100, null=True, blank=True)
+    nota = models.DecimalField(max_digits=6, decimal_places=3, null=True, blank=True)
     ranking = models.IntegerField(null=True)
 
     def __str__(self):
@@ -340,12 +341,19 @@ class Projeto(models.Model):
     modelo = models.ForeignKey(ProjetoModelo, on_delete=models.PROTECT)
 
     titulo = models.CharField(max_length=100, null=True, blank=True)
-    nota = models.DecimalField(max_digits=6, decimal_places=3, null=True, blank=True)
+
+    nota_projeto = models.DecimalField(
+        max_digits=6,
+        default=0.0,
+        decimal_places=3,
+        blank=True
+        )
+
     arquivo = models.FileField(upload_to='pdf/%Y/%m/%d/', null=True)
     resumo = models.TextField(null=True)
     imagem = models.ImageField(upload_to='img/', max_length=100, null=True)
 
-    def setNota(self):
+    def setNotaProjeto(self):
         data = float(self.introducao.nota_introducao)
         data += float(self.teoria.nota_teoria)
         data += float(self.metodologia.nota_metodologia)
@@ -373,7 +381,12 @@ class Introducao(models.Model):
     introducao_consideracao_4 = models.CharField(max_length=255, null=True, blank=True)
     introducao_consideracao_5 = models.CharField(max_length=255, null=True, blank=True)
 
-    nota_introducao = models.DecimalField(max_digits=7, decimal_places=3, default=0.0, blank=True)
+    nota_introducao = models.DecimalField(
+        max_digits=7,
+        default=0.0,
+        decimal_places=3,
+        blank=True
+        )
 
     def setNotaIntroducao(self):
         data = float(self.projeto.modelo.introducao_peso_1)*float(self.introducao_nota_1)
@@ -392,7 +405,13 @@ class Teoria(models.Model):
     teoria_total = models.IntegerField(default=0, blank=True)
     teoria_qde = models.IntegerField(default=0, blank=True)
     teoria_consideracao = models.CharField(max_length=255, null=True, blank=True)
-    nota_teoria = models.DecimalField(max_digits=6, decimal_places=3, default=0.0, blank=True)
+
+    nota_teoria = models.DecimalField(
+        max_digits=6,
+        decimal_places=3,
+        default=0.0,
+        blank=True
+        )
 
     projeto = models.OneToOneField(Projeto, on_delete=models.CASCADE)
 
@@ -580,14 +599,16 @@ class Extra(models.Model):
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
 
-    nota_extra = models.DecimalField(max_digits=6, decimal_places=3, default=0, blank=True)
-    penalidade = models.DecimalField(max_digits=6, decimal_places=3, default=0, blank=True)
-    divulgacao = models.DecimalField(max_digits=6, decimal_places=3, default=0, blank=True)
+    nota_extra = models.DecimalField(max_digits=6, decimal_places=3, default=0.0, blank=True)
+    penalidade_nota = models.DecimalField(max_digits=6, decimal_places=3, default=0, blank=True)
+    divulgacao_nota = models.DecimalField(max_digits=6, decimal_places=3, default=0, blank=True)
+    penalidade_consideracao = models.CharField(max_length=255, null=True, blank=True)
+    divulgacao_consideracao = models.CharField(max_length=255, null=True, blank=True)
 
     inscricao = models.OneToOneField(Inscricao, on_delete=models.CASCADE)
 
     def setNotaExtra(self):
-        data = self.penalidade+self.divulgacao
+        data = self.penalidade_nota+self.divulgacao_nota
         return data
 
 class Bibliografia(models.Model):
@@ -617,7 +638,34 @@ class Proposta(models.Model):
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
 
-    consideracoes = models.CharField(max_length=255, null=True, blank=True)
+    consideracoes = models.CharField(max_length=255, null=True, blank=True, default='A proposta atende os objetivos da chamada.')
     nota_proposta = models.DecimalField(max_digits=6, decimal_places=3, default=0.0, blank=True)
+    conteudo = models.TextField(null=True)
+    proposta_status = models.CharField(
+        max_length=3,
+        default="sim",
+        choices=(("sim", "Sim"), ("nao", "Não"))
+        )
+
+    inscricao = models.OneToOneField(Inscricao, on_delete=models.CASCADE)
+    modelo = models.ForeignKey(ProjetoModelo, on_delete=models.PROTECT)
+
+    def setNotaProposta(self):
+        if self.proposta_status == 'sim':
+            data = self.modelo.proposta_peso
+        elif self.proposta_status == 'nao':
+            data = 0.0
+        return data
+
+class Financeiro(models.Model):
+
+    created = models.DateField(auto_now_add=True)
+    updated = models.DateField(auto_now=True)
+
+    comprovante_1 = models.FileField(upload_to='pdf/%Y/%m/%d/', null=True)
+    comprovante_2 = models.FileField(upload_to='pdf/%Y/%m/%d/', null=True)
+    comprovante_3 = models.FileField(upload_to='pdf/%Y/%m/%d/', null=True)
+
+    consideracoes = models.CharField(max_length=255, null=True, blank=True, default='Aguarde')
 
     inscricao = models.OneToOneField(Inscricao, on_delete=models.CASCADE)

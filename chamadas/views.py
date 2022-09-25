@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
-from chamadas.models import Apresentacao, Bibliografia, Chamada, Inscricao, Introducao, Metodologia, Projeto, Proposta, Resultado, Teoria, Extra
-from chamadas.forms import BibliografiaForm, InscricaoForm, ProjetoApresentacaoAdmin, ProjetoBibliografiaAdmin, ProjetoForm, ProjetoIntroducaoAdmin
+from chamadas.models import Apresentacao, Bibliografia, Chamada, Financeiro, Inscricao, Introducao, Metodologia, Projeto, Proposta, Resultado, Teoria, Extra
+from chamadas.forms import BibliografiaForm, FinanceiroForm, InscricaoForm, ProjetoAdminForm, ProjetoApresentacaoAdmin, ProjetoBibliografiaAdmin, ProjetoExtraAdmin, ProjetoFinanceiroAdmin, ProjetoForm, ProjetoIntroducaoAdmin, ProjetoPropostaAdmin, PropostaForm
 from chamadas.forms import ProjetoTeoriaAdmin, ProjetoResultadoAdmin
 from chamadas.forms import ProjetoMetodologiaAdmin
 from django.http import HttpResponseRedirect
@@ -76,8 +76,9 @@ def inscricao_create_view(request, pk):
                 Projeto.objects.create(inscricao = form.instance, modelo = chamada.projetomodelo)
                 Bibliografia.objects.create(inscricao = form.instance, modelo = chamada.projetomodelo)
                 Apresentacao.objects.create(inscricao = form.instance, modelo = chamada.projetomodelo)
+                Proposta.objects.create(inscricao = form.instance, modelo = chamada.projetomodelo)
                 Extra.objects.create(inscricao = form.instance)
-                Proposta.objects.create(inscricao = form.instance)
+                Financeiro.objects.create(inscricao = form.instance)
                 projeto = Projeto.objects.get(inscricao = form.instance)
                 Introducao.objects.create(projeto = projeto)
                 Teoria.objects.create(projeto = projeto)
@@ -201,7 +202,7 @@ def inscricao_detail_view(request, pk):
 
     return render(request, template_name, context)
 
-# projetos
+# administrador
 
 @login_required
 @user_passes_test(lambda u: u.is_superuser, login_url='users:login')
@@ -213,9 +214,56 @@ def projeto_list_view(request, pk):
 
     object_list = Inscricao.objects.filter(chamada = object)
 
+    if request.method == 'POST':
+        for object in object_list:
+            data = float(object.bibliografia.nota_bibliografia)
+            data += float(object.projeto.nota_projeto)
+            data += float(object.proposta.nota_proposta)
+            data += float(object.apresentacao.nota_apresentacao)
+            data += float(object.extra.nota_extra)
+            object.nota = min(100,data)
+            object.save()
+        return HttpResponseRedirect(reverse_lazy('chamadas:projetos_list', kwargs = {'pk': pk}))
+
     context = {'object_list': object_list, 'chamada': object}
 
     return render(request, template_name, context)
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser, login_url='users:login')
+def projeto_detail_list_view(request, pk):
+
+    template_name = 'chamadas/projetos_detail_list.html'
+
+    chamada = get_object_or_404(Chamada, pk = pk)
+    projeto = Projeto.objects.all()
+
+    object_list = [object for object in projeto if object.inscricao.chamada == chamada]
+  
+    if request.method == 'POST':
+        for object in projeto:
+            object.nota_projeto = object.setNotaProjeto()
+            object.save()
+        return HttpResponseRedirect(reverse_lazy('chamadas:projeto_detail_superuser', kwargs = {'pk': pk}))
+
+    context = {'object_list': object_list, 'chamada': chamada}
+
+    return render(request, template_name, context)
+
+#@login_required
+#@user_passes_test(lambda u: u.is_superuser, login_url='users:login')
+#def projeto_detail_list_view(request, pk):
+#
+#    template_name = 'chamadas/projetos_detail_list.html'
+#
+#    chamada = get_object_or_404(Chamada, pk = pk)
+#    projeto = Projeto.objects.all()
+#
+#    object_list = [object for object in projeto if object.inscricao.chamada == chamada]
+#  
+#    context = {'object_list': object_list, 'chamada': chamada}
+#
+#    return render(request, template_name, context)
 
 @login_required
 @user_passes_test(lambda u: u.is_superuser, login_url='users:login')
@@ -269,16 +317,66 @@ def apresentacao_detail_superuser(request, pk):
 
 @login_required
 @user_passes_test(lambda u: u.is_superuser, login_url='users:login')
-def projeto_detail_list_view(request, pk):
+def financeiro_detail_superuser(request, pk):
 
-    template_name = 'chamadas/projetos_detail_list.html'
+    template_name = 'chamadas/financeiro_detail.html'
 
-    chamada = get_object_or_404(Chamada, pk = pk)
-    projeto = Projeto.objects.all()
+    object = get_object_or_404(Inscricao, pk = pk)
 
-    object_list = [object for object in projeto if object.inscricao.chamada == chamada]
+    if request.method == 'POST':
+        form = ProjetoFinanceiroAdmin(request.POST, instance=object.financeiro)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse_lazy('chamadas:projetos_list', kwargs = {'pk': object.chamada.pk}))
+    else:
+        form = ProjetoFinanceiroAdmin(instance=object.financeiro)
+ 
+    context = {'form': form}
 
-    context = {'object_list': object_list, 'chamada': chamada}
+    return render(request, template_name, context)
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser, login_url='users:login')
+def proposta_detail_superuser(request, pk):
+
+    template_name = 'chamadas/proposta_detail.html'
+
+    object = get_object_or_404(Inscricao, pk = pk)
+
+    if request.method == 'POST':
+        form = ProjetoPropostaAdmin(request.POST, instance=object.proposta)
+        if form.is_valid():
+            form.instance.nota_proposta = object.proposta.setNotaProposta()
+            form.save()
+            return HttpResponseRedirect(reverse_lazy('chamadas:projetos_list', kwargs = {'pk': object.chamada.pk}))
+    else:
+        form = ProjetoPropostaAdmin(instance=object.proposta)
+ 
+    context = {'form': form}
+
+    return render(request, template_name, context)
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser, login_url='users:login')
+def extra_detail_superuser(request, pk):
+
+    template_name = 'chamadas/extra_detail.html'
+
+    object = get_object_or_404(Inscricao, pk = pk)
+
+    if request.method == 'POST':
+        form = ProjetoExtraAdmin(request.POST, instance=object.extra)
+        if form.is_valid():
+            extra = Extra.objects.get(inscricao = object)
+            form.instance.nota_extra = extra.setNotaExtra()
+            form.save()
+            return HttpResponseRedirect(reverse_lazy('chamadas:projetos_list', kwargs = {'pk': object.chamada.pk}))
+    else:
+        form = ProjetoExtraAdmin(instance=object.extra)
+        extra = Extra.objects.get(inscricao = object)
+        form.instance.nota_extra = extra.setNotaExtra()
+ 
+    context = {'form': form}
 
     return render(request, template_name, context)
 
@@ -297,8 +395,8 @@ def introducao_detail_superuser(request, pk):
             introducao = Introducao.objects.get(projeto = object)
             form.instance.nota_introducao = introducao.setNotaIntroducao()
             form.save()
-            object.nota = object.setNota()
-            object.save()
+#            object.nota = object.setNota()
+#            object.save()
             return HttpResponseRedirect(reverse_lazy('chamadas:projeto_detail_superuser', kwargs = {'pk': object.inscricao.chamada.pk}))
     else:
         form = ProjetoIntroducaoAdmin(instance=object.introducao)
@@ -324,8 +422,8 @@ def teoria_detail_superuser(request, pk):
             teoria = Teoria.objects.get(projeto = object)
             form.instance.nota_teoria = teoria.setNotaTeoria()
             form.save()
-            object.nota = object.setNota()
-            object.save()
+#            object.nota = object.setNota()
+#            object.save()
             return HttpResponseRedirect(reverse_lazy('chamadas:projeto_detail_superuser', kwargs = {'pk': object.inscricao.chamada.pk}))
     else:
         form = ProjetoTeoriaAdmin(instance=object.teoria)
@@ -335,9 +433,6 @@ def teoria_detail_superuser(request, pk):
     context = {'form': form}
 
     return render(request, template_name, context)
-
-@login_required
-@user_passes_test(lambda u: u.is_superuser, login_url='users:login')
 
 @login_required
 @user_passes_test(lambda u: u.is_superuser, login_url='users:login')
@@ -354,8 +449,8 @@ def metodologia_detail_superuser(request, pk):
             metodologia = Metodologia.objects.get(projeto = object)
             form.instance.nota_metodologia = metodologia.setNotaMetodologia()
             form.save()
-            object.nota = object.setNota()
-            object.save()
+#            object.nota = object.setNota()
+#            object.save()
             return HttpResponseRedirect(reverse_lazy('chamadas:projeto_detail_superuser', kwargs = {'pk': object.inscricao.chamada.pk}))
     else:
         form = ProjetoMetodologiaAdmin(instance=object.metodologia)
@@ -384,9 +479,9 @@ def resultado_detail_superuser(request, pk):
             args = {'tema': object.inscricao.tema, 'atributo': 'resultado_fback_2', 'valor': form.cleaned_data['resultado_fback_2']}
             form.instance.resultado_nota_2 = Valor(args).setValor()
             form.instance.nota_resultado = result.setNotaResultado()
-            object.nota = object.setNota()
+#            object.nota = object.setNota()
             form.save()
-            object.save()
+#            object.save()
             return HttpResponseRedirect(reverse_lazy('chamadas:projeto_detail_superuser', kwargs = {'pk': object.inscricao.chamada.pk}))
     else:
         form = ProjetoResultadoAdmin(instance=object.resultado)
@@ -464,7 +559,7 @@ def inscricao_apresentacao_view(request, pk):
     object = get_object_or_404(Bibliografia, inscricao = inscricao)
 
     if request.method == 'POST':
-        form = BibliografiaForm(request.POST, request.FILES, instance=object)
+        form = BibliografiaForm(request.POST, instance=object)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse_lazy('chamadas:inscricao_detail', kwargs = {'pk': inscricao.pk}))
@@ -472,6 +567,61 @@ def inscricao_apresentacao_view(request, pk):
         form = BibliografiaForm(instance=object)
 
     context = {'form': form}
+
+    return render(request, template_name, context)
+
+@login_required
+def inscricao_financeiro_view(request, pk):
+
+    template_name = 'chamadas/inscricao_financeiro.html'
+
+    inscricao = get_object_or_404(Inscricao, pk = pk)
+
+    object = get_object_or_404(Financeiro, inscricao = inscricao)
+
+    if request.method == 'POST':
+        form = FinanceiroForm(request.POST, request.FILES, instance=object)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse_lazy('chamadas:inscricao_detail', kwargs = {'pk': inscricao.pk}))
+    else:
+        form = FinanceiroForm(instance=object)
+
+    context = {'form': form}
+
+    return render(request, template_name, context)
+
+@login_required
+def inscricao_proposta_view(request, pk):
+
+    template_name = 'chamadas/inscricao_proposta.html'
+
+    inscricao = get_object_or_404(Inscricao, pk = pk)
+
+    object = get_object_or_404(Proposta, inscricao = inscricao)
+
+    if request.method == 'POST':
+        form = PropostaForm(request.POST, instance=object)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse_lazy('chamadas:inscricao_detail', kwargs = {'pk': inscricao.pk}))
+    else:
+        form = PropostaForm(instance=object)
+
+    context = {'form': form}
+
+    return render(request, template_name, context)
+
+@login_required
+def inscricao_extra_view(request, pk):
+
+    template_name = 'chamadas/inscricao_extra.html'
+
+    inscricao = get_object_or_404(Inscricao, pk = pk)
+
+    object = get_object_or_404(Extra, inscricao = inscricao)
+
+    context = {'object': object}
 
     return render(request, template_name, context)
 

@@ -26,7 +26,13 @@ urlpatterns = [
     path('metodologia_detail_superuser/<int:pk>/', views.metodologia_detail_superuser, name='metodologia_detail_superuser'),
     path('resultado_detail_superuser/<int:pk>/', views.resultado_detail_superuser, name='resultado_detail_superuser'),
     path('apresentacao_detail_superuser/<int:pk>/', views.apresentacao_detail_superuser, name='apresentacao_detail_superuser'),
+    path('financeiro_detail_superuser/<int:pk>/', views.financeiro_detail_superuser, name='financeiro_detail_superuser'),
+    path('proposta_detail_superuser/<int:pk>/', views.proposta_detail_superuser, name='proposta_detail_superuser'),
+    path('extra_detail_superuser/<int:pk>/', views.extra_detail_superuser, name='extra_detail_superuser'),
     # inscricao-usuario
+    path('inscricao_extra/<int:pk>/', views.inscricao_extra_view, name='inscricao_extra'),
+    path('inscricao_proposta/<int:pk>/', views.inscricao_proposta_view, name='inscricao_proposta'),
+    path('inscricao_financeiro/<int:pk>/', views.inscricao_financeiro_view, name='inscricao_financeiro'),
     path('inscricao_apresentacao/<int:pk>/', views.inscricao_apresentacao_view, name='inscricao_apresentacao'),
     path('inscricao_bibliografia/<int:pk>/', views.inscricao_bibliografia_view, name='inscricao_bibliografia'),
     path('inscricao_projeto/<int:pk>/', views.inscricao_projeto_view, name='inscricao_projeto'),

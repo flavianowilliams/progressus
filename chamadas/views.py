@@ -202,9 +202,9 @@ def inscricao_detail_view(request, pk):
         form = ProjetoTituloForm(request.POST, instance=object.projeto)
         if form.is_valid():
             form.save()
-            HttpResponseRedirect(reverse_lazy('chamadas:inscricao_detail', kwargs = {'pk': pk}))
+            return HttpResponseRedirect(reverse_lazy('chamadas:inscricao_detail', kwargs = {'pk': pk}))
     else:
-        form = ProjetoTituloForm(request.POST, instance=object.projeto)
+        form = ProjetoTituloForm(instance=object.projeto)
 
     context = {'object': object, 'form': form}
 

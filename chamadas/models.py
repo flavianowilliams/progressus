@@ -668,4 +668,10 @@ class Financeiro(models.Model):
 
     consideracoes = models.CharField(max_length=255, null=True, blank=True, default='Aguarde')
 
+    financeiro_status = models.CharField(
+        max_length=10,
+        default="Adimplente",
+        choices=(("adimplente", "Adimplente"), ("em_debito", "Em débito"))
+        )
+
     inscricao = models.OneToOneField(Inscricao, on_delete=models.CASCADE)

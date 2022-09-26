@@ -88,24 +88,6 @@ class InscricaoForm(forms.ModelForm):
             raise forms.ValidationError('O nome {} já está em uso.'.format(data))
         return data
 
-    def clean_membro_1(self):
-        data = self.cleaned_data['membro_1']
-        if Inscricao.objects.filter(membro_1 = data).exists():
-            raise forms.ValidationError('O nome {} já está em uso.'.format(data))
-        return data
-
-    def clean_membro_2(self):
-        data = self.cleaned_data['membro_2']
-        if Inscricao.objects.filter(membro_2 = data).exists():
-            raise forms.ValidationError('{} já pertence a alguma equipe.'.format(data))
-        return data
-
-    def clean_membro_3(self):
-        data = self.cleaned_data['membro_3']
-        if Inscricao.objects.filter(membro_3 = data).exists():
-            raise forms.ValidationError('{} já pertence a alguma equipe.'.format(data))
-        return data
-
 class ProjetoModeloForm(forms.ModelForm):
 
     class Meta:

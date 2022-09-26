@@ -4,6 +4,11 @@
 
 {% block content %}
     <div class="container">
+        {% if not form.instance.inscricao.chamada.get_projeto %}
+            <p class="text-center" style="color: red;">
+                O prazo para a prestação de contas encerrou em {{ form.instance.inscricao.chamada.deadline_projeto }}
+            </p>
+        {% endif %}
         <h3>
             <div class="input-group">
                 <span class="input-group-text">Projeto:</span>
@@ -20,7 +25,7 @@
                     <div class="mx-3 my-3 mt-3 mb-3">
                         <h5>Comprovantes</h5>
                         {% if form.instance.inscricao.chamada.get_projeto %}
-                            <div class="row mb-2">
+                            <div class="row mb-2 mx-1">
                                 <label class="col-sm-2 col-form-label" for="">
                                     Comprovante 1:
                                 </label>
@@ -32,7 +37,7 @@
                                 </div>
                             </div>
                             {% else %}
-                                <div class="row mb-2">
+                                <div class="row mb-2 mx-1">
                                     <label class="col-sm-3 col-form-label" for="">
                                         Comprovante 1:
                                     </label>
@@ -46,7 +51,7 @@
                             </div>
                             {% endif %}
                             {% if form.instance.inscricao.chamada.get_projeto %}
-                            <div class="row mb-2">
+                            <div class="row mb-2 mx-1">
                                 <label class="col-sm-2 col-form-label" for="">
                                     Comprovante 1:
                                 </label>
@@ -58,8 +63,8 @@
                                 </div>
                             </div>
                             {% else %}
-                                <div class="row mb-2">
-                                    <label class="col-sm-3 col-form-label" for="">
+                                <div class="row mb-2 mx-1">
+                                    <label class="col-sm-2 col-form-label" for="">
                                         Comprovante 1:
                                     </label>
                                     <div class="col-sm-5">
@@ -72,7 +77,7 @@
                             </div>
                             {% endif %}
                             {% if form.instance.inscricao.chamada.get_projeto %}
-                            <div class="row mb-2">
+                            <div class="row mb-2 mx-1">
                                 <label class="col-sm-2 col-form-label" for="">
                                     Comprovante 1:
                                 </label>
@@ -84,8 +89,8 @@
                                 </div>
                             </div>
                             {% else %}
-                                <div class="row mb-2">
-                                    <label class="col-sm-3 col-form-label" for="">
+                                <div class="row mb-2 mx-1">
+                                    <label class="col-sm-2 col-form-label" for="">
                                         Comprovante 1:
                                     </label>
                                     <div class="col-sm-5">

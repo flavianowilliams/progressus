@@ -4,6 +4,11 @@
 
 {% block content %}
     <div class="container">
+        {% if not form.instance.inscricao.chamada.get_projeto %}
+            <p class="text-center" style="color: red;">
+                O prazo para o envio do projeto de pesquisa encerrou em {{ form.instance.inscricao.chamada.deadline_projeto }}
+            </p>
+        {% endif %}
         <form class="form-inline" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <h3>

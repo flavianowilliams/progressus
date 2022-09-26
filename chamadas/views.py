@@ -1,3 +1,4 @@
+from webbrowser import get
 from django.shortcuts import render, get_object_or_404
 from chamadas.models import Apresentacao, Bibliografia, Chamada, Financeiro, Inscricao, Introducao, Metodologia, Projeto, Proposta, Resultado, Teoria, Extra
 from chamadas.forms import BibliografiaForm, FinanceiroForm, InscricaoForm, ProjetoAdminForm, ProjetoApresentacaoAdmin, ProjetoBibliografiaAdmin, ProjetoExtraAdmin, ProjetoFinanceiroAdmin, ProjetoForm, ProjetoIntroducaoAdmin, ProjetoPropostaAdmin, PropostaForm
@@ -143,7 +144,6 @@ def inscricao_update_view(request, pk):
     object = get_object_or_404(Inscricao, pk = pk)
 
     if request.method == 'POST':
-        object.delete()
         form = InscricaoForm(request.POST, instance=object)
         if form.is_valid():
             form.save()
@@ -498,7 +498,7 @@ def inscricao_projeto_view(request, pk):
 
     template_name = 'chamadas/inscricao_projeto.html'
 
-    inscricao = get_object_or_404(Inscricao, pk = pk)
+    inscricao = get_object_or_404(Inscricao, pk = pk, lider=request.user.profile)
 
     object = get_object_or_404(Projeto, inscricao = inscricao)
     resultado = get_object_or_404(Resultado, projeto = object)
@@ -533,7 +533,7 @@ def inscricao_bibliografia_view(request, pk):
 
     template_name = 'chamadas/inscricao_bibliografia.html'
 
-    inscricao = get_object_or_404(Inscricao, pk = pk)
+    inscricao = get_object_or_404(Inscricao, pk = pk, lider=request.user.profile)
 
     object = get_object_or_404(Bibliografia, inscricao = inscricao)
 
@@ -554,9 +554,9 @@ def inscricao_apresentacao_view(request, pk):
 
     template_name = 'chamadas/inscricao_apresentacao.html'
 
-    inscricao = get_object_or_404(Inscricao, pk = pk)
+    inscricao = get_object_or_404(Inscricao, pk = pk, lider=request.user.profile)
 
-    object = get_object_or_404(Bibliografia, inscricao = inscricao)
+    object = get_object_or_404(Apresentacao, inscricao = inscricao)
 
     if request.method == 'POST':
         form = BibliografiaForm(request.POST, instance=object)
@@ -575,7 +575,7 @@ def inscricao_financeiro_view(request, pk):
 
     template_name = 'chamadas/inscricao_financeiro.html'
 
-    inscricao = get_object_or_404(Inscricao, pk = pk)
+    inscricao = get_object_or_404(Inscricao, pk = pk, lider=request.user.profile)
 
     object = get_object_or_404(Financeiro, inscricao = inscricao)
 
@@ -596,7 +596,7 @@ def inscricao_proposta_view(request, pk):
 
     template_name = 'chamadas/inscricao_proposta.html'
 
-    inscricao = get_object_or_404(Inscricao, pk = pk)
+    inscricao = get_object_or_404(Inscricao, pk = pk, lider=request.user.profile)
 
     object = get_object_or_404(Proposta, inscricao = inscricao)
 
@@ -617,7 +617,7 @@ def inscricao_extra_view(request, pk):
 
     template_name = 'chamadas/inscricao_extra.html'
 
-    inscricao = get_object_or_404(Inscricao, pk = pk)
+    inscricao = get_object_or_404(Inscricao, pk = pk, lider=request.user.profile)
 
     object = get_object_or_404(Extra, inscricao = inscricao)
 
@@ -630,9 +630,9 @@ def inscricao_introducao_view(request, pk):
 
     template_name = 'chamadas/inscricao_introducao.html'
 
-    inscricao = get_object_or_404(Inscricao, pk = pk)
+    inscricao = get_object_or_404(Inscricao, pk = pk, lider=request.user.profile)
 
-    object = Introducao.objects.get(projeto = inscricao.projeto)
+    object = get_object_or_404(Introducao, projeto = inscricao.projeto)
 
     if request.method == 'POST':
         form = ProjetoIntroducaoAdmin(request.POST, instance=object)

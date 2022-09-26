@@ -4,9 +4,11 @@
 
 {% block content %}
     <div class="container">
-        <p class="text-center" style="color: red;">
-            O prazo para o envio da proposta de trabalho encerrou em {{ form.instance.inscricao.chamada.deadline_proposta }}
-        </p>
+        {% if not form.instance.inscricao.chamada.get_proposta %}
+            <p class="text-center" style="color: red;">
+                O prazo para o envio da proposta de trabalho encerrou em {{ form.instance.inscricao.chamada.deadline_proposta }}
+            </p>
+        {% endif %}
         <h3>
             <div class="input-group">
                 <span class="input-group-text">Projeto:</span>

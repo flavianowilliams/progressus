@@ -6,7 +6,11 @@
     <div class="container">
         <form class="form-inline" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            <p class="text-center" style="color: red;">O prazo para o envio da revisão bibliográfica encerrou em {{ form.instance.inscricao.chamada.deadline_bibliografia }}</p>
+            {% if not form.instance.inscricao.chamada.get_bibliografia %}
+                <p class="text-center" style="color: red;">
+                    O prazo para o envio da revisão bibliográfica encerrou em {{ form.instance.inscricao.chamada.deadline_bibliografia }}
+                </p>
+            {% endif %}
             <h3>
                 <div class="input-group">
                     <span class="input-group-text">Projeto:</span>

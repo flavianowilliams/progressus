@@ -1,6 +1,6 @@
 from email.policy import default
 from django import forms
-from .models import Apresentacao, Bibliografia, Chamada, Extra, Financeiro, Introducao, Metodologia, ProjetoModelo, Proposta, Tema, Inscricao, Projeto, Teoria, Resultado
+from .models import Apresentacao, Bibliografia, Chamada, Extra, Financeiro, Introducao, Metodologia, ProjetoModelo, Proposta, Tema, Inscricao, Projeto, Teoria, Resultado, Turma
 
 class ChamadaFormCreate(forms.ModelForm):
 
@@ -77,6 +77,7 @@ class InscricaoForm(forms.ModelForm):
         fields = [
             'equipe',
             'tema',
+            'turma',
             'membro_1',
              'membro_2',
               'membro_3',
@@ -87,6 +88,30 @@ class InscricaoForm(forms.ModelForm):
         if Inscricao.objects.filter(equipe = data).exists():
             raise forms.ValidationError('O nome {} já está em uso.'.format(data))
         return data
+
+class TurmaFormCreate(forms.ModelForm):
+
+    class Meta:
+        model = Turma
+        fields = [
+            'nome',
+            'total_alunos',
+                ]
+
+    def clean_nome(self):
+        data = self.cleaned_data['nome']
+        if Turma.objects.filter(nome = data).exists():
+            raise forms.ValidationError('A turma {} já foi cadastrada.'.format(data))
+        return data
+
+class TurmaFormUpdate(forms.ModelForm):
+
+    class Meta:
+        model = Turma
+        fields = [
+            'nome',
+            'total_alunos',
+                ]
 
 class ProjetoModeloForm(forms.ModelForm):
 

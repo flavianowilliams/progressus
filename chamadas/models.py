@@ -265,6 +265,13 @@ class ProjetoModelo(models.Model):
     def __str__(self):
         return self.nome
 
+class Turma(models.Model):
+    nome = models.CharField(max_length=9, null=True, default="STDE")
+    total_alunos = models.IntegerField(null=True, blank=True)
+
+    def __str__(self):
+        return self.nome
+
 class Chamada(models.Model):
     nome = models.CharField(max_length=7, unique=True)
     projetomodelo = models.ForeignKey(ProjetoModelo, on_delete=models.PROTECT, null=True)
@@ -320,6 +327,7 @@ class Tema(models.Model):
 class Inscricao(models.Model):
     created = models.DateField(auto_now_add=True)
     tema = models.ForeignKey(Tema, on_delete=models.PROTECT)
+    turma = models.ForeignKey(Turma, on_delete=models.PROTECT)
     lider = models.ForeignKey(Profile, on_delete=models.CASCADE)
     chamada = models.ForeignKey(Chamada, on_delete=models.CASCADE)
     equipe = models.CharField(max_length=100)

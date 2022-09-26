@@ -1,7 +1,7 @@
 from webbrowser import get
 from django.shortcuts import render, get_object_or_404
 from chamadas.models import Apresentacao, Bibliografia, Chamada, Financeiro, Inscricao, Introducao, Metodologia, Projeto, Proposta, Resultado, Teoria, Extra
-from chamadas.forms import BibliografiaForm, FinanceiroForm, InscricaoForm, ProjetoAdminForm, ProjetoApresentacaoAdmin, ProjetoBibliografiaAdmin, ProjetoExtraAdmin, ProjetoFinanceiroAdmin, ProjetoForm, ProjetoIntroducaoAdmin, ProjetoPropostaAdmin, ProjetoTituloForm, PropostaForm
+from chamadas.forms import BibliografiaForm, FinanceiroForm, InscricaoForm, ProjetoApresentacaoAdmin, ProjetoBibliografiaAdmin, ProjetoExtraAdmin, ProjetoFinanceiroAdmin, ProjetoForm, ProjetoIntroducaoAdmin, ProjetoPropostaAdmin, ProjetoTituloForm, PropostaForm
 from chamadas.forms import ProjetoTeoriaAdmin, ProjetoResultadoAdmin
 from chamadas.forms import ProjetoMetodologiaAdmin
 from django.http import HttpResponseRedirect
@@ -90,6 +90,7 @@ def inscricao_create_view(request, pk):
                 message = (
                         'Inscrição feita com sucesso na chamada {} em {}.\n\n'.format(form.instance.chamada, form.instance.created)+
                         'Equipe: {}\n'.format(form.instance.equipe)+
+                        'Turma: {}\n'.format(form.instance.turma)+
                         'Lider: {}\n'.format(form.instance.lider)+
                         'Membro: {}\n'.format(form.instance.membro_1)+
                         'Membro: {}\n'.format(form.instance.membro_2)+

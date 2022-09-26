@@ -27,4 +27,9 @@ urlpatterns = [
     path('projeto_create/', views.projetomodelo_create_view, name='projeto_create'),
     path('projeto_update/<int:pk>/', views.projetomodelo_update_view, name='projeto_update'),
     path('projeto_delete/<int:pk>/', views.projetomodelo_delete_view, name='projeto_delete'),
+    # turmas
+    path('turmas_list/', views.turmas_list_view, name='turmas_list'),
+    path('turma_create/', views.turmas_create_view, name='turma_create'),
+    path('turma_update/<int:pk>/', views.turmas_update_view, name='turma_update'),
+    path('turma_delete/<int:pk>/', views.turmas_delete_view, name='turma_delete'),
 ]

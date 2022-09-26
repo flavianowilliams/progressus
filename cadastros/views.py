@@ -1,10 +1,10 @@
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
-from chamadas.forms import ChamadaFormCreate, ChamadaFormUpdate, ProjetoModeloForm, TemaFormCreate, TemaFormUpdate, ProjetoModeloUpdateForm
+from chamadas.forms import ChamadaFormCreate, ChamadaFormUpdate, ProjetoModeloForm, TemaFormCreate, TemaFormUpdate, ProjetoModeloUpdateForm, TurmaFormCreate, TurmaFormUpdate
 from chamadas.models import Chamada, ProjetoModelo
 from pages.forms import NoticiaFormCreate, NoticiaFormUpdate
-from .models import CadastroChamada, CadastroProfile, CadastroNoticia, CadastroProjeto, CadastroTema
+from .models import CadastroChamada, CadastroProfile, CadastroNoticia, CadastroProjeto, CadastroTema, CadastroTurma
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, user_passes_test
 
@@ -240,6 +240,8 @@ def tema_update_view(request, pk):
 
     return render(request, template_name, context)
 
+@login_required
+@user_passes_test(lambda u: u.is_superuser, login_url='users:login')
 def tema_delete_view(request, pk):
 
     template_name = 'cadastros/forms_delete.html'
@@ -307,6 +309,8 @@ def projetomodelo_update_view(request, pk):
 
     return render(request, template_name, context)
 
+@login_required
+@user_passes_test(lambda u: u.is_superuser, login_url='users:login')
 def projetomodelo_delete_view(request, pk):
 
     template_name = 'cadastros/forms_delete.html'
@@ -324,5 +328,74 @@ def projetomodelo_delete_view(request, pk):
         return HttpResponseRedirect(reverse_lazy('cadastros:projetomodelo_list'))
 
     context = {'object': cadastroprojeto, 'depend': depend}
+
+    return render(request, template_name, context)
+
+# turmas
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser, login_url='users:login')
+def turmas_create_view(request):
+
+    template_name = 'cadastros/forms.html'
+
+    if request.method == 'POST':
+        form = TurmaFormCreate(request.POST)
+        if form.is_valid():
+            form.save() # criando objeto Tema
+            CadastroTurma.objects.create(turma = form.instance) # criando objeto CadastroTema
+            return HttpResponseRedirect(reverse_lazy('cadastros:turmas_list'))
+    else:
+        form = TurmaFormCreate()
+
+    context = {'titulo': 'Novo cadastro de turma', 'botao': 'Salvar', 'form': form}
+
+    return render(request, template_name, context)
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser, login_url='users:login')
+def turmas_list_view(request):
+
+    template_name = 'cadastros/turmas_list.html'
+
+    object_list = CadastroTurma.objects.all()
+
+    context = {'object_list': object_list}
+
+    return render(request, template_name, context)
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser, login_url='users:login')
+def turmas_update_view(request, pk):
+
+    template_name = 'cadastros/forms.html'
+
+    object = get_object_or_404(CadastroTurma, pk = pk)
+
+    if request.method == 'POST':
+        form = TurmaFormUpdate(request.POST, instance = object.turma)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse_lazy('cadastros:turmas_list'))
+    else:
+        form = TurmaFormUpdate(instance=object.turma)
+
+    context = {'titulo': 'Edição de cadastro de turma', 'botao': 'Salvar', 'form': form}
+
+    return render(request, template_name, context)
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser, login_url='users:login')
+def turmas_delete_view(request, pk):
+
+    template_name = 'cadastros/forms_delete.html'
+
+    object = get_object_or_404(CadastroTurma, pk = pk)
+
+    if request.method == 'POST':
+        object.turma.delete()
+        return HttpResponseRedirect(reverse_lazy('cadastros:turmas_list'))
+
+    context = {'object': object}
 
     return render(request, template_name, context)

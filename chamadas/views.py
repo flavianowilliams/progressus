@@ -1,7 +1,7 @@
 from webbrowser import get
 from django.shortcuts import render, get_object_or_404
 from chamadas.models import Apresentacao, Bibliografia, Chamada, Financeiro, Inscricao, Introducao, Metodologia, Projeto, Proposta, Resultado, Teoria, Extra
-from chamadas.forms import BibliografiaForm, FinanceiroForm, InscricaoForm, ProjetoAdminForm, ProjetoApresentacaoAdmin, ProjetoBibliografiaAdmin, ProjetoExtraAdmin, ProjetoFinanceiroAdmin, ProjetoForm, ProjetoIntroducaoAdmin, ProjetoPropostaAdmin, PropostaForm
+from chamadas.forms import BibliografiaForm, FinanceiroForm, InscricaoForm, ProjetoAdminForm, ProjetoApresentacaoAdmin, ProjetoBibliografiaAdmin, ProjetoExtraAdmin, ProjetoFinanceiroAdmin, ProjetoForm, ProjetoIntroducaoAdmin, ProjetoPropostaAdmin, ProjetoTituloForm, PropostaForm
 from chamadas.forms import ProjetoTeoriaAdmin, ProjetoResultadoAdmin
 from chamadas.forms import ProjetoMetodologiaAdmin
 from django.http import HttpResponseRedirect
@@ -198,7 +198,15 @@ def inscricao_detail_view(request, pk):
 
     object = get_object_or_404(Inscricao, pk = pk, lider = request.user.profile)
 
-    context = {'object': object}
+    if request.method == 'POST':
+        form = ProjetoTituloForm(request.POST, instance=object.projeto)
+        if form.is_valid():
+            form.save()
+            HttpResponseRedirect(reverse_lazy('chamadas:inscricao_detail', kwargs = {'pk': pk}))
+    else:
+        form = ProjetoTituloForm(request.POST, instance=object.projeto)
+
+    context = {'object': object, 'form': form}
 
     return render(request, template_name, context)
 

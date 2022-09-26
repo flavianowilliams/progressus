@@ -14,15 +14,9 @@
             <h3>
                 <div class="input-group">
                     <span class="input-group-text">Projeto:</span>
-                    {% if form.instance.inscricao.chamada.get_projeto %}
-                        <div class="col-sm-8">
-                            {% render_field form.titulo class+="form-control" %}
-                        </div>
-                    {% else %}
-                        <div class="col-sm-6 mx-3">
-                            <input type="text" readonly class="form-control-plaintext" id="inpt12" value="{{ form.instance.inscricao.projeto.titulo }}">
-                        </div>
-                    {% endif %}
+                    <div class="col-sm-6 mx-3">
+                        <input type="text" readonly class="form-control-plaintext" id="inpt12" value="{{ form.instance.inscricao.projeto.titulo }}">
+                    </div>
                     <span class="input-group-text" style="margin-left: 4cm;">
                         Nota: {{ form.instance.nota_projeto|default:"Aguarde..." }}
                     </span>

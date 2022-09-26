@@ -1,5 +1,7 @@
 {% extends 'pages/base.html' %}
 
+{% load widget_tweaks %}
+
 {% block content %}
     <div class="container-fluid">
         <p>Bem vindo {{ object.lider }}.
@@ -11,17 +13,21 @@
         <hr>
         <div class="row">
             <div class="border col-5 mx-5">
-                <form>
-                    <div class="form-group row mx-3 mt-3">
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="input-group mx-3 mt-3">
+                        <span class="input-group-text">
+                            Projeto:
+                        </span>
+                        <div class="col-sm-8">
+                            {% render_field form.titulo class+="form-control" %}
+                        </div>
+                        <button type="submit" class="btn btn-sm btn-primary">Alterar</button>
+                    </div>
+                        <div class="form-group row mx-3 mt-3">
                         <label class="col-sm-2 col-form-label" for="x"><em>Equipe</em></label>
                         <div class="col-sm-6">
                             <input type="text" readonly class="form-control-plaintext" value="{{ object.equipe }}">
-                        </div>
-                    </div>
-                    <div class="form-group row mx-3">
-                        <label class="col-sm-2 col-form-label" for="x"><em>Projeto</em></label>
-                        <div class="col-sm-6">
-                            <input type="text" readonly class="form-control-plaintext" value="{{ object.projeto.titulo }}">
                         </div>
                     </div>
                     <div class="form-group row mx-3">

@@ -111,6 +111,14 @@
                                 <input type="text" readonly class="form-control-plaintext" id="inpt12" value="{{ form.instance.consideracoes }}">
                             </div>
                         </div>
+                        <div class="row">
+                            <label class="col-sm-3 col-form-label" for="inpt12">
+                                Status:
+                            </label>
+                            <div class="col-sm-8 mx-1">
+                                <input type="text" readonly class="form-control-plaintext" id="inpt12" value="{{ form.instance.financeiro_status }}">
+                            </div>
+                        </div>
                         {% if form.instance.inscricao.chamada.get_projeto %}
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary btn-sm mt-3">

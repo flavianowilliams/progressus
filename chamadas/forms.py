@@ -208,6 +208,14 @@ class ProjetoForm(forms.ModelForm):
             'arquivo',
                 ]
 
+class ProjetoTituloForm(forms.ModelForm):
+
+    class Meta:
+        model = Projeto
+        fields = [
+            'titulo',
+                ]
+
 class BibliografiaForm(forms.ModelForm):
 
     class Meta:

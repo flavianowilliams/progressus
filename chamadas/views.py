@@ -94,7 +94,8 @@ def inscricao_create_view(request, pk):
                         'Lider: {}\n'.format(form.instance.lider)+
                         'Membro: {}\n'.format(form.instance.membro_1)+
                         'Membro: {}\n'.format(form.instance.membro_2)+
-                        'Membro: {}\n'.format(form.instance.membro_3)
+                        'Membro: {}\n'.format(form.instance.membro_3)+
+                        '\nPara maiores informações, acesse http://200.17.101.198/'
                         )
                 subject = 'Plaforma progressus - Inscrição'
                 send_mail(subject, message, sender, [receiver], fail_silently=False)

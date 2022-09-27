@@ -115,7 +115,7 @@ def inscricao_list_superuser(request, pk):
 
     chamada = get_object_or_404(Chamada, pk = pk)
 
-    object_list = Inscricao.objects.filter(chamada = chamada).order_by('tema')
+    object_list = Inscricao.objects.filter(chamada = chamada)
 
     context = {'object_list': object_list, 'chamada': chamada}
 
@@ -222,7 +222,7 @@ def projeto_list_view(request, pk):
 
     object = get_object_or_404(Chamada, pk = pk)
 
-    object_list = Inscricao.objects.filter(chamada = object)
+    object_list = Inscricao.objects.filter(chamada = object).order_by('tema')
 
     if request.method == 'POST':
         for object in object_list:

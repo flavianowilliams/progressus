@@ -115,7 +115,7 @@ def inscricao_list_superuser(request, pk):
 
     chamada = get_object_or_404(Chamada, pk = pk)
 
-    object_list = Inscricao.objects.filter(chamada = chamada)
+    object_list = Inscricao.objects.filter(chamada = chamada).order_by('tema')
 
     context = {'object_list': object_list, 'chamada': chamada}
 

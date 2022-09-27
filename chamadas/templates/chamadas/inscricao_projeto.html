@@ -9,7 +9,7 @@
                 O prazo para o envio do projeto de pesquisa encerrou em {{ form.instance.inscricao.chamada.deadline_projeto }}
             </p>
         {% endif %}
-        <form class="form-inline" method="POST" enctype="multipart/form-data">
+        <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <h3>
                 <div class="input-group">
@@ -247,12 +247,12 @@
                                     <td>
                                         {% if form.instance.inscricao.chamada.get_projeto %}
                                             <div class="row text-center">
-                                                <div class="col-sm-4 center-block">
-                                                    <input type="text" class="form-control form-control-sm" name="resultado_input_1" value="{{ form.instance.resultado.resultado_input_1|floatformat:'0' }}">
+                                                <div class="col-sm-5">
+                                                    {% render_field form.resultado_1 placeholder=form.instance.resultado.resultado_input_1 class+="form-control form-control-sm" %}
                                                 </div>
                                             </div>
                                         {% else %}
-                                            {{ form.instance.resultado.resultado_input_1 }}
+                                            {{ form.instance.resultado_input_1 }}
                                         {% endif %}
                                     </td>
                                     <td>
@@ -260,7 +260,7 @@
                                     </td>    
                                     <td>{{ min_input_1 }}</td>
                                     <td>
-                                        {{ form.instance.resultado.resultado_nota_1 }}
+                                        {{ form.instance.resultado.resultado_1 }}
                                     </td>    
                                 </tr>
                                 <tr>
@@ -272,8 +272,8 @@
                                     <td>
                                         {% if form.instance.inscricao.chamada.get_projeto %}
                                             <div class="row text-center">
-                                                <div class="col-sm-4 center-block">
-                                                    <input type="text" class="form-control form-control-sm" name="resultado_input_1" value="{{ form.instance.resultado.resultado_input_2|floatformat:'0' }}">
+                                                <div class="col-sm-5">
+                                                    {% render_field form.resultado_2 placeholder=form.instance.resultado.resultado_input_2 class+="form-control form-control-sm" %}
                                                 </div>
                                             </div>
                                         {% else %}
@@ -312,9 +312,9 @@
                             <button type="submit" class="btn btn-sm btn-primary">Enviar projeto</button>
                         </div>
                     {% endif %}
-                </form>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
 {% endblock %}
 

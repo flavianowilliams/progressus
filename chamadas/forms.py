@@ -223,15 +223,16 @@ class ProjetoModeloUpdateForm(forms.ModelForm):
 
 class ProjetoForm(forms.ModelForm):
 
-    resultado_input_1 = forms.DecimalField()
-    resultado_input_2 = forms.DecimalField()
+    resultado_1 = forms.DecimalField(decimal_places=3, max_digits=7)
+    resultado_2 = forms.DecimalField(decimal_places=3, max_digits=7)
 
     class Meta:
         model = Projeto
         fields = [
-            'titulo',
             'arquivo',
-                ]
+            'resultado_1',
+            'resultado_2',
+        ]
 
 class ProjetoTituloForm(forms.ModelForm):
 

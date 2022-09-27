@@ -38,7 +38,7 @@
                             </div>
                             {% else %}
                                 <div class="row mb-2 mx-1">
-                                    <label class="col-sm-3 col-form-label" for="">
+                                    <label class="col-sm-2 col-form-label" for="">
                                         Comprovante 1:
                                     </label>
                                     <div class="col-sm-5">
@@ -53,10 +53,10 @@
                             {% if form.instance.inscricao.chamada.get_projeto %}
                             <div class="row mb-2 mx-1">
                                 <label class="col-sm-2 col-form-label" for="">
-                                    Comprovante 1:
+                                    Comprovante 2:
                                 </label>
                                 <div class="col-sm-5">
-                                    {% render_field form.comprovante_1 class+="form-control" %}
+                                    {% render_field form.comprovante_2 class+="form-control" %}
                                 </div>
                                 <div class="invalid-feedback">
                                     Campo obrigatório
@@ -65,11 +65,11 @@
                             {% else %}
                                 <div class="row mb-2 mx-1">
                                     <label class="col-sm-2 col-form-label" for="">
-                                        Comprovante 1:
+                                        Comprovante 2:
                                     </label>
                                     <div class="col-sm-5">
-                                    {% if form.instance.comprovante_1 %}
-                                        <a href="{{ form.instance.comprovante_1.url }}">Ver</a>
+                                    {% if form.instance.comprovante_2 %}
+                                        <a href="{{ form.instance.comprovante_2.url }}">Ver</a>
                                     {% else %}
                                         <span class="col-sm-1">Sem comprovante</span>
                                     {% endif %}
@@ -79,10 +79,10 @@
                             {% if form.instance.inscricao.chamada.get_projeto %}
                             <div class="row mb-2 mx-1">
                                 <label class="col-sm-2 col-form-label" for="">
-                                    Comprovante 1:
+                                    Comprovante 3:
                                 </label>
                                 <div class="col-sm-5">
-                                    {% render_field form.comprovante_1 class+="form-control" %}
+                                    {% render_field form.comprovante_3 class+="form-control" %}
                                 </div>
                                 <div class="invalid-feedback">
                                     Campo obrigatório
@@ -91,11 +91,11 @@
                             {% else %}
                                 <div class="row mb-2 mx-1">
                                     <label class="col-sm-2 col-form-label" for="">
-                                        Comprovante 1:
+                                        Comprovante 3:
                                     </label>
                                     <div class="col-sm-5">
-                                    {% if form.instance.comprovante_1 %}
-                                        <a href="{{ form.instance.comprovante_1.url }}">Ver</a>
+                                    {% if form.instance.comprovante_3 %}
+                                        <a href="{{ form.instance.comprovante_3.url }}">Ver</a>
                                     {% else %}
                                         <span class="col-sm-1">Sem comprovante</span>
                                     {% endif %}

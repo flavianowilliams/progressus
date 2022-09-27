@@ -519,10 +519,10 @@ def inscricao_projeto_view(request, pk):
     if request.method == 'POST':
         form = ProjetoForm(request.POST, request.FILES, instance=object)
         if form.is_valid():
-            resultado.resultado_input_1 = form.cleaned_data['resultado_input_1']
-            resultado.resultado_fback_1 = form.cleaned_data['resultado_input_1']
-            resultado.resultado_input_2 = form.cleaned_data['resultado_input_2']
-            resultado.resultado_fback_2 = form.cleaned_data['resultado_input_2']
+            resultado.resultado_input_1 = form.cleaned_data['resultado_1']
+            resultado.resultado_fback_1 = form.cleaned_data['resultado_1']
+            resultado.resultado_input_2 = form.cleaned_data['resultado_2']
+            resultado.resultado_fback_2 = form.cleaned_data['resultado_2']
             resultado.save()
             form.save()
             return HttpResponseRedirect(reverse_lazy('chamadas:inscricao_detail', kwargs = {'pk': object.inscricao.pk}))

@@ -358,8 +358,8 @@ class Projeto(models.Model):
         )
 
     arquivo = models.FileField(upload_to='pdf/%Y/%m/%d/', null=True)
-    resumo = models.TextField(null=True)
-    imagem = models.ImageField(upload_to='img/', max_length=100, null=True)
+    resumo = models.TextField(null=True, blank=True)
+    imagem = models.ImageField(upload_to='img/', max_length=100, null=True, blank=True)
 
     def setNotaProjeto(self):
         data = float(self.introducao.nota_introducao)

@@ -16,6 +16,7 @@ urlpatterns = [
     path('inscricao_delete/<int:pk>/', views.inscricao_delete_superuser, name='inscricao_delete'),
     path('inscricao_update/<int:pk>/', views.inscricao_update_view, name='inscricao_update'),
     path('inscricao_sendmail/<int:pk>/', views.enviar_email, name='inscricao_sendmail'),
+    path('inscricao_sendmassmail/<int:pk>/', views.enviar_email_coletivo, name='inscricao_sendmassmail'),
     path('inscricao_detail/<int:pk>/', views.inscricao_detail_view, name='inscricao_detail'),
     # projeto
     path('projetos_list/<int:pk>/', views.projeto_list_view, name='projetos_list'),

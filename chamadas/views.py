@@ -183,6 +183,32 @@ def enviar_email(request, pk):
     return render(request, template_name, context)
 
 @login_required
+@user_passes_test(lambda u: u.is_superuser, login_url='users:login')
+def enviar_email_coletivo(request, pk):
+
+    template_name = 'users/email.html'
+
+    chamada = get_object_or_404(Chamada, pk = pk)
+
+    receiver = [u.lider.usuario.email for u in Inscricao.objects.filter(chamada = chamada)]
+
+    sender = EMAIL_HOST_USER
+    subject = 'Plaforma progressus - Atenção!'
+
+    if request.method == 'POST':
+        message = request.POST.get('message')
+        send_mail(subject, message, sender, receiver, fail_silently=False)
+        return HttpResponseRedirect(reverse_lazy('pages:home'))
+    else:
+        message = ''
+
+    form = {'from': sender, 'to': receiver, 'message': message, 'subject': subject}
+
+    context = {'chamada': chamada, 'botao': 'Enviar', 'form': form}
+
+    return render(request, template_name, context)
+
+@login_required
 def inscricao_list_user(request):
 
     template_name = 'chamadas/inscricao_list_user.html'

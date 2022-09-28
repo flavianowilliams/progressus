@@ -42,16 +42,48 @@
                     <td>{{ object.inscricao }}</td>
                     <td>{{ object.inscricao.tema }}</td>
                     <td>
-                        <a href="{% url 'chamadas:introducao_detail_superuser' object.pk %}">{{ object.introducao.updated|date:"d/m/Y" }}</a>
+                        {% if object.introducao.updated > object.inscricao.chamada.deadline_projeto %}
+                            <a style="color: blue;" href="{% url 'chamadas:introducao_detail_superuser' object.pk %}">
+                                {{ object.introducao.updated|date:"d/m/Y" }}
+                            </a>
+                        {% else %}
+                            <a style="color: red;" href="{% url 'chamadas:introducao_detail_superuser' object.pk %}">
+                                {{ object.introducao.updated|date:"d/m/Y" }}
+                            </a>
+                    {% endif %}
                     </td>
                     <td>
-                        <a href="{% url 'chamadas:teoria_detail_superuser' object.pk %}">{{ object.teoria.updated|date:"d/m/Y" }}</a>
+                        {% if object.teoria.updated > object.inscricao.chamada.deadline_projeto %}
+                            <a style="color: blue;" href="{% url 'chamadas:teoria_detail_superuser' object.pk %}">
+                                {{ object.teoria.updated|date:"d/m/Y" }}
+                            </a>
+                        {% else %}
+                            <a style="color: red;" href="{% url 'chamadas:teoria_detail_superuser' object.pk %}">
+                                {{ object.teoria.updated|date:"d/m/Y" }}
+                            </a>
+                    {% endif %}
                     </td>
                     <td>
-                        <a href="{% url 'chamadas:metodologia_detail_superuser' object.pk %}">{{ object.metodologia.updated|date:"d/m/Y" }}</a>
+                        {% if object.metodologia.updated > object.inscricao.chamada.deadline_projeto %}
+                            <a style="color: blue;" href="{% url 'chamadas:metodologia_detail_superuser' object.pk %}">
+                                {{ object.metodologia.updated|date:"d/m/Y" }}
+                            </a>
+                        {% else %}
+                            <a style="color: red;" href="{% url 'chamadas:metodologia_detail_superuser' object.pk %}">
+                                {{ object.metodologia.updated|date:"d/m/Y" }}
+                            </a>
+                    {% endif %}
                     </td>
                     <td>
-                        <a href="{% url 'chamadas:resultado_detail_superuser' object.pk %}">{{ object.resultado.updated|date:"d/m/Y" }}</a>
+                        {% if object.resultado.updated > object.inscricao.chamada.deadline_projeto %}
+                            <a style="color: blue;" href="{% url 'chamadas:resultado_detail_superuser' object.pk %}">
+                                {{ object.resultado.updated|date:"d/m/Y" }}
+                            </a>
+                        {% else %}
+                            <a style="color: red;" href="{% url 'chamadas:resultado_detail_superuser' object.pk %}">
+                                {{ object.resultado.updated|date:"d/m/Y" }}
+                            </a>
+                    {% endif %}
                     </td>
                     <td>
                         {% if object.arquivo %}
@@ -62,7 +94,11 @@
                             Nenhum arquivo até o momento.
                         {% endif %}
                     </td>
-                    <td>{{ object.nota_projeto }}</td>
+                    {% if object.updated > object.inscricao.chamada.deadline_projeto %}
+                        <td style="color: blue;">{{ object.nota_projeto }}</td>
+                    {% else %}
+                        <td style="color: red;">{{ object.nota_projeto }}</td>
+                    {% endif %}
                 </tr>
             {% endfor %}
         </table>

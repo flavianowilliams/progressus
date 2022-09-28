@@ -1,3 +1,4 @@
+from datetime import date
 from webbrowser import get
 from django.shortcuts import render, get_object_or_404
 from chamadas.models import Apresentacao, Bibliografia, Chamada, Financeiro, Inscricao, Introducao, Metodologia, Projeto, Proposta, Resultado, Teoria, Extra
@@ -551,6 +552,14 @@ def inscricao_projeto_view(request, pk):
             resultado.resultado_fback_2 = form.cleaned_data['resultado_2']
             resultado.save()
             form.save()
+            sender = EMAIL_HOST_USER
+            receiver = inscricao.lider.usuario.email
+            message = (
+                        'Você enviou os resultados do seu trabalho em {}.\n\n'.format(date.today())+
+                        'Para maiores informações, acesse http://200.17.101.198/'
+                        )
+            subject = 'Plaforma progressus - Resultados'
+            send_mail(subject, message, sender, [receiver], fail_silently=False)
             return HttpResponseRedirect(reverse_lazy('chamadas:inscricao_detail', kwargs = {'pk': object.inscricao.pk}))
     else:
         form = ProjetoForm(instance=object)

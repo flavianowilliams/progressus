@@ -38,4 +38,5 @@ urlpatterns = [
     path('inscricao_bibliografia/<int:pk>/', views.inscricao_bibliografia_view, name='inscricao_bibliografia'),
     path('inscricao_projeto/<int:pk>/', views.inscricao_projeto_view, name='inscricao_projeto'),
     path('inscricao_introducao/<int:pk>/', views.inscricao_introducao_view, name='inscricao_introducao'),
+    path('ranking_list/<int:pk>/', views.ranking_list, name='ranking_list'),
 ]

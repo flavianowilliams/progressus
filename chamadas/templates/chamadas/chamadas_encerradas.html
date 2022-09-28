@@ -13,8 +13,12 @@
                 <br>
                 <em>{{ object.resumo }}</em>
             </p>
-            <br>
-            <a class="btn btn-primary btn-sm" href="#">Projetos em destaque</a>
+            <p>
+                <a class="btn btn-primary btn-sm" href="{% url 'chamadas:ranking_list' object.pk %}">Ranking</a>
+            </p>
+            <p>
+                <a class="btn btn-primary btn-sm" href="#">Projetos em destaque</a>
+            </p>
         {% empty %}
             <p>Nenhuma chamada encerrada até o momento...</p>
         {% endfor %}

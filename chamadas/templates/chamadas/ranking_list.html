@@ -1,0 +1,152 @@
+{% extends 'pages/base.html' %}
+
+{% load static %}
+
+{% block header %}
+{% endblock %}
+
+{% block content %}
+    <div class="container col-xl-12 text-center">
+        <h3>Ranking das equipes</h3>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <colgroup>
+                    <col style="width: 65;">
+                    <col style="width: 5;">
+                    <col style="width: 5;">
+                    <col style="width: 5;">
+                    <col style="width: 5;">
+                    <col style="width: 5;">
+                    <col style="width: 5;">
+                    <col style="width: 5;">
+                </colgroup>
+                <style>
+                    tr:nth-child(2){background-color: lightgreen;}
+                    tr:nth-child(3){background-color: lightblue;}
+                    tr:nth-child(4){background-color: lightgoldenrodyellow}
+                </style>
+                <tr>
+                    <th style="text-align: left;">Equipe</th>
+                    <th style="text-align: center;">Turma</th>
+                    <th style="text-align: center;">Membros</th>
+                    <th style="text-align: center;">Penalidades</th>
+                    <th style="text-align: center;">Divulgação</th>
+                    <th style="text-align: center;">Bibliografia</th>
+                    <th style="text-align: center;">Proposta</th>
+                    <th style="text-align: center;">Projeto</th>
+                    <th style="text-align: center;">Nota</th>
+                </tr>
+                {% for inscricao in object_list %}
+                    <tr>
+                        <td style="text-align: left;">
+                            {% if inscricao.status == 'Destaque' %}
+                                {% if inscricao.projeto.nota_projeto == 100.0 %}
+                                    {% if inscricao.projeto.nota_resultado == 100.0 %}
+                                        {% if inscricao.projeto.nota_teoria == 100.0 %}
+                                            <p style="color: blue;">{{ inscricao.equipe }} &#9883; &#10004; &#9851; &commat;</p>
+                                        {% else %}
+                                            <p style="color: blue;">{{ inscricao.equipe }} &#9883; &#10004; &#9851;</p>
+                                        {% endif %}
+                                    {% else %}
+                                        {% if inscricao.projeto.nota_teoria == 100.0 %}
+                                            <p style="color: blue;">{{ inscricao.equipe }} &#9883; &#10004; &commat;</p>
+                                        {% else %}
+                                            <p style="color: blue;">{{ inscricao.equipe }} &#9883; &#10004;</p>
+                                        {% endif %}
+                                    {% endif %}
+                                {% else %}
+                                    {% if inscricao.projeto.nota_resultado == 100.0 %}
+                                        {% if inscricao.projeto.nota_teoria == 100.0 %}
+                                            <p style="color: blue;">{{ inscricao.equipe }} &#9883; &#9851; &commat;</p>
+                                        {% else %}
+                                            <p style="color: blue;">{{ inscricao.equipe }} &#9883; &#9851</p>
+                                        {% endif %}
+                                    {% else %}
+                                        {% if inscricao.projeto.nota_teoria == 100.0 %}
+                                            <p style="color: blue;">{{ inscricao.equipe }} &#9883; &commat;</p>
+                                        {% else %}
+                                            <p style="color: blue;">{{ inscricao.equipe }} &#9883;</p>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endif %}
+                            {% else %}
+                                {% if inscricao.projeto.nota_projeto == 100.0 %}
+                                    {% if inscricao.projeto.nota_resultado == 100.0 %}
+                                        {% if inscricao.projeto.nota_teoria == 100.0 %}
+                                            <p style="color: blue;">{{ inscricao.equipe }} &#10004; &#9851; &commat;</p>
+                                        {% else %}
+                                            <p style="color: blue;">{{ inscricao.equipe }} &#10004; &#9851;</p>
+                                        {% endif %}
+                                    {% else %}
+                                        {% if inscricao.projeto.nota_teoria == 100.0 %}
+                                            <p style="color: blue;">{{ inscricao.equipe }} &#10004; &commat;</p>
+                                        {% else %}
+                                            <p style="color: blue;">{{ inscricao.equipe }} &#10004;</p>
+                                        {% endif %}
+                                    {% endif %}
+                                {% else %}
+                                    {% if inscricao.projeto.nota_resultado == 100.0 %}
+                                        {% if inscricao.projeto.nota_teoria == 100.0 %}
+                                            <p style="color: blue;">{{ inscricao.equipe }} &#9851; &commat;</p>
+                                        {% else %}
+                                            <p style="color: blue;">{{ inscricao.equipe }} &#9851;</p>
+                                        {% endif %}
+                                    {% else %}
+                                        {% if inscricao.projeto.nota_teoria == 100.0 %}
+                                            <p style="color: blue;">{{ inscricao.equipe }} &commat;</p>
+                                        {% else %}
+                                            {{ inscricao.equipe }}
+                                        {% endif %}
+                                    {% endif %}
+                                {% endif %}
+                            {% endif %}
+                        </td>
+                        <td style="text-align: center;">{{ inscricao.turma }}</td>
+                        <td style="text-align: center;">{{ inscricao.membros }}</td>
+                        <td style="text-align: center;">{{ inscricao.extra.penalidade|floatformat:'0' }}</td>
+                        <td style="text-align: center;">{{ inscricao.extra.divulgacao|floatformat:'0' }}</td>
+                        <td style="text-align: center;">
+                            {% if inscricao.bibliografia.nota_bibliografia %}
+                                {{ inscricao.bibliografia.nota_bibliografia|floatformat:'0' }}
+                            {% else %}
+                                <p style="font-size: 11pt;">Aguarde</p>
+                            {% endif %}
+                        </td>
+                        <td style="text-align: center;">
+                            {% if inscricao.proposta.nota_proposta %}
+                                {{ inscricao.proposta.nota_proposta|floatformat:'0' }}
+                            {% else %}
+                                <p style="font-size: 11pt;">Aguarde</p>
+                            {% endif %}
+                        </td>
+                        <td style="text-align: center;">
+                            {% if inscricao.projeto.nota_projeto %}
+                                {% if inscricao.projeto.nota_projeto == 100.0 %}
+                                    <p style="color: blue;">{{ inscricao.projeto.get_nota|floatformat:'0' }}</p>
+                                {% else %}
+                                    <p style="color: black;">{{ inscricao.projeto.get_nota|floatformat:'0' }}</p>
+                                {% endif %}
+                            {% else %}
+                                <p style="font-size: 11pt;">Aguarde</p>
+                            {% endif %}
+                        </td>
+                        <td style="text-align: center;">{{ inscricao.nota_final|floatformat:'2' }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="10" style="text-align: center;">Não há avaliações até o momento.</td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <ul style="line-height: 1mm; list-style: none; padding-left: 5mm;">
+                <li><p style="text-align: left; font-size: smaller;">&#9883; Melhor equipe de acordo com o tema escolhido;</p></li>
+                <li><p style="text-align: left; font-size: smaller;">&#10004; Nota máxima obtida no quesito "Projeto";</p></li>
+                <li><p style="text-align: left; font-size: smaller;">&commat; Nota máxima obtida na descrição teórica;</p></li>
+                <li><p style="text-align: left; font-size: smaller;">&#9851; Nota máxima obtida nos critérios de qualidade.</p></li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footnote %}
+{% endblock %}

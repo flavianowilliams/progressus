@@ -681,3 +681,16 @@ def inscricao_introducao_view(request, pk):
     context = {'form': form}
 
     return render(request, template_name, context)
+
+@login_required
+def ranking_list(request, pk):
+
+    template_name = 'chamadas/ranking_list.html'
+
+    chamada = get_object_or_404(Chamada, pk = pk)
+
+    object_list = Inscricao.objects.filter(chamada = chamada)
+
+    context = {'object_list': object_list}
+
+    return render(request, template_name, context)

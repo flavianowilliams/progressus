@@ -14,7 +14,6 @@
                     <th>Status</th>
                     <th>Data</th>
                     <th>Nome da equipe</th>
-                    <th>Ranking</th>
                 </tr>
                 {% for object in object_list %}
                     <tr>
@@ -24,9 +23,6 @@
                         <td>{{ object.created }}</td>
                         <td>
                             <a href="{% url 'chamadas:inscricao_detail' object.pk %}">{{ object.equipe }}</a>
-                        </td>
-                        <td>
-                            <a class="btn btn-sm btn-primary" href="#">Ver</a>
                         </td>
                     </tr>
                 {% empty %}

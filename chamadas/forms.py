@@ -89,6 +89,19 @@ class InscricaoForm(forms.ModelForm):
             raise forms.ValidationError('O nome {} já está em uso.'.format(data))
         return data
 
+class InscricaoUpdateForm(forms.ModelForm):
+
+    class Meta:
+        model = Inscricao
+        fields = [
+            'equipe',
+            'tema',
+            'turma',
+            'membro_1',
+             'membro_2',
+              'membro_3',
+                ]
+
 class TurmaFormCreate(forms.ModelForm):
 
     class Meta:

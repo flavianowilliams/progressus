@@ -2,7 +2,7 @@ from datetime import date
 from webbrowser import get
 from django.shortcuts import render, get_object_or_404
 from chamadas.models import Apresentacao, Bibliografia, Chamada, Financeiro, Inscricao, Introducao, Metodologia, Projeto, Proposta, Resultado, Teoria, Extra
-from chamadas.forms import BibliografiaForm, FinanceiroForm, InscricaoForm, ProjetoApresentacaoAdmin, ProjetoBibliografiaAdmin, ProjetoExtraAdmin, ProjetoFinanceiroAdmin, ProjetoForm, ProjetoIntroducaoAdmin, ProjetoPropostaAdmin, ProjetoTituloForm, PropostaForm
+from chamadas.forms import BibliografiaForm, FinanceiroForm, InscricaoForm, InscricaoUpdateForm, ProjetoApresentacaoAdmin, ProjetoBibliografiaAdmin, ProjetoExtraAdmin, ProjetoFinanceiroAdmin, ProjetoForm, ProjetoIntroducaoAdmin, ProjetoPropostaAdmin, ProjetoTituloForm, PropostaForm
 from chamadas.forms import ProjetoTeoriaAdmin, ProjetoResultadoAdmin
 from chamadas.forms import ProjetoMetodologiaAdmin
 from django.http import HttpResponseRedirect
@@ -147,12 +147,12 @@ def inscricao_update_view(request, pk):
     object = get_object_or_404(Inscricao, pk = pk)
 
     if request.method == 'POST':
-        form = InscricaoForm(request.POST, instance=object)
+        form = InscricaoUpdateForm(request.POST, instance=object)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse_lazy('chamadas:inscricoes_list_superuser', kwargs = {'pk': object.chamada.pk}))
     else:
-        form = InscricaoForm(instance = object)
+        form = InscricaoUpdateForm(instance = object)
 
     context = {'botao': 'Editar', 'form': form}
 

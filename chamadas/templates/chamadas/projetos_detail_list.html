@@ -34,7 +34,7 @@
                 <th>Teoria</th>
                 <th>Metodologia</th>
                 <th>Resultados</th>
-                <th>Opções</th>
+                <th>Arquivo</th>
                 <th>Nota</th>
             </tr>
             {% for object in object_list %}
@@ -91,7 +91,7 @@
                             Arquivo
                             </a>
                         {% else %}
-                            Nenhum arquivo até o momento.
+                            -
                         {% endif %}
                     </td>
                     {% if object.updated > object.inscricao.chamada.deadline_projeto %}

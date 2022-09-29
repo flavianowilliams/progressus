@@ -38,23 +38,64 @@
                             <td>{{ object }}</td>
                             <td>{{ object.tema }}</td>
                             <td>
-                                <a href="{% url 'chamadas:bibliografia_detail_superuser' object.pk %}">{{ object.bibliografia.updated|date:"d/m/Y" }}</a>
+                                {% if object.bibliografia.updated > object.chamada.deadline_bibliografia %}
+                                    <a style="color: blue;" href="{% url 'chamadas:bibliografia_detail_superuser' object.pk %}">
+                                        {{ object.bibliografia.updated|date:"d/m/Y" }}
+                                    </a>
+                                {% else %}
+                                    <a style="color: red;" href="{% url 'chamadas:bibliografia_detail_superuser' object.pk %}">
+                                        {{ object.bibliografia.updated|date:"d/m/Y" }}
+                                    </a>
+                                {% endif %}
                             </td>
                             <td>
-                                <a href="{% url 'chamadas:proposta_detail_superuser' object.pk %}">{{ object.proposta.updated|date:"d/m/Y" }}</a>
-                            </td>
-                            </td>
-                            <td>
-                                <a href="{% url 'chamadas:projeto_detail_superuser' object.chamada.pk %}">{{ object.projeto.updated|date:"d/m/Y" }}</a>
-                            </td>
-                            <td>
-                                <a href="{% url 'chamadas:apresentacao_detail_superuser' object.pk %}">{{ object.apresentacao.updated|date:"d/m/Y" }}</a>
-                            </td>
-                            <td>
-                                <a href="{% url 'chamadas:extra_detail_superuser' object.pk %}">{{ object.extra.updated|date:"d/m/Y" }}</a>
+                                {% if object.proposta.updated > object.chamada.deadline_proposta %}
+                                    <a style="color: blue;" href="{% url 'chamadas:proposta_detail_superuser' object.pk %}">
+                                        {{ object.proposta.updated|date:"d/m/Y" }}
+                                    </a>
+                                {% else %}
+                                    <a style="color: red;" href="{% url 'chamadas:proposta_detail_superuser' object.pk %}">
+                                        {{ object.proposta.updated|date:"d/m/Y" }}
+                                    </a>
+                                {% endif %}
                             </td>
                             <td>
-                                <a href="{% url 'chamadas:financeiro_detail_superuser' object.pk %}">{{ object.financeiro.updated|date:"d/m/Y" }}</a>
+                                {% if object.projeto.updated > object.chamada.deadline_projeto %}
+                                    <a style="color: blue;" href="{% url 'chamadas:projeto_detail_superuser' object.chamada.pk %}">
+                                        {{ object.projeto.updated|date:"d/m/Y" }}
+                                    </a>
+                                {% else %}
+                                    <a style="color: red;" href="{% url 'chamadas:projeto_detail_superuser' object.chamada.pk %}">
+                                        {{ object.projeto.updated|date:"d/m/Y" }}
+                                    </a>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if object.apresentacao.updated > object.chamada.deadline_chamada %}
+                                    <a style="color: blue;" href="{% url 'chamadas:apresentacao_detail_superuser' object.pk %}">
+                                        {{ object.apresentacao.updated|date:"d/m/Y" }}
+                                    </a>
+                                {% else %}
+                                    <a style="color: red;" href="{% url 'chamadas:apresentacao_detail_superuser' object.pk %}">
+                                        {{ object.apresentacao.updated|date:"d/m/Y" }}
+                                    </a>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="{% url 'chamadas:extra_detail_superuser' object.pk %}">
+                                    {{ object.extra.updated|date:"d/m/Y" }}
+                                </a>
+                            </td>
+                            <td>
+                                {% if object.financeiro.updated > object.chamada.deadline_projeto %}
+                                    <a style="color: blue;" href="{% url 'chamadas:financeiro_detail_superuser' object.pk %}">
+                                        {{ object.financeiro.updated|date:"d/m/Y" }}
+                                    </a>
+                                {% else %}
+                                    <a style="color: red;" href="{% url 'chamadas:financeiro_detail_superuser' object.pk %}">
+                                        {{ object.financeiro.updated|date:"d/m/Y" }}
+                                    </a>
+                                {% endif %}
                             </td>
                             <td>{{ object.nota }}</td>
                         </tr>

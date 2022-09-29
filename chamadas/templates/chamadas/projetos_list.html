@@ -15,7 +15,8 @@
             <table class="table table-striped">
                 <colgroup>
                     <col style="width: 20vw;">
-                    <col style="width: 20vw;">
+                    <col style="width: 10vw;">
+                    <col style="width: 10vw;">
                     <col style="width: 10vw;">
                     <col style="width: 10vw;">
                     <col style="width: 10vw;">
@@ -25,7 +26,7 @@
                 </colgroup>
                 <tr>
                     <th>Equipe</th>
-                    <th>Tema</th>
+                    <th>Turma</th>
                     <th>Revisao bibliográfica</th>
                     <th>Proposta</th>
                     <th>Projeto</th>
@@ -36,7 +37,7 @@
                     {% for object in object_list %}
                         <tr>
                             <td>{{ object }}</td>
-                            <td>{{ object.tema }}</td>
+                            <td>{{ object.turma }}</td>
                             <td>
                                 {% if object.bibliografia.updated > object.chamada.deadline_bibliografia %}
                                     <a style="color: blue;" href="{% url 'chamadas:bibliografia_detail_superuser' object.pk %}">

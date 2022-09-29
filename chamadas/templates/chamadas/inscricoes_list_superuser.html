@@ -9,17 +9,19 @@
     <div class="table-responsive">
         <table class="table table-striped">
             <colgroup>
-                <col style="width: 15vw;">
+                <col style="width: 20vw;">
+                <col style="width: 10vw;">
+                <col style="width: 10vw;">
+                <col style="width: 10vw;">
+                <col style="width: 10vw;">
                 <col style="width: 10vw;">
                 <col style="width: 10vw;">
                 <col style="width: 20vw;">
-                <col style="width: 15vw;">
-                <col style="width: 15vw;">
-                <col style="width: 15vw;">
             </colgroup>
             <tr>
                 <th>Equipe</th>
                 <th>Data</th>
+                <th>Turma</th>
                 <th>Lider</th>
                 <th>Membro</th>
                 <th>Membro</th>
@@ -29,6 +31,7 @@
                     <tr>
                         <td>{{ object.equipe }}</td>
                         <td>{{ object.created|date:'d/m/Y' }}</td>
+                        <td>{{ object.turma }}</td>
                         <td>{{ object.lider }}</td>
                         <td>{{ object.membro_1 }}</td>
                         <td>{{ object.membro_2 }}</td>

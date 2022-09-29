@@ -273,7 +273,7 @@ def projeto_detail_list_view(request, pk):
     template_name = 'chamadas/projetos_detail_list.html'
 
     chamada = get_object_or_404(Chamada, pk = pk)
-    projeto = Projeto.objects.all()
+    projeto = Projeto.objects.all().order_by('-arquivo')
 
     object_list = [object for object in projeto if object.inscricao.chamada == chamada]
   

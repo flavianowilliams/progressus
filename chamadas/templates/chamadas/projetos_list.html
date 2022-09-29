@@ -29,24 +29,24 @@
                     <th>Turma</th>
                     <th>
                         <p>Rev. bib.</p>
-                        <p>({ chamada.deadline_bibliografia|date:"d/m/y" })</p>
+                        <p>({{ chamada.deadline_bibliografia|date:"d/m/y" }})</p>
                     </th>
                     <th>
                         <p>Proposta</p>
-                        <p>({ chamada.deadline_proposta|date:"d/m/y" })</p>
+                        <p>({{ chamada.deadline_proposta|date:"d/m/y" }})</p>
                     </th>
                     <th>
                         <p>Projeto</p>
-                        <p>({ chamada.deadline_projeto|date:"d/m/y" })</p>
+                        <p>({{ chamada.deadline_projeto|date:"d/m/y" }})</p>
                     </th>
                     <th>
                         <p>Apresentação</p>
-                        <p>({ chamada.deadline_chamada|date:"d/m/y" })</p>
+                        <p>({{ chamada.deadline_chamada|date:"d/m/y" }})</p>
                     </th>
                     <th>Extra</th>
                     <th>
                         <p>Financeiro</p>
-                        <p>({ chamada.deadline_projeto|date:"d/m/y" })</p>
+                        <p>({{ chamada.deadline_projeto|date:"d/m/y" }})</p>
                     </th>
                     <th>Nota</th>
                     {% for object in object_list %}

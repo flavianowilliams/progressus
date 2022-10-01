@@ -14,7 +14,7 @@
                 <em>{{ object.resumo }}</em>
             </p>
             <p>
-                <a class="btn btn-primary btn-sm" href="{% url 'chamadas:ranking_list' object.pk %}">Ranking</a>
+                <a class="btn btn-primary btn-sm" href="{{ object.edital.url }}">Edital</a>
             </p>
             <p>
                 <a class="btn btn-primary btn-sm" href="#">Projetos em destaque</a>

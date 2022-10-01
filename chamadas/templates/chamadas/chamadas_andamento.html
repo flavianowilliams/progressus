@@ -14,7 +14,14 @@
                 <em>{{ object.resumo }}</em>
             </p>
             <p>Data de encerramento: {{ object.deadline_chamada }}.</p>
-            <p><a class="btn btn-primary btn-sm" href="{% url 'chamadas:ranking_list' object.pk %}">Ranking</a></p>
+            <p>
+                <a class="btn btn-primary btn-sm" href="{{ object.edital.url }}">Edital</a>
+            </p>
+            {% if request.user.is_authenticated %}
+                <p>
+                    <a class="btn btn-primary btn-sm" href="{% url 'chamadas:ranking_list' object.pk %}">Ranking</a>
+                </p>
+            {% endif %}
             <p><a class="btn btn-primary btn-sm" href="{% url 'users:login' %}">Login</a></p>
         {% empty %}
             <p>Nenhuma chamada em andamento até o momento...</p>

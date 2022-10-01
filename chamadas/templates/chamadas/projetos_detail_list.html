@@ -39,7 +39,9 @@
             </tr>
             {% for object in object_list %}
                 <tr>
-                    <td>{{ object.inscricao }}</td>
+                    <td>
+                        <a href="{% url 'chamadas:inscricoes_list_superuser' object.pk %}">{{ object.inscricao }}</a>
+                    </td>
                     <td>{{ object.inscricao.tema }}</td>
                     <td>
                         {% if object.introducao.updated > object.inscricao.chamada.deadline_projeto %}
@@ -88,7 +90,7 @@
                     <td>
                         {% if object.arquivo %}
                             <a class="btn btn-sm btn-primary" href="{{ object.arquivo.url }}">
-                            Ver
+                                {{ object.resultado.updated|date:"d/m/Y" }}
                             </a>
                         {% else %}
                             -

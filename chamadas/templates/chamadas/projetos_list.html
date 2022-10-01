@@ -51,7 +51,9 @@
                     <th>Nota</th>
                     {% for object in object_list %}
                         <tr>
-                            <td>{{ object }}</td>
+                            <td>
+                                <a href="{% url 'chamadas:inscricoes_list_superuser' chamada.pk %}">{{ object }}</a>
+                            </td>
                             <td>{{ object.turma }}</td>
                             <td>
                                 {% if object.bibliografia.updated > object.chamada.deadline_bibliografia %}

@@ -1,5 +1,4 @@
 from datetime import date
-from webbrowser import get
 from django.shortcuts import render, get_object_or_404
 from chamadas.models import Apresentacao, Bibliografia, Chamada, Financeiro, Inscricao, Introducao, Metodologia, Projeto, Proposta, Resultado, Teoria, Extra
 from chamadas.forms import BibliografiaForm, FinanceiroForm, InscricaoForm, InscricaoUpdateForm, ProjetoApresentacaoAdmin, ProjetoBibliografiaAdmin, ProjetoExtraAdmin, ProjetoFinanceiroAdmin, ProjetoForm, ProjetoIntroducaoAdmin, ProjetoPropostaAdmin, ProjetoTituloForm, PropostaForm

@@ -1,5 +1,5 @@
 asgiref==3.5.2
-Django==4.0.6
+Django
 django-cleanup==6.0.0
 django-crispy-forms==1.14.0
 django-environ==0.9.0

@@ -71,7 +71,7 @@
                         <td style="text-align: center;">{{ inscricao.turma }}</td>
                         <td style="text-align: center;">
                             {% if inscricao.projeto.arquivo %}
-                                {{ inscricao.projeto.arquivo.url }}
+                                <a class="btn btn-sm btn-primary" href="{{ inscricao.projeto.arquivo.url }}">Ver</a>
                             {% else %}
                                 -
                             {% endif %}
@@ -103,7 +103,7 @@
                                 <p style="font-size: 11pt;">Aguarde</p>
                             {% endif %}
                         </td>
-                        <td style="text-align: center;">{{ inscricao.nota_final|floatformat:'2' }}</td>
+                        <td style="text-align: center;">{{ inscricao.nota|floatformat:'2' }}</td>
                     </tr>
                 {% empty %}
                     <tr>

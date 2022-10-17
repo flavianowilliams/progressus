@@ -563,6 +563,12 @@ class Resultado(models.Model):
 
     projeto = models.OneToOneField(Projeto, on_delete=models.CASCADE)
 
+    resultado_consideracao_1 = models.CharField(max_length=255, null=True, blank=True)
+    resultado_consideracao_2 = models.CharField(max_length=255, null=True, blank=True)
+    resultado_consideracao_3 = models.CharField(max_length=255, null=True, blank=True)
+    resultado_consideracao_4 = models.CharField(max_length=255, null=True, blank=True)
+    resultado_consideracao_5 = models.CharField(max_length=255, null=True, blank=True)
+
     def setNotaResultado(self):
         data = float(self.projeto.modelo.resultado_peso_1)*float(self.resultado_nota_1)
         data += float(self.projeto.modelo.resultado_peso_2)*float(self.resultado_nota_2)

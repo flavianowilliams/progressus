@@ -386,6 +386,8 @@ class ProjetoResultadoAdmin(forms.ModelForm):
             'resultado_fback_2',
             'resultado_nota_1',
             'resultado_nota_2',
+            'resultado_consideracao_1',
+            'resultado_consideracao_2',
             'nota_resultado',
         ]
 

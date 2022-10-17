@@ -1,8 +1,8 @@
-asgiref==3.5.2
+asgiref
 Django
-django-cleanup==6.0.0
-django-crispy-forms==1.14.0
-django-environ==0.9.0
-django-widget-tweaks==1.4.12
-Pillow==9.2.0
-sqlparse==0.4.2
+django-cleanup
+django-crispy-forms
+django-environ
+django-widget-tweaks
+Pillow
+sqlparse

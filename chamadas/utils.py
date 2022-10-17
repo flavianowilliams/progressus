@@ -26,9 +26,9 @@ class Valor():
         maximo = max(self.lista)
         if maximo == 0.0:
             if self.args['valor'] == 0.0:
-                nota = 100.0
-            else:
                 nota = 0.0
+            else:
+                nota = 100.0
         else:
             nota = 100*float(self.args['valor'])/float(maximo)
 

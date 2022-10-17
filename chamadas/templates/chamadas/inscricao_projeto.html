@@ -235,7 +235,7 @@
                                     <th>Peso</th>
                                     <th style="text-align:start;">Valor encontrado</th>
                                     <th>Valor considerado</th>
-                                    <th>Valor de referência</th>
+                                    <th>Considerações do avaliador</th>
                                     <th>Nota</th>
                                 </tr>
                                 <tr>
@@ -258,7 +258,7 @@
                                     <td>
                                         {{ form.instance.resultado.resultado_fback_1|default:"Aguarde..." }}
                                     </td>    
-                                    <td>{{ min_input_1 }}</td>
+                                    <td>{{ form.instance.resultado.resultado_consideracao_1|default:"Aguarde..." }}</td>
                                     <td>
                                         {{ form.instance.resultado.resultado_1 }}
                                     </td>    
@@ -283,7 +283,7 @@
                                     <td>
                                         {{ form.instance.resultado.resultado_fback_2|default:"Aguarde..." }}
                                     </td>    
-                                    <td>{{ max_input_2 }}</td>
+                                    <td>{{ form.instance.resultado.resultado_consideracao_2|default:"Aguarde..." }}</td>
                                     <td>
                                         {{ form.instance.resultado.resultado_nota_2 }}
                                     </td>    

@@ -38,12 +38,12 @@ class Valor():
 
         object_list = Inscricao.objects.all()
 
-        if self.args['atributo'] == 'resultado_fback_1':
-            list = [object.projeto.resultado.resultado_fback_1 for object in object_list if object.tema == self.args['tema']]
-        else:
-            list = [object.projeto.resultado.resultado_fback_2 for object in object_list if object.tema == self.args['tema']]
+#        if self.args['atributo'] == 'resultado_fback_1':
+#            list = [object.projeto.resultado.resultado_fback_1 for object in object_list if object.tema == self.args['tema']]
+#        else:
+#            list = [object.projeto.resultado.resultado_fback_2 for object in object_list if object.tema == self.args['tema']]
 
-        minimo = min(list)
+        minimo = min(self.lista)
         if minimo == 0.0:
             if self.args['valor'] == 0.0:
                 nota = 100.0

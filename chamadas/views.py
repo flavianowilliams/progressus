@@ -507,7 +507,7 @@ def resultado_detail_superuser(request, pk):
     result = Resultado.objects.get(projeto = object)
 
     if request.method == 'POST':
-        form = ProjetoResultadoAdmin(request.POST, instance=object.resultado)
+        form = ProjetoResultadoAdmin(request.POST, instance=result)
         if form.is_valid():
             form.save()
             args = {'tema': object.inscricao.tema, 'atributo': 'resultado_fback_1', 'valor': form.cleaned_data['resultado_fback_1']}
@@ -520,7 +520,7 @@ def resultado_detail_superuser(request, pk):
 #            object.save()
             return HttpResponseRedirect(reverse_lazy('chamadas:projeto_detail_superuser', kwargs = {'pk': object.inscricao.chamada.pk}))
     else:
-        form = ProjetoResultadoAdmin(instance=object.resultado)
+        form = ProjetoResultadoAdmin(instance=result)
         form.instance.nota_resultado = result.setNotaResultado()
  
     context = {'form': form}

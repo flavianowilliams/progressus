@@ -5,7 +5,8 @@
 {% block content %}
     <div class="container">
         <h2>Equipe: {{ form.instance.projeto.inscricao }}</h2>
-        <h3>Projeto: {{ form.instance.projeto.titulo }}</h3>
+        <h3>Tema: {{ form.instance.projeto.inscricao.tema }}</h3>
+        <h4>Projeto: {{ form.instance.projeto.titulo }}</h3>
         <div class="card-body">
             <h4 class="card-title text-center">Teoria</h4>
             <form action="" method="POST">

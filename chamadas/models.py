@@ -401,19 +401,19 @@ class Introducao(models.Model):
     introducao_consideracao_3 = models.CharField(
         max_length=255,
         null=True,
-        blank=True
+        blank=True,
         default='A equipe não enviou o relatório do trabalho'
         )
     introducao_consideracao_4 = models.CharField(
         max_length=255,
         null=True,
-        blank=True
+        blank=True,
         default='A equipe não enviou o relatório do trabalho'
         )
     introducao_consideracao_5 = models.CharField(
         max_length=255,
         null=True,
-        blank=True
+        blank=True,
         default='A equipe não enviou o relatório do trabalho'
         )
 

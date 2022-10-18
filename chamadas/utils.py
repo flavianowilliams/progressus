@@ -52,4 +52,6 @@ class Valor():
         else:
             nota = 100*float(minimo)/float(self.args['valor'])
 
+        nota = minimo
+
         return nota

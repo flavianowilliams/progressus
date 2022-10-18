@@ -1,4 +1,5 @@
 from datetime import date
+from email.policy import default
 from django.db import models
 from users.models import Profile
 
@@ -383,11 +384,38 @@ class Introducao(models.Model):
     introducao_nota_3 = models.DecimalField(max_digits=7, decimal_places=3, default=0.0, blank=True)
     introducao_nota_4 = models.DecimalField(max_digits=7, decimal_places=3, default=0.0, blank=True)
     introducao_nota_5 = models.DecimalField(max_digits=7, decimal_places=3, default=0.0, blank=True)
-    introducao_consideracao_1 = models.CharField(max_length=255, null=True, blank=True)
-    introducao_consideracao_2 = models.CharField(max_length=255, null=True, blank=True)
-    introducao_consideracao_3 = models.CharField(max_length=255, null=True, blank=True)
-    introducao_consideracao_4 = models.CharField(max_length=255, null=True, blank=True)
-    introducao_consideracao_5 = models.CharField(max_length=255, null=True, blank=True)
+
+    introducao_consideracao_1 = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+        default='A equipe não enviou o relatório do trabalho'
+        )
+    
+    introducao_consideracao_2 = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+        default='A equipe não enviou o relatório do trabalho'
+        )
+    introducao_consideracao_3 = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True
+        default='A equipe não enviou o relatório do trabalho'
+        )
+    introducao_consideracao_4 = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True
+        default='A equipe não enviou o relatório do trabalho'
+        )
+    introducao_consideracao_5 = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True
+        default='A equipe não enviou o relatório do trabalho'
+        )
 
     nota_introducao = models.DecimalField(
         max_digits=7,

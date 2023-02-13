@@ -509,13 +509,6 @@ def resultado_detail_superuser(request, pk):
     if request.method == 'POST':
         form = ProjetoResultadoAdmin(request.POST, instance=result)
         if form.is_valid():
-#            args = {'tema': object.inscricao.tema, 'atributo': 'resultado_fback_1', 'valor': form.cleaned_data['resultado_fback_1']}
-#            form.instance.resultado_nota_1 = Valor(args).setValorInv()
-#            args = {'tema': object.inscricao.tema, 'atributo': 'resultado_fback_2', 'valor': form.cleaned_data['resultado_fback_2']}
- #           form.instance.resultado_nota_2 = Valor(args).setValor()
- #           form.instance.nota_resultado = result.setNotaResultado()
- #           form.save()
- #           return HttpResponseRedirect(reverse_lazy('chamadas:projeto_detail_superuser', kwargs = {'pk': object.inscricao.chamada.pk}))
 
             form.save()
 
@@ -529,7 +522,7 @@ def resultado_detail_superuser(request, pk):
                 'valor': form.cleaned_data['resultado_fback_1']
                 }
 
-            form.instance.resultado_nota_1 = Valor(args).setValor2()
+            form.instance.resultado_nota_1 = Valor(args).setValor()
 
             args = {
                 'tema': object.inscricao.tema,
@@ -538,7 +531,7 @@ def resultado_detail_superuser(request, pk):
                 'valor': form.cleaned_data['resultado_fback_2']
                 }
 
-            form.instance.resultado_nota_2 = Valor(args).setValor2()
+            form.instance.resultado_nota_2 = Valor(args).setValor()
 
             form.instance.nota_resultado = result.setNotaResultado()
 

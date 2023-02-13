@@ -631,6 +631,12 @@ class Resultado(models.Model):
         default=0.0,
         blank=True)
 
+    resultado_prop_1 = models.CharField(max_length=7)
+    resultado_prop_2 = models.CharField(max_length=7)
+    resultado_prop_3 = models.CharField(max_length=7)
+    resultado_prop_4 = models.CharField(max_length=7)
+    resultado_prop_5 = models.CharField(max_length=7)
+
     projeto = models.OneToOneField(Projeto, on_delete=models.CASCADE)
 
     resultado_consideracao_1 = models.CharField(max_length=255, null=True, blank=True)

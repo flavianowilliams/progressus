@@ -21,6 +21,32 @@ class Valor():
 
         self.lista = lista
 
+    def setValor2(self):
+
+        if self.args['regra'] == 'direta':
+
+            maximo = max(self.lista)
+            if maximo == 0.0:
+                if self.args['valor'] == 0.0:
+                    nota = 0.0
+                else:
+                    nota = 100.0
+            else:
+                nota = 100*float(self.args['valor'])/float(maximo)
+
+        elif self.args['regra'] == 'inversa':
+
+            minimo = min(self.lista)
+            if minimo == 0.0:
+                if self.args['valor'] == 0.0:
+                    nota = 100.0
+                else:
+                    nota = 0.0
+            else:
+                nota = 100*float(minimo)/float(self.args['valor'])
+
+        return nota
+
     def setValor(self):
 
         maximo = max(self.lista)
@@ -35,13 +61,6 @@ class Valor():
         return nota
 
     def setValorInv(self):
-
-        object_list = Inscricao.objects.all()
-
-#        if self.args['atributo'] == 'resultado_fback_1':
-#            list = [object.projeto.resultado.resultado_fback_1 for object in object_list if object.tema == self.args['tema']]
-#        else:
-#            list = [object.projeto.resultado.resultado_fback_2 for object in object_list if object.tema == self.args['tema']]
 
         minimo = min(self.lista)
         if minimo == 0.0:

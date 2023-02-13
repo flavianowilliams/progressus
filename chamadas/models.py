@@ -158,6 +158,48 @@ class ProjetoModelo(models.Model):
         verbose_name='5. Resultado (parâmetro): Peso'
         )
 
+    resultado_prop_1 = models.CharField(
+        max_length=7,
+        default='direta',
+        choices=(("Direta", "direta"), ("Inversa", "inversa")),
+        verbose_name='1. Resultado (parâmetro): Proporção'
+    )
+
+    resultado_prop_1 = models.CharField(
+        max_length=7,
+        default='direta',
+        choices=(("direta", "Direta"), ("inversa", "Inversa")),
+        verbose_name='1. Resultado (parâmetro): Proporção'
+    )
+
+    resultado_prop_2 = models.CharField(
+        max_length=7,
+        default='direta',
+        choices=(("direta", "Direta"), ("inversa", "Inversa")),
+        verbose_name='1. Resultado (parâmetro): Proporção'
+    )
+
+    resultado_prop_3 = models.CharField(
+        max_length=7,
+        default='direta',
+        choices=(("direta", "Direta"), ("inversa", "Inversa")),
+        verbose_name='1. Resultado (parâmetro): Proporção'
+    )
+
+    resultado_prop_4 = models.CharField(
+        max_length=7,
+        default='direta',
+        choices=(("direta", "Direta"), ("inversa", "Inversa")),
+        verbose_name='1. Resultado (parâmetro): Proporção'
+    )
+
+    resultado_prop_5 = models.CharField(
+        max_length=7,
+        default='direta',
+        choices=(("direta", "Direta"), ("inversa", "Inversa")),
+        verbose_name='1. Resultado (parâmetro): Proporção'
+    )
+
     introducao_peso = models.DecimalField(
         max_digits=6,
         decimal_places=3,
@@ -230,7 +272,7 @@ class ProjetoModelo(models.Model):
         verbose_name='2. Apresentação (parâmetro): Peso'
         )
     apresentacao_titulo_3 = models.CharField(
-        max_length=100,
+        max_length=105,
         default='Qualidade dos recursos audiovisuais (aspectos visuais e auditivos, qualidade das imagens, vídeos e texto)',
         verbose_name = '3. Apresentação (parâmetro): Título'
         )

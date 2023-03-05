@@ -2,8 +2,10 @@
 
 {% load widget_tweaks %}
 
+{% load static %}
+
 {% block content %}
-    <div class="container-fluid">
+    <div class="container">
         <h2>Equipe: {{ form.instance.inscricao }}</h2>
         <form action="" method="POST" enctype="multipart/form-data">
             <div class="card-body">
@@ -60,6 +62,10 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="container">
+                {{ form.instance.arquivo.url }}
+                <embed src="{% static form.instance.arquivo.url %}" type="application/pdf">
             </div>
         </form>
     </div>

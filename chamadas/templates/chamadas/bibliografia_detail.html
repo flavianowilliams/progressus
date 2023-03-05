@@ -8,7 +8,7 @@
         <form action="" method="POST" enctype="multipart/form-data">
             <div class="card-body">
                 <h4 class="card-title text-center">Bibliografia</h4>
-                <div class="border w-50">
+                <div class="border">
                     {% csrf_token %}
                     <div class="mx-3 my-3 mt-3 mb-3">
                         <h5>Parâmetros de avaliação</h5>
@@ -60,9 +60,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="border w-50">
-                <embed src="{{ form.instance.arquivo }}" width="50%"/>
             </div>
         </form>
     </div>

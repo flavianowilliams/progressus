@@ -706,7 +706,7 @@ class Bibliografia(models.Model):
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
 
-    arquivo = models.FileField(upload_to='pdf/%Y/%m/%d/', null=True)
+    arquivo = models.FileField(upload_to='pdf/%Y/%m/%d/', null=True, default='pdf/modelo-vazio.pdf')
     bibliografia_qde = models.IntegerField(null=True, blank=True)
     consideracoes = models.CharField(max_length=255, null=True, blank=True)
     nota_bibliografia = models.DecimalField(max_digits=6, decimal_places=3, default=0.0, blank=True)

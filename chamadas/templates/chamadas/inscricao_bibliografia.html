@@ -32,6 +32,7 @@
                                     <th>Quantidade mínima de referências aceitáveis</th>
                                     <th>Quantidade de referências apresentadas</th>
                                     <th>Considerações do avaliador</th>
+                                    <th>Peso</th>
                                     <th>Nota</th>
                                 </tr>
                                 <tr>
@@ -43,6 +44,9 @@
                                     </td>
                                     <td>
                                         {{ form.instance.consideracoes|default:"Aguarde..." }}
+                                    </td>
+                                    <td>
+                                        {{ form.instance.modelo.bibliografia_peso|default:"Aguarde..." }}
                                     </td>
                                     <td>
                                         {{ form.instance.nota_bibliografia|default:"Aguarde..." }}

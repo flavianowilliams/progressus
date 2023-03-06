@@ -7,7 +7,7 @@ from chamadas.forms import ProjetoMetodologiaAdmin
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required, user_passes_test
-from progressus.settings import EMAIL_HOST_USER
+from progressus.settings import EMAIL_HOST_USER, MEDIA_ROOT
 from django.core.mail import send_mail
 from chamadas.utils import Valor
 
@@ -322,7 +322,7 @@ def bibliografia_detail_superuser(request, pk):
         bibliografia = Bibliografia.objects.get(inscricao = object)
         form.instance.nota_bibliografia = bibliografia.setNotaBibliografia()
  
-    context = {'form': form}
+    context = {'form': form, 'media_root': MEDIA_ROOT}
 
     return render(request, template_name, context)
 

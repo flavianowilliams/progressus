@@ -59,6 +59,8 @@
                                         <a class="btn btn-primary btn-sm" href="{{ form.instance.arquivo.url }}">Ver arquivo</a>
                                     </div>
                                 </div>
+                            {% else %}
+                                <p class="alert">A revisão bibliográfica ainda não foi entregue.</p>
                             {% endif %}
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary btn-sm">

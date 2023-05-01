@@ -117,7 +117,7 @@
                                     </a>
                                 {% endif %}
                             </td>
-                            <td><a href="{% url 'chamadas:inscricao_status' object.pk %}">{{ object.inscricao_status }}</a></td>
+                            <td><a href="{% url 'chamadas:inscricao_status' object.pk %}">{{ object.getStatus }}</a></td>
                             <td>{{ object.nota }}</td>
                         </tr>
                     {% empty %}

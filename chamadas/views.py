@@ -41,7 +41,7 @@ def projetos_destaque_list_view(request, pk):
 
     inscricao = Inscricao.objects.filter(chamada = chamada)
 
-    object_list = [object for object in inscricao if object.inscricao_status == 'comum']
+    object_list = [object for object in inscricao if object.inscricao_status == 'destaque']
 
     context = {'object_list': object_list, 'chamada': chamada}
 

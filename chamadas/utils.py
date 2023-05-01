@@ -24,25 +24,38 @@ class Valor():
     def setValor(self):
 
         if self.args['regra'] == 'direta':
-
-            maximo = max(self.lista)
-            if maximo == 0.0:
-                if self.args['valor'] == 0.0:
-                    nota = 0.0
-                else:
-                    nota = 100.0
-            else:
-                nota = 100*float(self.args['valor'])/float(maximo)
-
+            nota_min = min(self.lista)
+            nota_max = max(self.lista)
         elif self.args['regra'] == 'inversa':
+            nota_min = max(self.lista)
+            nota_max = min(self.lista)
 
-            minimo = min(self.lista)
-            if minimo == 0.0:
-                if self.args['valor'] == 0.0:
-                    nota = 100.0
-                else:
-                    nota = 0.0
-            else:
-                nota = 100*float(minimo)/float(self.args['valor'])
+        nota = 100*(self.args['valor']-nota_max)/(nota_max-nota_min)
 
         return nota
+
+#    def setValor(self):
+#
+#        if self.args['regra'] == 'direta':
+#
+#            maximo = max(self.lista)
+#            if maximo == 0.0:
+#                if self.args['valor'] == 0.0:
+#                    nota = 0.0
+#                else:
+#                    nota = 100.0
+#            else:
+#                nota = 100*float(self.args['valor'])/float(maximo)
+#
+#        elif self.args['regra'] == 'inversa':
+#
+#            minimo = min(self.lista)
+#            if minimo == 0.0:
+#                if self.args['valor'] == 0.0:
+#                    nota = 100.0
+#                else:
+#                    nota = 0.0
+#            else:
+#                nota = 100*float(minimo)/float(self.args['valor'])
+#
+#        return nota

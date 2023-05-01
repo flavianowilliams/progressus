@@ -17,7 +17,7 @@
                 <a class="btn btn-primary btn-sm" href="{{ object.edital.url }}">Edital</a>
             </p>
             <p>
-                <a class="btn btn-primary btn-sm" href="#">Projetos em destaque</a>
+                <a class="btn btn-primary btn-sm" href="{% url 'chamadas:projetos_destaque_list' object.pk %}">Projetos em destaque</a>
             </p>
         {% empty %}
             <p>Nenhuma chamada encerrada até o momento...</p>

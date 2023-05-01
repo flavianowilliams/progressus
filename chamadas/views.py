@@ -1,7 +1,7 @@
 from datetime import date
 from django.shortcuts import render, get_object_or_404
 from chamadas.models import Apresentacao, Bibliografia, Chamada, Financeiro, Inscricao, Introducao, Metodologia, Projeto, Proposta, Resultado, Teoria, Extra
-from chamadas.forms import BibliografiaForm, FinanceiroForm, InscricaoForm, InscricaoUpdateForm, ProjetoApresentacaoAdmin, ProjetoBibliografiaAdmin, ProjetoExtraAdmin, ProjetoFinanceiroAdmin, ProjetoForm, ProjetoIntroducaoAdmin, ProjetoPropostaAdmin, ProjetoTituloForm, PropostaForm
+from chamadas.forms import BibliografiaForm, FinanceiroForm, InscricaoForm, InscricaoUpdateForm, ProjetoApresentacaoAdmin, ProjetoBibliografiaAdmin, ProjetoExtraAdmin, ProjetoFinanceiroAdmin, ProjetoForm, ProjetoIntroducaoAdmin, ProjetoPropostaAdmin, ProjetoTituloForm, PropostaForm, InscricaoStatusAdmin
 from chamadas.forms import ProjetoTeoriaAdmin, ProjetoResultadoAdmin
 from chamadas.forms import ProjetoMetodologiaAdmin
 from django.http import HttpResponseRedirect
@@ -30,6 +30,20 @@ def andamento_list_view(request):
     object_list = [object for object in Chamada.objects.all() if object.get_status() == 'Em andamento']
 
     context = {'object_list': object_list}
+
+    return render(request, template_name, context)
+
+def projetos_destaque_list_view(request, pk):
+
+    template_name = 'chamadas/projetos_destaque_list.html'
+
+    chamada = get_object_or_404(Chamada, pk = pk)
+
+    inscricao = Inscricao.objects.filter(chamada = chamada)
+
+    object_list = [object for object in inscricao if object.inscricao_status == 'comum']
+
+    context = {'object_list': object_list, 'chamada': chamada}
 
     return render(request, template_name, context)
 
@@ -152,6 +166,26 @@ def inscricao_update_view(request, pk):
             return HttpResponseRedirect(reverse_lazy('chamadas:inscricoes_list_superuser', kwargs = {'pk': object.chamada.pk}))
     else:
         form = InscricaoUpdateForm(instance = object)
+
+    context = {'botao': 'Editar', 'form': form}
+
+    return render(request, template_name, context)
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser, login_url='users:login')
+def inscricao_update_status_view(request, pk):
+
+    template_name = 'chamadas/inscricao_status_editar.html'
+
+    object = get_object_or_404(Inscricao, pk = pk)
+
+    if request.method == 'POST':
+        form = InscricaoStatusAdmin(request.POST, instance=object)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse_lazy('chamadas:projetos_list', kwargs = {'pk': object.chamada.pk}))
+    else:
+        form = InscricaoStatusAdmin(instance = object)
 
     context = {'botao': 'Editar', 'form': form}
 
@@ -285,21 +319,6 @@ def projeto_detail_list_view(request, pk):
     context = {'object_list': object_list, 'chamada': chamada}
 
     return render(request, template_name, context)
-
-#@login_required
-#@user_passes_test(lambda u: u.is_superuser, login_url='users:login')
-#def projeto_detail_list_view(request, pk):
-#
-#    template_name = 'chamadas/projetos_detail_list.html'
-#
-#    chamada = get_object_or_404(Chamada, pk = pk)
-#    projeto = Projeto.objects.all()
-#
-#    object_list = [object for object in projeto if object.inscricao.chamada == chamada]
-#  
-#    context = {'object_list': object_list, 'chamada': chamada}
-#
-#    return render(request, template_name, context)
 
 @login_required
 @user_passes_test(lambda u: u.is_superuser, login_url='users:login')

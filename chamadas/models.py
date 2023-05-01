@@ -368,17 +368,34 @@ class Tema(models.Model):
         return self.titulo
 
 class Inscricao(models.Model):
+
     created = models.DateField(auto_now_add=True)
+
     tema = models.ForeignKey(Tema, on_delete=models.PROTECT)
+
     turma = models.ForeignKey(Turma, on_delete=models.PROTECT)
+
     lider = models.ForeignKey(Profile, on_delete=models.CASCADE)
+
     chamada = models.ForeignKey(Chamada, on_delete=models.CASCADE)
+
     equipe = models.CharField(max_length=100)
+
     membro_1 = models.CharField(max_length=100, null=True, blank=True)
+
     membro_2 = models.CharField(max_length=100, null=True, blank=True)
+
     membro_3 = models.CharField(max_length=100, null=True, blank=True)
+
     nota = models.DecimalField(max_digits=6, decimal_places=3, null=True, blank=True)
+
     ranking = models.IntegerField(null=True)
+
+    inscricao_status = models.CharField(
+        max_length=11,
+        default="comum",
+        choices=(("comum", "Comum"), ("destaque", "Em destaque"))
+        )
 
     def __str__(self):
         return self.equipe

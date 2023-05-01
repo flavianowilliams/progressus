@@ -38,5 +38,7 @@ urlpatterns = [
     path('inscricao_bibliografia/<int:pk>/', views.inscricao_bibliografia_view, name='inscricao_bibliografia'),
     path('inscricao_projeto/<int:pk>/', views.inscricao_projeto_view, name='inscricao_projeto'),
     path('inscricao_introducao/<int:pk>/', views.inscricao_introducao_view, name='inscricao_introducao'),
+    path('inscricao_status/<int:pk>/', views.inscricao_update_status_view, name='inscricao_status'),
     path('ranking_list/<int:pk>/', views.ranking_list, name='ranking_list'),
+    path('projetos_destaque_list/<int:pk>/', views.projetos_destaque_list_view, name='projetos_destaque_list'),
 ]

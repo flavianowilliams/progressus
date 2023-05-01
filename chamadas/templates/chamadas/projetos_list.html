@@ -14,7 +14,8 @@
         <div class="table-responsive">
             <table class="table table-striped">
                 <colgroup>
-                    <col style="width: 20vw;">
+                    <col style="width: 10vw;">
+                    <col style="width: 10vw;">
                     <col style="width: 10vw;">
                     <col style="width: 10vw;">
                     <col style="width: 10vw;">
@@ -48,6 +49,7 @@
                         Financeiro
                         ({{ chamada.deadline_projeto|date:"d/m/y" }})
                     </th>
+                    <th>Status</th>
                     <th>Nota</th>
                     {% for object in object_list %}
                         <tr>
@@ -115,6 +117,7 @@
                                     </a>
                                 {% endif %}
                             </td>
+                            <td><a href="{% url 'chamadas:inscricao_status' object.pk %}">{{ object.inscricao_status }}</a></td>
                             <td>{{ object.nota }}</td>
                         </tr>
                     {% empty %}

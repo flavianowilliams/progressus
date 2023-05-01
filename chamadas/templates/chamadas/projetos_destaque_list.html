@@ -1,0 +1,23 @@
+{% extends 'pages/base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <h3>Projetos em destaque da chamada <strong>{{ chamada }}</strong></h3>
+        {% for object in object_list %}
+            {{ object.inscricao_status }}
+            {% if object.inscricao_status == "destaque" %}
+                <h4>{{ object }}</h4>
+                <p>
+                    <em>{{ object.proposta.conteudo }}</em>
+                </p>
+                <p>
+                    <a class="btn btn-primary btn-sm" href="{{ object.projeto.arquivo.url }}">Ver</a>
+                </p>
+            {% endif %}
+        {% empty %}
+            <p>Nenhum projeto em destaque até o momento...</p>
+    {% endfor %}
+    </div>
+{% endblock %}

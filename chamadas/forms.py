@@ -102,6 +102,14 @@ class InscricaoUpdateForm(forms.ModelForm):
               'membro_3',
                 ]
 
+class InscricaoStatusAdmin(forms.ModelForm):
+
+    class Meta:
+        model = Inscricao
+        fields = [
+            'inscricao_status',
+        ]
+
 class TurmaFormCreate(forms.ModelForm):
 
     class Meta:

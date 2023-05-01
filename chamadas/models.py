@@ -392,10 +392,13 @@ class Inscricao(models.Model):
     ranking = models.IntegerField(null=True)
 
     inscricao_status = models.CharField(
-        max_length=11,
+        max_length=12,
         default="comum",
         choices=(("comum", "Comum"), ("destaque", "Em destaque"))
         )
+
+    def getStatus(self):
+        return self.inscricao_status
 
     def __str__(self):
         return self.equipe

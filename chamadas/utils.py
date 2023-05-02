@@ -2,37 +2,39 @@ from chamadas.models import Inscricao
 
 class Valor():
 
-    def __init__(self, args):
+    def __init__(self, kwargs):
 
-        self.args = args
+        self.kwargs = kwargs
 
         object_list = Inscricao.objects.all()
 
-        if self.args['atributo'] == 'resultado_fback_1':
-            lista = [object.projeto.resultado.resultado_fback_1 for object in object_list if object.tema == self.args['tema']]
-        elif self.args['atributo'] == 'resultado_fback_2':
-            lista = [object.projeto.resultado.resultado_fback_2 for object in object_list if object.tema == self.args['tema']]
-        elif self.args['atributo'] == 'resultado_fback_3':
-            lista = [object.projeto.resultado.resultado_fback_3 for object in object_list if object.tema == self.args['tema']]
+        if self.kwargs['atributo'] == 'resultado_fback_1':
+            lista = [object.projeto.resultado.resultado_fback_1 for object in object_list if object.tema == self.kwargs['tema']]
+        elif self.kwargs['atributo'] == 'resultado_fback_2':
+            lista = [object.projeto.resultado.resultado_fback_2 for object in object_list if object.tema == self.kwargs['tema']]
+        elif self.kwargs['atributo'] == 'resultado_fback_3':
+            lista = [object.projeto.resultado.resultado_fback_3 for object in object_list if object.tema == self.kwargs['tema']]
         elif self.args['atributo'] == 'resultado_fback_4':
-            lista = [object.projeto.resultado.resultado_fback_4 for object in object_list if object.tema == self.args['tema']]
-        elif self.args['atributo'] == 'resultado_fback_5':
-            lista = [object.projeto.resultado.resultado_fback_5 for object in object_list if object.tema == self.args['tema']]
+            lista = [object.projeto.resultado.resultado_fback_4 for object in object_list if object.tema == self.kwargs['tema']]
+        elif self.kwargs['atributo'] == 'resultado_fback_5':
+            lista = [object.projeto.resultado.resultado_fback_5 for object in object_list if object.tema == self.kwargs['tema']]
 
         self.lista = lista
 
     def setValor(self):
 
-        if self.args['regra'] == 'direta':
-            nota_min = min(self.lista)
-            nota_max = max(self.lista)
-        elif self.args['regra'] == 'inversa':
-            nota_min = max(self.lista)
-            nota_max = min(self.lista)
+#        if self.args['regra'] == 'direta':
+#            x1 = min(self.lista)
+#            x2 = max(self.lista)
+#        elif self.args['regra'] == 'inversa':
+#            x1 = max(self.lista)
+#            x2 = min(self.lista)
 
-        if abs(nota_max-nota_min) < 1.e-4:
-            nota = 100*(self.args['valor']-nota_max)/(nota_max-nota_min)
-        else:
-            nota = 0.0
+#        if abs(x2-x1) > 1.e-4:
+#            nota = 100*(self.args['valor']-x1)/(x2-x1)
+#        else:
+#            nota = 0.0
+
+        nota = 100
 
         return nota

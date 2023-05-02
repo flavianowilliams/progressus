@@ -74,7 +74,7 @@
                             <a style="color: red;" href="{% url 'chamadas:metodologia_detail_superuser' object.pk %}">
                                 {{ object.metodologia.updated|date:"d/m/Y" }}
                             </a>
-                    {% endif %}
+                        {% endif %}
                     </td>
                     <td>
                         {% if object.resultado.updated > object.inscricao.chamada.deadline_projeto %}

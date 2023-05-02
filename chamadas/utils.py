@@ -1,48 +1,42 @@
-from chamadas.models import Inscricao
+from chamadas.models import Resultado, Chamada
 
 class Valor():
 
-    def __init__(self, args):
+    def __init__(self, kwargs):
 
-        self.args = args
+        self.kwargs = kwargs
 
-        object_list = Inscricao.objects.all()
+        chamada = Chamada.objects.get(pk = kwargs['pk'])
 
-        if self.args['atributo'] == 'resultado_fback_1':
-            lista = [object.projeto.resultado.resultado_fback_1 for object in object_list if object.tema == self.args['tema']]
-        elif self.args['atributo'] == 'resultado_fback_2':
-            lista = [object.projeto.resultado.resultado_fback_2 for object in object_list if object.tema == self.args['tema']]
-        elif self.args['atributo'] == 'resultado_fback_3':
-            lista = [object.projeto.resultado.resultado_fback_3 for object in object_list if object.tema == self.args['tema']]
-        elif self.args['atributo'] == 'resultado_fback_4':
-            lista = [object.projeto.resultado.resultado_fback_4 for object in object_list if object.tema == self.args['tema']]
-        elif self.args['atributo'] == 'resultado_fback_5':
-            lista = [object.projeto.resultado.resultado_fback_5 for object in object_list if object.tema == self.args['tema']]
+        object_list = [object for object in Resultado.objects.all() if object.projeto.inscricao.chamada == chamada and object.projeto.inscricao.tema == self.kwargs['tema']]
+
+        if self.kwargs['atributo'] == 'resultado_fback_1':
+            lista = [object.resultado_fback_1 for object in object_list if object.resultado_fback_1 > 1.e-8]
+#        elif self.kwargs['atributo'] == 'resultado_fback_2':
+#            lista = [object.projeto.resultado.resultado_fback_2 for object in object_list if object.tema == self.kwargs['tema']]
+#        elif self.kwargs['atributo'] == 'resultado_fback_3':
+#            lista = [object.projeto.resultado.resultado_fback_3 for object in object_list if object.tema == self.kwargs['tema']]
+#        elif self.args['atributo'] == 'resultado_fback_4':
+#            lista = [object.projeto.resultado.resultado_fback_4 for object in object_list if object.tema == self.kwargs['tema']]
+#        elif self.kwargs['atributo'] == 'resultado_fback_5':
+#            lista = [object.projeto.resultado.resultado_fback_5 for object in object_list if object.tema == self.kwargs['tema']]
 
         self.lista = lista
 
     def setValor(self):
 
-        if self.args['regra'] == 'direta':
+        if self.kwargs['regra'] == 'direta':
+            x1 = min(self.lista)
+            x2 = max(self.lista)
+        elif self.kwargs['regra'] == 'Inversa':
+            x1 = max(self.lista)
+            x2 = min(self.lista)
 
-            maximo = max(self.lista)
-            if maximo == 0.0:
-                if self.args['valor'] == 0.0:
-                    nota = 0.0
-                else:
-                    nota = 100.0
-            else:
-                nota = 100*float(self.args['valor'])/float(maximo)
-
-        elif self.args['regra'] == 'inversa':
-
-            minimo = min(self.lista)
-            if minimo == 0.0:
-                if self.args['valor'] == 0.0:
-                    nota = 100.0
-                else:
-                    nota = 0.0
-            else:
-                nota = 100*float(minimo)/float(self.args['valor'])
+        if abs(x2-x1) > 1.e-8:
+            nota = 100*(self.kwargs['valor']-x1)/(x2-x1)
+            if self.kwargs['valor'] < 1.e-8:
+                nota = 0.0
+        else:
+            nota = 0.0
 
         return nota

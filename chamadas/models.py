@@ -126,15 +126,25 @@ class ProjetoModelo(models.Model):
     resultado_peso_1 = models.DecimalField(
         max_digits=6,
         decimal_places=3,
-        default=0.005,
+        default=0.01,
         verbose_name='1. Resultado (parâmetro): Peso'
+        )
+    resultado_titulo_1 = models.CharField(
+        max_length=100,
+        default='Erro percentual',
+        verbose_name = '1. Resultado (parâmetro): Título'
         )
 
     resultado_peso_2 = models.DecimalField(
         max_digits=6,
         decimal_places=3,
-        default=0.005,
+        default=0.0,
         verbose_name='2. Resultado (parâmetro): Peso'
+        )
+    resultado_titulo_2 = models.CharField(
+        max_length=100,
+        default='Nenhum critério atribuido',
+        verbose_name = '2. Resultado (parâmetro): Título'
         )
 
     resultado_peso_3 = models.DecimalField(
@@ -143,6 +153,11 @@ class ProjetoModelo(models.Model):
         default=0.0,
         verbose_name='3. Resultado (parâmetro): Peso'
         )
+    resultado_titulo_3 = models.CharField(
+        max_length=100,
+        default='Nenhum critério atribuido',
+        verbose_name = '3. Resultado (parâmetro): Título'
+        )
 
     resultado_peso_4 = models.DecimalField(
         max_digits=6,
@@ -150,12 +165,22 @@ class ProjetoModelo(models.Model):
         default=0.0,
         verbose_name='4. Resultado (parâmetro): Peso'
         )
+    resultado_titulo_4 = models.CharField(
+        max_length=100,
+        default='Nenhum critério atribuido',
+        verbose_name = '4. Resultado (parâmetro): Título'
+        )
 
     resultado_peso_5 = models.DecimalField(
         max_digits=6,
         decimal_places=3,
         default=0.0,
         verbose_name='5. Resultado (parâmetro): Peso'
+        )
+    resultado_titulo_5 = models.CharField(
+        max_length=100,
+        default='Nenhum critério atribuido',
+        verbose_name = '5. Resultado (parâmetro): Título'
         )
 
     resultado_prop_1 = models.CharField(
@@ -165,39 +190,32 @@ class ProjetoModelo(models.Model):
         verbose_name='1. Resultado (parâmetro): Proporção'
     )
 
-    resultado_prop_1 = models.CharField(
-        max_length=7,
-        default='direta',
-        choices=(("direta", "Direta"), ("inversa", "Inversa")),
-        verbose_name='1. Resultado (parâmetro): Proporção'
-    )
-
     resultado_prop_2 = models.CharField(
         max_length=7,
         default='direta',
         choices=(("direta", "Direta"), ("inversa", "Inversa")),
-        verbose_name='1. Resultado (parâmetro): Proporção'
+        verbose_name='2. Resultado (parâmetro): Proporção'
     )
 
     resultado_prop_3 = models.CharField(
         max_length=7,
         default='direta',
         choices=(("direta", "Direta"), ("inversa", "Inversa")),
-        verbose_name='1. Resultado (parâmetro): Proporção'
+        verbose_name='3. Resultado (parâmetro): Proporção'
     )
 
     resultado_prop_4 = models.CharField(
         max_length=7,
         default='direta',
         choices=(("direta", "Direta"), ("inversa", "Inversa")),
-        verbose_name='1. Resultado (parâmetro): Proporção'
+        verbose_name='4. Resultado (parâmetro): Proporção'
     )
 
     resultado_prop_5 = models.CharField(
         max_length=7,
         default='direta',
         choices=(("direta", "Direta"), ("inversa", "Inversa")),
-        verbose_name='1. Resultado (parâmetro): Proporção'
+        verbose_name='5. Resultado (parâmetro): Proporção'
     )
 
     introducao_peso = models.DecimalField(
@@ -210,7 +228,7 @@ class ProjetoModelo(models.Model):
     teoria_peso = models.DecimalField(
         max_digits=6,
         decimal_places=3,
-        default=25,
+        default=20,
         verbose_name='Teoria: Peso'
         )
 
@@ -224,7 +242,7 @@ class ProjetoModelo(models.Model):
     resultado_peso = models.DecimalField(
         max_digits=6,
         decimal_places=3,
-        default=25,
+        default=30,
         verbose_name='Resultado: Peso'
         )
 
@@ -257,7 +275,7 @@ class ProjetoModelo(models.Model):
     apresentacao_peso_1 = models.DecimalField(
         max_digits=6,
         decimal_places=3,
-        default=0.002,
+        default=0.02,
         verbose_name='2. Apresentação (parâmetro): Peso'
         )
     apresentacao_titulo_2 = models.CharField(
@@ -268,7 +286,7 @@ class ProjetoModelo(models.Model):
     apresentacao_peso_2 = models.DecimalField(
         max_digits=6,
         decimal_places=3,
-        default=0.002,
+        default=0.02,
         verbose_name='2. Apresentação (parâmetro): Peso'
         )
     apresentacao_titulo_3 = models.CharField(
@@ -279,7 +297,7 @@ class ProjetoModelo(models.Model):
     apresentacao_peso_3 = models.DecimalField(
         max_digits=6,
         decimal_places=3,
-        default=0.002,
+        default=0.02,
         verbose_name='3. Apresentação (parâmetro): Peso'
         )
     apresentacao_titulo_4 = models.CharField(
@@ -290,7 +308,7 @@ class ProjetoModelo(models.Model):
     apresentacao_peso_4 = models.DecimalField(
         max_digits=6,
         decimal_places=3,
-        default=0.002,
+        default=0.02,
         verbose_name='4. Apresentação (parâmetro): Peso'
         )
     apresentacao_titulo_5 = models.CharField(
@@ -301,7 +319,7 @@ class ProjetoModelo(models.Model):
     apresentacao_peso_5 = models.DecimalField(
         max_digits=6,
         decimal_places=3,
-        default=0.002,
+        default=0.02,
         verbose_name='5. Apresentação (parâmetro): Peso'
         )
 

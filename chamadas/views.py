@@ -504,8 +504,6 @@ def metodologia_detail_superuser(request, pk):
             metodologia = Metodologia.objects.get(projeto = object)
             form.instance.nota_metodologia = metodologia.setNotaMetodologia()
             form.save()
-#            object.nota = object.setNota()
-#            object.save()
             return HttpResponseRedirect(reverse_lazy('chamadas:projeto_detail_superuser', kwargs = {'pk': object.inscricao.chamada.pk}))
     else:
         form = ProjetoMetodologiaAdmin(instance=object.metodologia)
@@ -523,43 +521,41 @@ def resultado_detail_superuser(request, pk):
     template_name = 'chamadas/resultado_detail.html'
 
     object = get_object_or_404(Projeto, pk = pk)
-    result = Resultado.objects.get(projeto = object)
+    resultado = Resultado.objects.get(projeto = object)
 
     if request.method == 'POST':
-        form = ProjetoResultadoAdmin(request.POST, instance=result)
+        form = ProjetoResultadoAdmin(request.POST, instance=resultado)
         if form.is_valid():
 
             form.save()
 
-            form.instance.resultado_prop_1 = object.modelo.resultado_prop_1
-            form.instance.resultado_prop_2 = object.modelo.resultado_prop_2
-
-            args = {
+            kwargs = {
+                'pk' : object.inscricao.chamada.pk,
                 'tema': object.inscricao.tema,
                 'atributo': 'resultado_fback_1',
-                'regra': form.instance.resultado_prop_1,
+                'regra': object.modelo.resultado_prop_1,
                 'valor': form.cleaned_data['resultado_fback_1']
                 }
 
-            form.instance.resultado_nota_1 = Valor(args).setValor()
+            form.instance.resultado_nota_1 = Valor(kwargs).setValor()
 
-            args = {
-                'tema': object.inscricao.tema,
-                'atributo': 'resultado_fback_2',
-                'regra': form.instance.resultado_prop_2,
-                'valor': form.cleaned_data['resultado_fback_2']
-                }
+#            kwargs = {
+#                'tema': object.inscricao.tema,
+#                'atributo': 'resultado_fback_2',
+#                'regra': object.modelo.resultado_prop_2,
+#                'valor': form.cleaned_data['resultado_fback_2']
+#                }
+#
+#            form.instance.resultado_nota_2 = Valor(args).setValor()
 
-            form.instance.resultado_nota_2 = Valor(args).setValor()
-
-            form.instance.nota_resultado = result.setNotaResultado()
+            form.instance.nota_resultado = resultado.setNotaResultado()
 
             form.save()
 
             return HttpResponseRedirect(reverse_lazy('chamadas:projeto_detail_superuser', kwargs = {'pk': object.inscricao.chamada.pk}))
     else:
-        form = ProjetoResultadoAdmin(instance=result)
-        form.instance.nota_resultado = result.setNotaResultado()
+        form = ProjetoResultadoAdmin(instance=resultado)
+        form.instance.nota_resultado = resultado.setNotaResultado()
  
     context = {'form': form}
 

@@ -538,7 +538,7 @@ def resultado_detail_superuser(request, pk):
 
             form.instance.resultado_nota_1 = Valor(kwargs).setValor()
 
-#            args = {
+#            kwargs = {
 #                'tema': object.inscricao.tema,
 #                'atributo': 'resultado_fback_2',
 #                'regra': object.modelo.resultado_prop_2,

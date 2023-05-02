@@ -23,18 +23,16 @@ class Valor():
 
     def setValor(self):
 
-#        if self.args['regra'] == 'direta':
-#            x1 = min(self.lista)
-#            x2 = max(self.lista)
-#        elif self.args['regra'] == 'inversa':
-#            x1 = max(self.lista)
-#            x2 = min(self.lista)
+        if self.kwargs['regra'] == 'direta':
+            x1 = min(self.lista)
+            x2 = max(self.lista)
+        elif self.kwargs['regra'] == 'Inversa':
+            x1 = max(self.lista)
+            x2 = min(self.lista)
 
-#        if abs(x2-x1) > 1.e-4:
-#            nota = 100*(self.args['valor']-x1)/(x2-x1)
-#        else:
-#            nota = 0.0
-
-        nota = 100
+        if abs(x2-x1) > 1.e-4:
+            nota = 100*(self.kwargs['valor']-x1)/(x2-x1)
+        else:
+            nota = 0.0
 
         return nota

@@ -15,11 +15,11 @@
                         <h5>Critérios de qualidade</h5>
                         {% if form.instance.projeto.modelo.resultado_peso_1 > 0.0 %}
                             <div class="row mb-2">
-                                <label class="col-sm-3 col-form-label" for="inpt2">
-                                    Critério 1
+                                <label class="col-sm-2 col-form-label" for="inpt2">
+                                    Critério:
                                 </label>
                                 <div class="col-sm-2 mx-1">
-                                    <input type="text" readonly class="form-control-plaintext" id="inpt2" value="{{ form.instance.projeto.modelo.resultado_peso_1 }}">
+                                    <input type="text" readonly class="form-control-plaintext" id="inpt2" value="{{ form.instance.projeto.modelo.resultado_titulo_1 }}">
                                 </div>
                             </div>
                             <div class="row mb-2">
@@ -72,7 +72,7 @@
                             </div>
                             <hr>
                         {% endif %}
-                        {% if form.instance.projeto.modelo.resultado_peso_2 >= 0.0 %}
+                        {% if form.instance.projeto.modelo.resultado_peso_2 > 0.0 %}
                             <div class="row mb-2">
                                 <label class="col-sm-3 col-form-label" for="inpt2">
                                     Critério 2

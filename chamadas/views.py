@@ -530,6 +530,7 @@ def resultado_detail_superuser(request, pk):
             form.save()
 
             kwargs = {
+                'pk' : object.inscricao.chamada.pk,
                 'tema': object.inscricao.tema,
                 'atributo': 'resultado_fback_1',
                 'regra': object.modelo.resultado_prop_1,

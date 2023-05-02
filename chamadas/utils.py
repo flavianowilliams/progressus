@@ -30,6 +30,9 @@ class Valor():
             nota_min = max(self.lista)
             nota_max = min(self.lista)
 
-        nota = 100*(self.args['valor']-nota_max)/(nota_max-nota_min)
+        if abs(nota_max-nota_min) < 1.e-4:
+            nota = 100*(self.args['valor']-nota_max)/(nota_max-nota_min)
+        else:
+            nota = 0.0
 
         return nota

@@ -165,39 +165,32 @@ class ProjetoModelo(models.Model):
         verbose_name='1. Resultado (parâmetro): Proporção'
     )
 
-    resultado_prop_1 = models.CharField(
-        max_length=7,
-        default='direta',
-        choices=(("direta", "Direta"), ("inversa", "Inversa")),
-        verbose_name='1. Resultado (parâmetro): Proporção'
-    )
-
     resultado_prop_2 = models.CharField(
         max_length=7,
         default='direta',
         choices=(("direta", "Direta"), ("inversa", "Inversa")),
-        verbose_name='1. Resultado (parâmetro): Proporção'
+        verbose_name='2. Resultado (parâmetro): Proporção'
     )
 
     resultado_prop_3 = models.CharField(
         max_length=7,
         default='direta',
         choices=(("direta", "Direta"), ("inversa", "Inversa")),
-        verbose_name='1. Resultado (parâmetro): Proporção'
+        verbose_name='3. Resultado (parâmetro): Proporção'
     )
 
     resultado_prop_4 = models.CharField(
         max_length=7,
         default='direta',
         choices=(("direta", "Direta"), ("inversa", "Inversa")),
-        verbose_name='1. Resultado (parâmetro): Proporção'
+        verbose_name='4. Resultado (parâmetro): Proporção'
     )
 
     resultado_prop_5 = models.CharField(
         max_length=7,
         default='direta',
         choices=(("direta", "Direta"), ("inversa", "Inversa")),
-        verbose_name='1. Resultado (parâmetro): Proporção'
+        verbose_name='5. Resultado (parâmetro): Proporção'
     )
 
     introducao_peso = models.DecimalField(

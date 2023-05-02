@@ -39,11 +39,33 @@
                 {% for inscricao in object_list %}
                     <tr>
                         <td style="text-align: left;">
-                            {% if inscricao.projeto.resultado.nota_resultado >= 99.9 %}
-                                <p style="color: blue;">{{ inscricao.equipe }} &#10004;</p>
+                            {% if inscricao.projeto.nota_projeto == 100.0 %}
+                                {% if inscricao.projeto.nota_resultado == 100.0 %}
+                                    {% if inscricao.projeto.nota_teoria == 100.0 %}
+                                        <p style="color: blue;">{{ inscricao.equipe }} &#10004; &#9851; &commat;</p>
+                                    {% else %}
+                                        <p style="color: blue;">{{ inscricao.equipe }} &#10004; &#9851;</p>
+                                    {% endif %}
+                                {% else %}
+                                    {% if inscricao.projeto.nota_teoria == 100.0 %}
+                                        <p style="color: blue;">{{ inscricao.equipe }} &#10004; &commat;</p>
+                                    {% else %}
+                                        <p style="color: blue;">{{ inscricao.equipe }} &#10004;</p>
+                                    {% endif %}
+                                {% endif %}
                             {% else %}
-                                <p>{{ inscricao.equipe }}</p>
-                                {{ inscricao.projeto.resultado.nota_resultado }}
+                                {% if inscricao.projeto.nota_resultado == 100.0 %}
+                                    {% if inscricao.projeto.nota_teoria == 100.0 %}
+                                        <p style="color: blue;">{{ inscricao.equipe }} &#9851; &commat;</p>
+                                    {% else %}
+                                        <p style="color: blue;">{{ inscricao.equipe }} &#9851;</p>
+                                    {% endif %}
+                                {% else %}
+                                    {% if inscricao.projeto.nota_teoria == 100.0 %}
+                                        <p style="color: blue;">{{ inscricao.equipe }} &commat;</p>                                        {% else %}
+                                            {{ inscricao.equipe }}
+                                    {% endif %}
+                                {% endif %}
                             {% endif %}
                         </td>
                         <td style="text-align: center;">{{ inscricao.turma }}</td>
@@ -85,7 +107,7 @@
                     </tr>
                 {% empty %}
                     <tr>
-                        <td colspan="10" style="text-align: center;">Não há inscrições até o momento.</td>
+                        <td colspan="10" style="text-align: center;">Não há avaliações até o momento.</td>
                     </tr>
                 {% endfor %}
             </table>

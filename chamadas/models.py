@@ -112,8 +112,8 @@ class ProjetoModelo(models.Model):
         verbose_name='4. Metodologia (parâmetro): Peso'
         )
     metodologia_titulo_5 = models.CharField(
-        max_length=100,
-        default='Uma imagem clara do dispositivo, ou no caso de software o link para o seu repositório foi fornecido?',
+        max_length=165,
+        default='O autor forneceu informações de como o leitor poderia obter as amostras do experimento e os equipamentos que foram utilizados para o desenvolvimento do trabalho.',
         verbose_name = '5. Metodologia (parâmetro): Título'
         )
     metodologia_peso_5 = models.DecimalField(

@@ -83,11 +83,11 @@ class InscricaoForm(forms.ModelForm):
               'membro_3',
                 ]
 
-    def clean_equipe(self):
-        data = self.cleaned_data['equipe']
-        if Inscricao.objects.filter(equipe = data).exists():
-            raise forms.ValidationError('O nome {} já está em uso.'.format(data))
-        return data
+#    def clean_equipe(self):
+#        data = self.cleaned_data['equipe']
+#        if Inscricao.objects.filter(equipe = data).exists():
+#            raise forms.ValidationError('O nome {} já está em uso.'.format(data))
+#        return data
 
 class InscricaoUpdateForm(forms.ModelForm):
 

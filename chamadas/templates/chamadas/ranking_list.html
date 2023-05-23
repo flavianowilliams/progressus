@@ -43,7 +43,6 @@
                                 <p style="color: blue;">{{ inscricao.equipe }} &#10004;</p>
                             {% else %}
                                 <p>{{ inscricao.equipe }}</p>
-                                {{ inscricao.projeto.resultado.nota_resultado }}
                             {% endif %}
                         </td>
                         <td style="text-align: center;">{{ inscricao.turma }}</td>
@@ -57,25 +56,25 @@
                         <td style="text-align: center;">{{ inscricao.extra.penalidade_nota|floatformat:'0' }}</td>
                         <td style="text-align: center;">{{ inscricao.extra.divulgacao_nota|floatformat:'0' }}</td>
                         <td style="text-align: center;">
-                            {% if inscricao.bibliografia.nota_bibliografia %}
+                            {% if inscricao.bibliografia.nota_bibliografia is not null %}
                                 {{ inscricao.bibliografia.nota_bibliografia|floatformat:'0' }}
                             {% else %}
                                 <p style="font-size: 11pt;">Aguarde</p>
                             {% endif %}
                         </td>
                         <td style="text-align: center;">
-                            {% if inscricao.proposta.nota_proposta %}
+                            {% if inscricao.proposta.nota_proposta is not null %}
                                 {{ inscricao.proposta.nota_proposta|floatformat:'0' }}
                             {% else %}
                                 <p style="font-size: 11pt;">Aguarde</p>
                             {% endif %}
                         </td>
                         <td style="text-align: center;">
-                            {% if inscricao.projeto.nota_projeto %}
+                            {% if inscricao.projeto.nota_projeto is not null %}
                                 {% if inscricao.projeto.nota_projeto == 100.0 %}
-                                    <p style="color: blue;">{{ inscricao.projeto.get_nota|floatformat:'0' }}</p>
+                                    <p style="color: blue;">{{ inscricao.projeto.nota_projeto|floatformat:'0' }}</p>
                                 {% else %}
-                                    <p style="color: black;">{{ inscricao.projeto.get_nota|floatformat:'0' }}</p>
+                                    <p style="color: black;">{{ inscricao.projeto.nota_projeto|floatformat:'0' }}</p>
                                 {% endif %}
                             {% else %}
                                 <p style="font-size: 11pt;">Aguarde</p>
@@ -90,10 +89,7 @@
                 {% endfor %}
             </table>
             <ul style="line-height: 1mm; list-style: none; padding-left: 5mm;">
-                <li><p style="text-align: left; font-size: smaller;">&#9883; Melhor equipe de acordo com o tema escolhido;</p></li>
-                <li><p style="text-align: left; font-size: smaller;">&#10004; Nota máxima obtida no quesito "Projeto";</p></li>
-                <li><p style="text-align: left; font-size: smaller;">&commat; Nota máxima obtida na descrição teórica;</p></li>
-                <li><p style="text-align: left; font-size: smaller;">&#9851; Nota máxima obtida nos critérios de qualidade.</p></li>
+                <li><p style="text-align: left; font-size: smaller;">&#10004; Melhor equipe de acordo com o tema escolhido;</p></li>
             </ul>
         </div>
     </div>

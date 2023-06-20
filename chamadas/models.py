@@ -421,6 +421,36 @@ class Inscricao(models.Model):
     def __str__(self):
         return self.equipe
 
+class Apresentacao(models.Model):
+
+    created = models.DateField(auto_now_add=True)
+    updated = models.DateField(auto_now=True)
+
+    inscricao = models.OneToOneField(Inscricao, on_delete=models.CASCADE)
+    modelo = models.ForeignKey(ProjetoModelo, on_delete=models.PROTECT)
+
+    apresentacao_nota_1 = models.DecimalField(max_digits=7, decimal_places=3, default=0.0, blank=True)
+    apresentacao_nota_2 = models.DecimalField(max_digits=7, decimal_places=3, default=0.0, blank=True)
+    apresentacao_nota_3 = models.DecimalField(max_digits=7, decimal_places=3, default=0.0, blank=True)
+    apresentacao_nota_4 = models.DecimalField(max_digits=7, decimal_places=3, default=0.0, blank=True)
+    apresentacao_nota_5 = models.DecimalField(max_digits=7, decimal_places=3, default=0.0, blank=True)
+    apresentacao_consideracao_1 = models.CharField(max_length=255, null=True, blank=True)
+    apresentacao_consideracao_2 = models.CharField(max_length=255, null=True, blank=True)
+    apresentacao_consideracao_3 = models.CharField(max_length=255, null=True, blank=True)
+    apresentacao_consideracao_4 = models.CharField(max_length=255, null=True, blank=True)
+    apresentacao_consideracao_5 = models.CharField(max_length=255, null=True, blank=True)
+
+    nota_apresentacao = models.DecimalField(max_digits=7, decimal_places=3, default=0.0, blank=True)
+
+    def setNotaApresentacao(self):
+        data = float(self.modelo.apresentacao_peso_1)*float(self.apresentacao_nota_1)
+        data += float(self.modelo.apresentacao_peso_2)*float(self.apresentacao_nota_2)
+        data += float(self.modelo.apresentacao_peso_3)*float(self.apresentacao_nota_3)
+        data += float(self.modelo.apresentacao_peso_4)*float(self.apresentacao_nota_4)
+        data += float(self.modelo.apresentacao_peso_5)*float(self.apresentacao_nota_5)
+        data = data*float(self.modelo.apresentacao_peso)
+        return data
+
 class Projeto(models.Model):
 
     created = models.DateField(auto_now_add=True)
@@ -690,36 +720,6 @@ class Resultado(models.Model):
         data += float(self.projeto.modelo.resultado_peso_4)*float(self.resultado_nota_4)
         data += float(self.projeto.modelo.resultado_peso_5)*float(self.resultado_nota_5)
         data = data*float(self.projeto.modelo.resultado_peso)
-        return data
-
-class Apresentacao(models.Model):
-
-    created = models.DateField(auto_now_add=True)
-    updated = models.DateField(auto_now=True)
-
-    inscricao = models.OneToOneField(Inscricao, on_delete=models.CASCADE)
-    modelo = models.ForeignKey(ProjetoModelo, on_delete=models.PROTECT)
-
-    apresentacao_nota_1 = models.DecimalField(max_digits=7, decimal_places=3, default=0.0, blank=True)
-    apresentacao_nota_2 = models.DecimalField(max_digits=7, decimal_places=3, default=0.0, blank=True)
-    apresentacao_nota_3 = models.DecimalField(max_digits=7, decimal_places=3, default=0.0, blank=True)
-    apresentacao_nota_4 = models.DecimalField(max_digits=7, decimal_places=3, default=0.0, blank=True)
-    apresentacao_nota_5 = models.DecimalField(max_digits=7, decimal_places=3, default=0.0, blank=True)
-    apresentacao_consideracao_1 = models.CharField(max_length=255, null=True, blank=True)
-    apresentacao_consideracao_2 = models.CharField(max_length=255, null=True, blank=True)
-    apresentacao_consideracao_3 = models.CharField(max_length=255, null=True, blank=True)
-    apresentacao_consideracao_4 = models.CharField(max_length=255, null=True, blank=True)
-    apresentacao_consideracao_5 = models.CharField(max_length=255, null=True, blank=True)
-
-    nota_apresentacao = models.DecimalField(max_digits=7, decimal_places=3, default=0.0, blank=True)
-
-    def setNotaApresentacao(self):
-        data = float(self.modelo.apresentacao_peso_1)*float(self.apresentacao_nota_1)
-        data += float(self.modelo.apresentacao_peso_2)*float(self.apresentacao_nota_2)
-        data += float(self.modelo.apresentacao_peso_3)*float(self.apresentacao_nota_3)
-        data += float(self.modelo.apresentacao_peso_4)*float(self.apresentacao_nota_4)
-        data += float(self.modelo.apresentacao_peso_5)*float(self.apresentacao_nota_5)
-        data = data*float(self.modelo.apresentacao_peso)
         return data
 
 class Extra(models.Model):

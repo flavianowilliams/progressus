@@ -4,13 +4,19 @@ class Valor():
 
     def __init__(self, kwargs):
 
-        self.kwargs = kwargs
+        self.kwargs = {
+            'pk': kwargs['pk'],
+            'tema': kwargs['tema'],
+            'atributo': kwargs['atributo'],
+            'regra': kwargs['regra'],
+            'valor': kwargs['valor']
+        }
 
         chamada = Chamada.objects.get(pk = kwargs['pk'])
 
-        object_list = [object for object in Resultado.objects.all() if object.projeto.inscricao.chamada == chamada and object.projeto.inscricao.tema == self.kwargs['tema']]
+        object_list = [object for object in Resultado.objects.all() if object.projeto.inscricao.chamada == chamada and object.projeto.inscricao.tema == kwargs['tema']]
 
-        if self.kwargs['atributo'] == 'resultado_fback_1':
+        if kwargs['atributo'] == 'resultado_fback_1':
             lista = [object.resultado_fback_1 for object in object_list if object.resultado_fback_1 > 1.e-8]
 #        elif self.kwargs['atributo'] == 'resultado_fback_2':
 #            lista = [object.projeto.resultado.resultado_fback_2 for object in object_list if object.tema == self.kwargs['tema']]
@@ -25,7 +31,7 @@ class Valor():
 
     def setValor(self):
 
-        if self.kwargs['regra'] == 'direta':
+        if self.kwargs['regra'] == 'Direta':
             x1 = min(self.lista)
             x2 = max(self.lista)
         elif self.kwargs['regra'] == 'Inversa':

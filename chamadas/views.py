@@ -4,7 +4,7 @@ from chamadas.models import Apresentacao, Bibliografia, Chamada, Financeiro, Ins
 from chamadas.forms import BibliografiaForm, FinanceiroForm, InscricaoForm, InscricaoUpdateForm, ProjetoApresentacaoAdmin, ProjetoBibliografiaAdmin, ProjetoExtraAdmin, ProjetoFinanceiroAdmin, ProjetoForm, ProjetoIntroducaoAdmin, ProjetoPropostaAdmin, ProjetoTituloForm, PropostaForm, InscricaoStatusAdmin
 from chamadas.forms import ProjetoTeoriaAdmin, ProjetoResultadoAdmin
 from chamadas.forms import ProjetoMetodologiaAdmin
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required, user_passes_test
 from progressus.settings import EMAIL_HOST_USER, MEDIA_ROOT
@@ -537,7 +537,8 @@ def resultado_detail_superuser(request, pk):
                 'valor': form.cleaned_data['resultado_fback_1']
                 }
 
-            form.instance.resultado_nota_1 = Valor(kwargs).setValor()
+            nota = Valor(kwargs)
+            form.instance.resultado_nota_1 = nota.setValor()
 
 #            kwargs = {
 #                'tema': object.inscricao.tema,
@@ -552,6 +553,7 @@ def resultado_detail_superuser(request, pk):
 
             form.save()
 
+#            return HttpResponse(form.instance.resultado_nota_1)
             return HttpResponseRedirect(reverse_lazy('chamadas:projeto_detail_superuser', kwargs = {'pk': object.inscricao.chamada.pk}))
     else:
         form = ProjetoResultadoAdmin(instance=resultado)

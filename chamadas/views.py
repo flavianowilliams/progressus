@@ -576,15 +576,15 @@ def inscricao_projeto_view(request, pk):
     resultado = get_object_or_404(Resultado, projeto = object)
 
     input_1 = [resultado.resultado_fback_1 for resultado in Resultado.objects.all()]
-    input_2 = [resultado.resultado_fback_2 for resultado in Resultado.objects.all()]
+#    input_2 = [resultado.resultado_fback_2 for resultado in Resultado.objects.all()]
 
     if request.method == 'POST':
         form = ProjetoForm(request.POST, request.FILES, instance=object)
         if form.is_valid():
             resultado.resultado_input_1 = form.cleaned_data['resultado_1']
             resultado.resultado_fback_1 = form.cleaned_data['resultado_1']
-            resultado.resultado_input_2 = form.cleaned_data['resultado_2']
-            resultado.resultado_fback_2 = form.cleaned_data['resultado_2']
+#            resultado.resultado_input_2 = form.cleaned_data['resultado_2']
+#            resultado.resultado_fback_2 = form.cleaned_data['resultado_2']
             resultado.save()
             form.save()
             sender = EMAIL_HOST_USER
@@ -601,9 +601,9 @@ def inscricao_projeto_view(request, pk):
 
     context = {'form': form,
     'max_input_1': max(input_1),
-    'max_input_2': max(input_2),
+#    'max_input_2': max(input_2),
     'min_input_1': min(input_1),
-    'min_input_2': min(input_2),
+#    'min_input_2': min(input_2),
     }
 
     return render(request, template_name, context)

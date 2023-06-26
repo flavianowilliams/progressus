@@ -265,14 +265,14 @@ class ProjetoModeloUpdateForm(forms.ModelForm):
 class ProjetoForm(forms.ModelForm):
 
     resultado_1 = forms.DecimalField(decimal_places=3, max_digits=7)
-    resultado_2 = forms.DecimalField(decimal_places=3, max_digits=7)
+#    resultado_2 = forms.DecimalField(decimal_places=3, max_digits=7)
 
     class Meta:
         model = Projeto
         fields = [
             'arquivo',
             'resultado_1',
-            'resultado_2',
+#            'resultado_2',
         ]
 
 class ProjetoTituloForm(forms.ModelForm):

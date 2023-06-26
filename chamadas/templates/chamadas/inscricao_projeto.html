@@ -241,7 +241,9 @@
                                 <tr>
                                     <td>1</td>
                                     <td>
-                                        Custo financeiro
+                                        <div class="col-sm-9 mx-1">
+                                            <input type="text" readonly class="form-control-plaintext" id="inpt2" value="{{ form.instance.modelo.resultado_titulo_1 }}">
+                                        </div>        
                                     </td>
                                     <td>{{ form.instance.modelo.resultado_peso_1 }}</td>
                                     <td>
@@ -260,9 +262,10 @@
                                     </td>    
                                     <td>{{ form.instance.resultado.resultado_consideracao_1|default:"Aguarde..." }}</td>
                                     <td>
-                                        {{ form.instance.resultado.resultado_1 }}
-                                    </td>    
+                                        {{ form.instance.resultado.resultado_nota_1 }}
+                                    </td>
                                 </tr>
+                                <!--
                                 <tr>
                                     <td>2</td>
                                     <td>
@@ -286,8 +289,9 @@
                                     <td>{{ form.instance.resultado.resultado_consideracao_2|default:"Aguarde..." }}</td>
                                     <td>
                                         {{ form.instance.resultado.resultado_nota_2 }}
-                                    </td>    
+                                    </td>
                                 </tr>
+                                -->
                             </table>
                         </div>
                     </div>
